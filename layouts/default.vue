@@ -1,9 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <Header />
-  <slot />
-  <Footer />
+  <div class="container">
+    <Header />
+    <div class="content">
+      <slot />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <script>
@@ -18,4 +22,6 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style>
+@import '~/scss/style.scss';
+</style>
