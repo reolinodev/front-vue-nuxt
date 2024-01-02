@@ -2,8 +2,7 @@
 
 <template>
   <div>
-    <nuxt-link to="/"> 홈 </nuxt-link>
-    <nuxt-link to="/member/member"> 사용자 </nuxt-link>
+    <h1>사용자 페이지</h1>
   </div>
 </template>
 
