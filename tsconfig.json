@@ -28,10 +28,12 @@
         "./*"
       ]
     },
-    "typeRoots": ["types"], // 타입 정의 파일의 위치 설정
+    "typeRoots": [
+      "types"
+    ],
     "types": [
       "@nuxt/types",
-      "@types/node",
+      "@types/node"
     ],
     "exclude": [
       "node_modules"
@@ -40,4 +42,5 @@
       "/**/*.ts",
       "**/*.vue"
     ]
+  }
 }
