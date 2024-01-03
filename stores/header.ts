@@ -16,16 +16,9 @@ interface MenuLv2Item {
 export const headerStore = defineStore('header', {
   state: () => ({
     menuLv1Items: [] as MenuLv1Item[],
-    menuLv2Items: [] as MenuLv2Item[]
+    menuLv2Items: [] as MenuLv2Item[],
+    navigatorNm: 'Main'
   }),
-  getters: {
-    getMenuLv1Items(): any {
-      return this.menuLv1Items
-    },
-    getMenuLv2Items(): any {
-      return this.menuLv2Items
-    }
-  },
   actions: {
     async getMenuData(): void {
       this.menuLv1Items = []
@@ -56,5 +49,8 @@ export const headerStore = defineStore('header', {
         this.menuLv2Items.push(menuLv2Item)
       }
     }
+  },
+  persist: {
+    storage: persistedState.sessionStorage
   }
 })

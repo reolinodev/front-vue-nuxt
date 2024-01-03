@@ -54,6 +54,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { headerStore } from '@/stores/header'
+import { getSessionStorage } from '~/utils/storage'
 
 export default defineComponent({
   name: 'HeaderComp',
@@ -69,6 +70,8 @@ export default defineComponent({
       } else if (parentNm === '' && childNm === '') {
         navigatorNm.value = 'Main'
       }
+
+      store.$state.navigatorNm = navigatorNm.value
     }
 
     const getMenuData = async () => {
@@ -78,6 +81,11 @@ export default defineComponent({
     }
 
     getMenuData()
+
+    onMounted(() => {
+      const headerStorage = getSessionStorage('header')
+      navigatorNm.value = headerStorage.navigatorNm
+    })
 
     return {
       navigatorNm,

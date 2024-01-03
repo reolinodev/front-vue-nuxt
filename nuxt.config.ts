@@ -12,7 +12,7 @@ export default defineNuxtConfig({
 
   components: true,
 
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
 
   vite: {
     define: {
