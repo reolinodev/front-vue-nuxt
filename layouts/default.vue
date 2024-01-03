@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Header from '~/components/HeaderComp.vue'
+import Footer from '~/components/FooterComp.vue'
+</script>
 
 <template>
   <div class="container">
@@ -10,18 +13,6 @@
   </div>
 </template>
 
-<script>
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
-
-export default {
-  components: {
-    Header,
-    Footer
-  }
-}
-</script>
-
-<style>
-@import '~/scss/style.scss';
+<style lang="scss">
+@import '@/scss/style.scss';
 </style>

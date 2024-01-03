@@ -37,6 +37,8 @@ module.exports = {
     'no-debug': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 프로덕션 환경에서 디버그 관련 문제 발생 시 에러
     'no-unused-vars': 'off', // 사용되지 않는 변수에 대한 경고 무시
     'vue/singleline-html-element-content-newline': 'off',
+    'space-before-function-paren': 'off',
+
     // Prettier 코드 스타일 설정
     'prettier/prettier': [
       'error',

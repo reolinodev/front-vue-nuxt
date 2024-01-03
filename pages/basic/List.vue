@@ -1,9 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>사용자 페이지</h1>
-  </div>
+  <div>목록 화면</div>
 </template>
 
 <style scoped></style>
