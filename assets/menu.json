@@ -1,0 +1,38 @@
+{
+  "menuLv1Items": [
+       { "menuId": "00001", "menuNm": "BASIC" },
+       { "menuId": "00002", "menuNm": "SAMPLE" }
+  ],
+  "menuLv2Items": [
+    {
+      "menuId": "10001",
+      "menuNm": "LIST",
+      "prnMenuId": "00001",
+      "url": "/basic/List"
+    },
+    {
+      "menuId": "10002",
+      "menuNm": "VIEW",
+      "prnMenuId": "00001",
+      "url": "/basic/View"
+    },
+    {
+      "menuId": "10003",
+      "menuNm": "WRITE",
+      "prnMenuId": "00001",
+      "url": "/basic/Write"
+    },
+    {
+      "menuId": "10004",
+      "menuNm": "EDIT",
+      "prnMenuId": "00001",
+      "url": "/basic/Edit"
+    },
+    {
+      "menuId": "20001",
+      "menuNm": "VUETIFY",
+      "prnMenuId": "00002",
+      "url": "/sample/vuetify"
+    }
+  ]
+}

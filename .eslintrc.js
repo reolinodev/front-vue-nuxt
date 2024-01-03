@@ -38,6 +38,7 @@ module.exports = {
     'no-unused-vars': 'off', // 사용되지 않는 변수에 대한 경고 무시
     'vue/singleline-html-element-content-newline': 'off',
     'space-before-function-paren': 'off',
+    'no-plusplus': 'off', // no-plusplus 규칙을 비활성화합니다.
 
     // Prettier 코드 스타일 설정
     'prettier/prettier': [

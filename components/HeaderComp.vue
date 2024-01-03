@@ -17,7 +17,7 @@
 
     <div class="menu">
       <div class="d-flex justify-space-around" style="gap: 20px; padding: 20px">
-        <v-menu v-for="menuLv1Item in menuLv1List" :key="menuLv1Item.menuId">
+        <v-menu v-for="menuLv1Item in menuLv1Items" :key="menuLv1Item.menuId">
           <template #activator="{ props }">
             <v-btn color="warning" size="large" v-bind="props">
               {{ menuLv1Item['menuNm'] }}
@@ -25,7 +25,7 @@
           </template>
           <v-list>
             <v-list-item
-              v-for="menuLv2Item in menuLv2List.filter(
+              v-for="menuLv2Item in menuLv2Items.filter(
                 (c) => c.prnMenuId === menuLv1Item.menuId
               )"
               :key="menuLv2Item.menuId"
@@ -53,54 +53,17 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { headerStore } from '@/stores/header'
 
 export default defineComponent({
   name: 'HeaderComp',
   setup() {
     const navigatorNm = ref('Main')
+    const menuLv1Items = ref([])
+    const menuLv2Items = ref([])
+    const store = headerStore()
 
-    const menuLv1List = ref([])
-    const menuLv2List = ref([])
-
-    menuLv1List.value = [
-      { menuId: '00001', menuNm: 'BASIC' },
-      { menuId: '00002', menuNm: 'SAMPLE' }
-    ]
-
-    menuLv2List.value = [
-      {
-        menuId: '10001',
-        menuNm: 'LIST',
-        prnMenuId: '00001',
-        url: '/basic/List'
-      },
-      {
-        menuId: '10002',
-        menuNm: 'VIEW',
-        prnMenuId: '00001',
-        url: '/basic/View'
-      },
-      {
-        menuId: '10003',
-        menuNm: 'WRITE',
-        prnMenuId: '00001',
-        url: '/basic/Write'
-      },
-      {
-        menuId: '10004',
-        menuNm: 'EDIT',
-        prnMenuId: '00001',
-        url: '/basic/Edit'
-      },
-      {
-        menuId: '20001',
-        menuNm: 'VUETIFY',
-        prnMenuId: '00002',
-        url: '/sample/vuetify'
-      }
-    ]
-
-    const changeNavigator = (parentNm: string) => (childNm: string) => {
+    const changeNavigator = (parentNm: string, childNm: string) => {
       if (parentNm !== '' && childNm !== '') {
         navigatorNm.value = `${parentNm} < ${childNm}`
       } else if (parentNm === '' && childNm === '') {
@@ -108,10 +71,18 @@ export default defineComponent({
       }
     }
 
+    const getMenuData = async () => {
+      await store.getMenuData()
+      menuLv1Items.value = store.$state.menuLv1Items
+      menuLv2Items.value = store.$state.menuLv2Items
+    }
+
+    getMenuData()
+
     return {
       navigatorNm,
-      menuLv1List,
-      menuLv2List,
+      menuLv1Items,
+      menuLv2Items,
       changeNavigator
     }
   }

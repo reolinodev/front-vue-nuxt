@@ -12,6 +12,8 @@ export default defineNuxtConfig({
 
   components: true,
 
+  modules: ['@pinia/nuxt'],
+
   vite: {
     define: {
       'process.env.DEBUG': false
