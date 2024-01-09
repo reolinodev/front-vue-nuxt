@@ -30,16 +30,12 @@
               )"
               :key="menuLv2Item.menuId"
               :value="menuLv2Item.menuId"
+              @click="
+                changeNavigator(menuLv1Item['menuNm'], menuLv2Item['menuNm'])
+              "
             >
               <nuxt-link :to="menuLv2Item.url">
-                <v-list-item-title
-                  @click="
-                    changeNavigator(
-                      menuLv1Item['menuNm'],
-                      menuLv2Item['menuNm']
-                    )
-                  "
-                >
+                <v-list-item-title>
                   {{ menuLv2Item['menuNm'] }}
                 </v-list-item-title>
               </nuxt-link>
