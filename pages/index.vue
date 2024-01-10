@@ -8,7 +8,7 @@ import { commonStore } from '~/stores/common'
 const common = commonStore()
 
 const router = useRouter()
-if (!common.$state.isLogin) {
+if (!common.isLogin) {
   router.push('login')
 }
 </script>

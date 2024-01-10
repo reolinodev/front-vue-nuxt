@@ -5,5 +5,8 @@ export const commonStore = defineStore('common', {
     isLogin: false,
     isLoding: false,
     apiUrl: ''
-  })
+  }),
+  persist: {
+    storage: persistedState.sessionStorage
+  }
 })

@@ -50,7 +50,7 @@ export default defineComponent({
     const errorMessage = ref('')
 
     // 인증하기
-    const certification = async () => {
+    const certification = () => {
       if (validate()) {
         const params = {
           loginId: loginId.value,
@@ -58,7 +58,9 @@ export default defineComponent({
           loginDevice: loginDevice.value,
           deviceBrowser: deviceBrowser.value
         }
-        await login.loginPrc(params)
+
+        login.loginPrc(params)
+
         if (login.resultCode === 'ok') {
           common.isLogin = true
           router.push('/')
@@ -82,8 +84,12 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      deviceBrowser.value = getDeviceBrowser()
-      loginDevice.value = getLoginDevice()
+      if (common.isLogin) {
+        router.push('/')
+      } else {
+        deviceBrowser.value = getDeviceBrowser()
+        loginDevice.value = getLoginDevice()
+      }
     })
 
     return {

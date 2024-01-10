@@ -30,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "^10.2.5",
+    "axios": "^1.6.3",
     "babel-core": "6.26.3",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
@@ -49,6 +50,6 @@
     "sass-loader": "^13.2.0",
     "typescript": "^5.1.6",
     "vite-plugin-vuetify": "^2.0.1",
-    "axios": "^1.6.3"
+    "pinia-plugin-persistedstate": "^3.2.1"
   }
 }

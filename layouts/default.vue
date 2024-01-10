@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLogin" class="container">
+  <div v-if="isLoginContainer" class="container">
     <header-comp />
     <div class="content">
       <slot />
@@ -21,18 +21,26 @@ import { commonStore } from '~/stores/common'
 export default {
   setup() {
     const common = commonStore()
-    const isLogin = ref(common.$state.isLogin)
+    const isLogin = ref(common.isLogin)
+    const isLoginContainer = ref(false)
+
+    onMounted(() => {
+      if (isLogin.value === true) {
+        isLoginContainer.value = true
+      } else {
+        isLoginContainer.value = false
+      }
+    })
 
     watch(
-      () => common.$state.isLogin,
+      () => common.isLogin,
       (newValue) => {
-        isLogin.value = newValue
-        console.log('afasdf', newValue)
+        isLoginContainer.value = newValue
       }
     )
 
     return {
-      isLogin
+      isLoginContainer
     }
   }
 }

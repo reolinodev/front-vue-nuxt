@@ -40,6 +40,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'no-plusplus': 'off', // no-plusplus 규칙을 비활성화합니다.
     'no-param-reassign': 'off',
+    'func-names': 'off',
 
     // Prettier 코드 스타일 설정
     'prettier/prettier': [
