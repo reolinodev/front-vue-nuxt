@@ -8,25 +8,25 @@
       "menuId": "10001",
       "menuNm": "LIST",
       "prnMenuId": "00001",
-      "url": "/basic/List"
+      "url": "/basic/list"
     },
     {
       "menuId": "10002",
       "menuNm": "VIEW",
       "prnMenuId": "00001",
-      "url": "/basic/View"
+      "url": "/basic/view"
     },
     {
       "menuId": "10003",
       "menuNm": "WRITE",
       "prnMenuId": "00001",
-      "url": "/basic/Write"
+      "url": "/basic/write"
     },
     {
       "menuId": "10004",
       "menuNm": "EDIT",
       "prnMenuId": "00001",
-      "url": "/basic/Edit"
+      "url": "/basic/edit"
     },
     {
       "menuId": "20001",

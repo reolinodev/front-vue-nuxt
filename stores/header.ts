@@ -1,10 +1,6 @@
 import { defineStore } from 'pinia'
 import userMenus from '@/assets/menu.json'
 
-// const baseURL = import.meta.env.API_URL
-
-const baseURL: string = process.env.TEST
-
 interface MenuLv1Item {
   menuId: string
   menuNm: string
@@ -24,13 +20,10 @@ export const headerStore = defineStore('header', {
     navigatorNm: 'Main'
   }),
   actions: {
-    async getMenuData(): void {
+    getMenuData(): void {
       this.menuLv1Items = []
       this.menuLv2Items = []
-
-      // todo 실제로 메뉴를 조회하게끔 수정
-      await this.setMenuState(userMenus)
-      console.log('222', baseURL)
+      this.setMenuState(userMenus)
     },
     setMenuState(menuItems: { menuLv1Items: []; menuLv2Items: [] }) {
       const lv1Items: [] = menuItems.menuLv1Items
@@ -38,8 +31,9 @@ export const headerStore = defineStore('header', {
 
       for (let i: number = 0; i < lv1Items.length; i++) {
         const menuLv1Item: MenuLv1Item = { menuId: '', menuNm: '' }
-        menuLv1Item.menuId = lv1Items[i].menuId
-        menuLv1Item.menuNm = lv1Items[i].menuNm
+        const { menuId, menuNm } = lv1Items[i]
+        menuLv1Item.menuId = menuId
+        menuLv1Item.menuNm = menuNm
 
         this.menuLv1Items.push(menuLv1Item)
       }
@@ -51,10 +45,13 @@ export const headerStore = defineStore('header', {
           prnMenuId: '',
           url: ''
         }
-        menuLv2Item.menuId = lv2Items[j].menuId
-        menuLv2Item.menuNm = lv2Items[j].menuNm
-        menuLv2Item.prnMenuId = lv2Items[j].prnMenuId
-        menuLv2Item.url = lv2Items[j].url
+
+        const { menuId, menuNm, prnMenuId, url } = lv2Items[j]
+
+        menuLv2Item.menuId = menuId
+        menuLv2Item.menuNm = menuNm
+        menuLv2Item.prnMenuId = prnMenuId
+        menuLv2Item.url = url
 
         this.menuLv2Items.push(menuLv2Item)
       }

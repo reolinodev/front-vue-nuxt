@@ -1,5 +1,5 @@
 export function getSessionStorage(key: string) {
-  const storedData = sessionStorage.getItem(key)
+  const storedData: string | null = sessionStorage.getItem(key)
 
   if (storedData) {
     return JSON.parse(storedData)
@@ -7,6 +7,6 @@ export function getSessionStorage(key: string) {
   return {}
 }
 
-export function clearSessionStorage() {
+export function clearSessionStorage(): void {
   sessionStorage.clear()
 }

@@ -54,11 +54,11 @@ import { getSessionStorage } from '~/utils/storage'
 
 export default defineComponent({
   name: 'HeaderComp',
-  setup() {
+  setup: function () {
     const navigatorNm = ref('Main')
     const menuLv1Items = ref([])
     const menuLv2Items = ref([])
-    const store = headerStore()
+    const header = headerStore()
 
     const changeNavigator = (parentNm: string, childNm: string) => {
       if (parentNm !== '' && childNm !== '') {
@@ -67,13 +67,13 @@ export default defineComponent({
         navigatorNm.value = 'Main'
       }
 
-      store.$state.navigatorNm = navigatorNm.value
+      header.$state.navigatorNm = navigatorNm.value
     }
 
     const getMenuData = async () => {
-      await store.getMenuData()
-      menuLv1Items.value = store.$state.menuLv1Items
-      menuLv2Items.value = store.$state.menuLv2Items
+      await header.getMenuData()
+      menuLv1Items.value = header.$state.menuLv1Items
+      menuLv2Items.value = header.$state.menuLv2Items
     }
 
     getMenuData()
