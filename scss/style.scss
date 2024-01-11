@@ -1,0 +1,36 @@
+html {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color : #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
