@@ -1,5 +1,5 @@
 <template>
-  <div>메인페이지</div>
+  <div class="content-container">메인화면</div>
 </template>
 
 <script setup lang="ts">

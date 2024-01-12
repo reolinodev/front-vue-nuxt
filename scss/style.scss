@@ -1,7 +1,3 @@
-html {
-  overflow: hidden;
-}
-
 a {
   text-decoration: none;
   color : #ffffff;
@@ -32,5 +28,19 @@ a {
   padding: 20px;
   display: flex;
   justify-content: center;
+}
+
+.content-container {
+  min-height: 500px;
+  border-radius: 50px;
+}
+
+.content-sub-title {
+  padding: 10px;
+}
+
+.item-container{
+  padding: 10px;
+  margin-top: 15px;
 }
 
