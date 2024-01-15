@@ -27,6 +27,18 @@
       <div class="content-sub-title"># 4.range slide (수치 나오게)</div>
 
       <v-range-slider v-model="slideValue" step="10" thumb-label="always" />
+
+      <div class="content-sub-title"># 5.file (일반)</div>
+      <v-file-input label="File input" clearable />
+
+      <div class="content-sub-title"># 6.file (유효성)</div>
+      <v-file-input
+        :rules="fileRules"
+        accept="image/png, image/jpeg, image/bmp"
+        placeholder="Pick an avatar"
+        prepend-icon="mdi-camera"
+        label="Avatar"
+      />
     </v-form>
   </v-sheet>
 </template>
@@ -42,10 +54,23 @@ export default defineComponent({
 
     const slideValue = ref<Array<number>>([20, 40])
 
+    type FileRuleType = (v: FileList) => boolean | string
+    const fileRules: Array<FileRuleType> = [
+      (v) => {
+        return (
+          !v ||
+          !v.length ||
+          v[0].size < 2000000 ||
+          'Avatar size should be less than 2 MB!'
+        )
+      }
+    ]
+
     return {
       model,
       model2,
-      slideValue
+      slideValue,
+      fileRules
     }
   }
 })

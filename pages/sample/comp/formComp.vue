@@ -38,6 +38,16 @@
         <v-btn color="warning" class="mt-4" block @click="resetValidation">
           Reset Validation
         </v-btn>
+
+        <v-btn
+          color="default"
+          class="mt-4"
+          block
+          :loading="loading"
+          @click="submit"
+        >
+          Submit
+        </v-btn>
       </div>
     </v-form>
   </v-sheet>
@@ -50,6 +60,7 @@ export default defineComponent({
   name: 'FormComp',
   setup: function () {
     const form = ref<any>(null)
+    const loading = ref<boolean>(false)
 
     const name = ref('')
     const nameRules = [
@@ -79,6 +90,10 @@ export default defineComponent({
       form.value.resetValidation()
     }
 
+    const submit = () => {
+      loading.value = true
+    }
+
     return {
       name,
       nameRules,
@@ -86,9 +101,11 @@ export default defineComponent({
       items,
       checkbox,
       form,
+      loading,
       validate,
       reset,
-      resetValidation
+      resetValidation,
+      submit
     }
   }
 })

@@ -70,18 +70,6 @@
         :rules="rules"
         :model-value="textValue"
       />
-
-      <div class="content-sub-title"># 5.file (일반)</div>
-      <v-file-input label="File input" clearable />
-
-      <div class="content-sub-title"># 6.file (유효성)</div>
-      <v-file-input
-        :rules="fileRules"
-        accept="image/png, image/jpeg, image/bmp"
-        placeholder="Pick an avatar"
-        prepend-icon="mdi-camera"
-        label="Avatar"
-      />
     </v-form>
   </v-sheet>
 </template>
@@ -93,7 +81,6 @@ export default defineComponent({
   name: 'FormComp2',
   setup: function () {
     type RuleType = (v: string) => boolean | string
-    type FileRuleType = (v: FileList) => boolean | string
 
     const radios = ref<string>('one')
     const ex7 = ref<string>('red')
@@ -106,23 +93,11 @@ export default defineComponent({
       }
     ]
 
-    const fileRules: Array<FileRuleType> = [
-      (v) => {
-        return (
-          !v ||
-          !v.length ||
-          v[0].size < 2000000 ||
-          'Avatar size should be less than 2 MB!'
-        )
-      }
-    ]
-
     return {
       radios,
       ex7,
       ex8,
       rules,
-      fileRules,
       textValue
     }
   }

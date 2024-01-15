@@ -50,6 +50,7 @@
     "sass": "^1.56.2",
     "sass-loader": "^13.2.0",
     "typescript": "^5.1.6",
-    "vite-plugin-vuetify": "^2.0.1"
+    "vite-plugin-vuetify": "^2.0.1",
+    "vee-validate": "^4.12.4"
   }
 }
