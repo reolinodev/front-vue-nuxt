@@ -22,7 +22,10 @@
         <v-tab :value="image">이미지</v-tab>
         <v-tab :value="badge">뱃지</v-tab>
         <v-tab :value="scroll">스크롤</v-tab>
+        <v-tab :value="list">리스트</v-tab>
+        <v-tab :value="panel">패널</v-tab>
         <v-tab :value="etc">기타</v-tab>
+        <v-tab :value="etc2">기타2</v-tab>
       </v-tabs>
       <v-window v-model="tab">
         <v-window-item value="form" class="item-container">
@@ -81,8 +84,20 @@
           <scroll-comp />
         </v-window-item>
 
+        <v-window-item value="list" class="item-container">
+          <list-comp />
+        </v-window-item>
+
+        <v-window-item value="panel" class="item-container">
+          <panel-comp />
+        </v-window-item>
+
         <v-window-item value="etc" class="item-container">
           <etc-comp />
+        </v-window-item>
+
+        <v-window-item value="etc2" class="item-container">
+          <etc-comp2 />
         </v-window-item>
       </v-window>
     </v-card>
@@ -106,10 +121,16 @@ import TimeLineComp from '~/pages/sample/comp/timelineComp.vue'
 import ImageComp from '~/pages/sample/comp/imageComp.vue'
 import BadgeComp from '~/pages/sample/comp/badgeComp.vue'
 import ScrollComp from '~/pages/sample/comp/scrollComp.vue'
+import ListComp from '~/pages/sample/comp/listComp.vue'
+import PanelComp from '~/pages/sample/comp/panelComp.vue'
+import EtcComp2 from '~/pages/sample/comp/etcComp2.vue'
 
 export default defineComponent({
   name: 'Vuetify',
   components: {
+    EtcComp2,
+    PanelComp,
+    ListComp,
     ScrollComp,
     BadgeComp,
     ImageComp,
