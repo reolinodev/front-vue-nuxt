@@ -1,20 +1,19 @@
-<template>
-  <div class="content-container">메인화면</div>
-</template>
-
 <script setup lang="ts">
 import { commonStore } from '~/stores/common'
-import { headerStore } from '~/stores/header'
+import { navStore } from '~/stores/nav'
 
 const common = commonStore()
-const header = headerStore()
+const nav = navStore()
 
 const router = useRouter()
 if (!common.isLogin) {
   router.push('login')
+} else if (common.currentUrl !== '') {
+  router.push(common.currentUrl)
 } else {
-  header.navigatorNm = 'Main'
+  nav.getMenuData()
+  common.currentUrl = nav.mainMenuUrl
+  common.currentMenuNm = nav.mainMenuNm
+  router.push(common.currentUrl)
 }
 </script>
-
-<style scoped></style>
