@@ -63,13 +63,13 @@
           </v-list>
         </v-list>
       </v-navigation-drawer>
-      <v-main style="height: 250px" />
+      <v-main />
     </v-layout>
   </v-card>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import { navStore } from '@/stores/nav'
 import { commonStore } from '@/stores/common'
 
@@ -109,9 +109,18 @@ export default defineComponent({
     }
 
     watch(
-      () => nav,
+      () => nav.menuLv1Items,
+      () => {
+        setMenuData()
+      }
+    )
+
+    watch(
+      () => rail.value,
       (newValue) => {
-        console.log('navigation 수정', newValue)
+        if (newValue) {
+          open.value = []
+        }
       }
     )
 

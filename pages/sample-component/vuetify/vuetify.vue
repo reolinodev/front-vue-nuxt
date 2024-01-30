@@ -1,154 +1,119 @@
 <template>
-  <div class="content-container">
-    <v-card class="mx-auto">
+  <v-row class="pt-2 pe-5 h-auto" justify="center">
+    <v-col class="pa-1" cols="12">
       <v-tabs
         v-model="tab"
-        color="teal-darken-3"
+        color="deep-purple-accent-1"
         next-icon="mdi-arrow-right-bold-box-outline"
         prev-icon="mdi-arrow-left-bold-box-outline"
         show-arrows
       >
-        <v-tab :value="form0">폼 형태</v-tab>
-        <v-tab :value="form1">폼 구성 #1</v-tab>
-        <v-tab :value="form2">폼 구성 #2</v-tab>
-        <v-tab :value="form3">폼 구성 #3</v-tab>
-        <v-tab :value="form4">폼 유효성</v-tab>
-        <v-tab :value="loading">로딩</v-tab>
-        <v-tab :value="stepper">스텝</v-tab>
-        <v-tab :value="windows">윈도우즈</v-tab>
-        <v-tab :value="dialog">다이어로그</v-tab>
-        <v-tab :value="alerts">얼럿</v-tab>
-        <v-tab :value="timeline">타임라인</v-tab>
-        <v-tab :value="image">이미지</v-tab>
-        <v-tab :value="badge">뱃지</v-tab>
-        <v-tab :value="scroll">스크롤</v-tab>
-        <v-tab :value="list">리스트</v-tab>
-        <v-tab :value="panel">패널</v-tab>
-        <v-tab :value="etc">기타</v-tab>
-        <v-tab :value="etc2">기타2</v-tab>
+        <v-tab :value="basic">Basic</v-tab>
+        <v-tab :value="basic2">Basic2</v-tab>
+        <v-tab :value="form">Form Comp</v-tab>
+        <v-tab :value="formValid">Form Valid</v-tab>
+        <v-tab :value="lists">Lists</v-tab>
+        <v-tab :value="Sheets">Sheets</v-tab>
+        <v-tab :value="cards">Cards</v-tab>
+        <v-tab :value="alerts">Alerts</v-tab>
+        <v-tab :value="loadings">Lodings</v-tab>
+        <v-tab :value="chips">Chips</v-tab>
+        <v-tab :value="images">images</v-tab>
+        <v-tab :value="carousels">Carousels</v-tab>
+        <v-tab :value="timelines">Timelines</v-tab>
+        <v-tab :value="stepper">Stepper</v-tab>
+        <v-tab :value="etc">ETC</v-tab>
       </v-tabs>
       <v-window v-model="tab">
-        <v-window-item value="form" class="item-container">
-          <form-comp />
+        <v-window-item value="basic">
+          <vuetify-basic />
         </v-window-item>
-
-        <v-window-item value="form1" class="item-container">
-          <form-comp1 />
+        <v-window-item value="basic2">
+          <vuetify-basic2 />
         </v-window-item>
-
-        <v-window-item value="form2" class="item-container">
-          <form-comp2 />
+        <v-window-item value="form">
+          <vuetify-form />
         </v-window-item>
-
-        <v-window-item value="form3" class="item-container">
-          <form-comp3 />
+        <v-window-item value="formValid">
+          <vuetify-form-valid />
         </v-window-item>
-
-        <v-window-item value="form4" class="item-container">
-          <form-comp4 />
+        <v-window-item value="lists">
+          <vuetify-list />
         </v-window-item>
-
-        <v-window-item value="loading" class="item-container">
-          <loding-comp />
+        <v-window-item value="sheets">
+          <vuetify-sheet />
         </v-window-item>
-
-        <v-window-item value="stepper" class="item-container">
-          <stepper-comp />
+        <v-window-item value="cards">
+          <vuetify-card />
         </v-window-item>
-
-        <v-window-item value="windows" class="item-container">
-          <window-comp />
+        <v-window-item value="alerts">
+          <vuetify-alert />
         </v-window-item>
-
-        <v-window-item value="dialog" class="item-container">
-          <dialog-comp />
+        <v-window-item value="loadings">
+          <vuetify-loading />
         </v-window-item>
-
-        <v-window-item value="alerts" class="item-container">
-          <alert-comp />
+        <v-window-item value="chips">
+          <vuetify-chip />
         </v-window-item>
-
-        <v-window-item value="timeline" class="item-container">
-          <time-line-comp />
+        <v-window-item value="images">
+          <vuetifyt-image />
         </v-window-item>
-
-        <v-window-item value="image" class="item-container">
-          <image-comp />
+        <v-window-item value="carousels">
+          <vuetify-calousel />
         </v-window-item>
-
-        <v-window-item value="badge" class="item-container">
-          <badge-comp />
+        <v-window-item value="timelines">
+          <vuetify-timeline />
         </v-window-item>
-
-        <v-window-item value="scroll" class="item-container">
-          <scroll-comp />
+        <v-window-item value="stepper">
+          <vuetify-stepper />
         </v-window-item>
-
-        <v-window-item value="list" class="item-container">
-          <list-comp />
-        </v-window-item>
-
-        <v-window-item value="panel" class="item-container">
-          <panel-comp />
-        </v-window-item>
-
-        <v-window-item value="etc" class="item-container">
-          <etc-comp />
-        </v-window-item>
-
-        <v-window-item value="etc2" class="item-container">
-          <etc-comp2 />
+        <v-window-item value="etc">
+          <vuetify-etc />
         </v-window-item>
       </v-window>
-    </v-card>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import FormComp from '~/pages/sample-component/vuetify/comp/formComp.vue'
-import FormComp1 from '~/pages/sample-component/vuetify/comp/formComp1.vue'
-import FormComp2 from '~/pages/sample-component/vuetify/comp/formComp2.vue'
-import FormComp3 from '~/pages/sample-component/vuetify/comp/formComp3.vue'
-import FormComp4 from '~/pages/sample-component/vuetify/comp/formComp4.vue'
-import LodingComp from '~/pages/sample-component/vuetify/comp/lodingComp.vue'
-import StepperComp from '~/pages/sample-component/vuetify/comp/stepperComp.vue'
-import WindowComp from '~/pages/sample-component/vuetify/comp/windowComp.vue'
-import EtcComp from '~/pages/sample-component/vuetify/comp/etcComp.vue'
-import AlertComp from '~/pages/sample-component/vuetify/comp/alertComp.vue'
-import DialogComp from '~/pages/sample-component/vuetify/comp/dialogComp.vue'
-import TimeLineComp from '~/pages/sample-component/vuetify/comp/timelineComp.vue'
-import ImageComp from '~/pages/sample-component/vuetify/comp/imageComp.vue'
-import BadgeComp from '~/pages/sample-component/vuetify/comp/badgeComp.vue'
-import ScrollComp from '~/pages/sample-component/vuetify/comp/scrollComp.vue'
-import ListComp from '~/pages/sample-component/vuetify/comp/listComp.vue'
-import PanelComp from '~/pages/sample-component/vuetify/comp/panelComp.vue'
-import EtcComp2 from '~/pages/sample-component/vuetify/comp/etcComp2.vue'
+import VuetifyForm from '~/pages/sample-component/vuetify/comp/vuetifyForm.vue'
+import VuetifyFormValid from '~/pages/sample-component/vuetify/comp/vuetifyFormValid.vue'
+import VuetifyCalousel from '~/pages/sample-component/vuetify/comp/vuetifyCalousel.vue'
+import VuetifyLoading from '~/pages/sample-component/vuetify/comp/vuetifyLoding.vue'
+import VuetifytImage from '~/pages/sample-component/vuetify/comp/vuetifytImage.vue'
+import VuetifyTimeline from '~/pages/sample-component/vuetify/comp/vuetifyTimeline.vue'
+import VuetifyStepper from '~/pages/sample-component/vuetify/comp/vuetifyStepper.vue'
+import VuetifyList from '~/pages/sample-component/vuetify/comp/vuetifyList.vue'
+import VuetifyBasic from '~/pages/sample-component/vuetify/comp/vuetifyBasic.vue'
+import VuetifyBasic2 from '~/pages/sample-component/vuetify/comp/vuetifyBasic2.vue'
+import VuetifyEtc from '~/pages/sample-component/vuetify/comp/vuetifyEtc.vue'
+import VuetifyAlert from '~/pages/sample-component/vuetify/comp/vuetifyAlert.vue'
+import VuetifyChip from '~/pages/sample-component/vuetify/comp/vuetifyChip.vue'
+import VuetifyCard from '~/pages/sample-component/vuetify/comp/vuetifyCard.vue'
+import VuetifySheet from '~/pages/sample-component/vuetify/comp/vuetifySheet.vue'
 
 export default defineComponent({
   name: 'Vuetify',
   components: {
-    EtcComp2,
-    PanelComp,
-    ListComp,
-    ScrollComp,
-    BadgeComp,
-    ImageComp,
-    TimeLineComp,
-    DialogComp,
-    AlertComp,
-    EtcComp,
-    WindowComp,
-    StepperComp,
-    LodingComp,
-    FormComp4,
-    FormComp,
-    FormComp3,
-    FormComp2,
-    FormComp1
+    VuetifySheet,
+    VuetifyCard,
+    VuetifyChip,
+    VuetifyAlert,
+    VuetifyEtc,
+    VuetifyBasic2,
+    VuetifyBasic,
+    VuetifyList,
+    VuetifyStepper,
+    VuetifyTimeline,
+    VuetifytImage,
+    VuetifyLoading,
+    VuetifyCalousel,
+    VuetifyFormValid,
+    VuetifyForm
   },
   setup: function () {
-    const tab = ref<string>('form1')
+    const tab = ref<string>('form')
 
     return {
       tab
