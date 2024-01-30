@@ -1,12 +1,15 @@
 <template>
-  <div class="footer">Footer</div>
+  <div>Member</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'FooterComp'
+  name: 'Member',
+  setup: function () {
+    return {}
+  }
 })
 </script>
 

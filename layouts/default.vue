@@ -1,10 +1,19 @@
 <template>
   <div v-if="isLoginContainer" class="container">
-    <header-comp />
-    <div class="content">
-      <slot />
+    <div class="left">
+      <nav-comp />
     </div>
-    <footer-comp />
+    <div class="right">
+      <div class="right-container">
+        <div class="header">
+          <header-comp />
+        </div>
+
+        <div class="content">
+          <slot />
+        </div>
+      </div>
+    </div>
   </div>
   <div v-else class="container">
     <div class="content">
@@ -14,9 +23,8 @@
 </template>
 
 <script lang="ts">
-import HeaderComp from '@/components/HeaderComp.vue'
-import FooterComp from '@/components/FooterComp.vue'
 import { commonStore } from '~/stores/common'
+import { ref } from 'vue'
 
 export default {
   setup() {
