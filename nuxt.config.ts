@@ -16,11 +16,21 @@ export default defineNuxtConfig({
   },
   components: true,
 
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    'nuxt-tiptap-editor'
+  ],
 
   vite: {
     define: {
       'process.env.DEBUG': false
+    }
+  },
+  tiptap: {
+    prefix: 'Tiptap', // prefix for Tiptap imports, composables not included
+    lowlight: {
+      theme: 'github-dark' // default theme
     }
   }
 })

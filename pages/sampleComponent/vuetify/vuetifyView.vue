@@ -76,25 +76,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import VuetifyForm from '~/pages/sample-component/vuetify/comp/vuetifyForm.vue'
-import VuetifyFormValid from '~/pages/sample-component/vuetify/comp/vuetifyFormValid.vue'
-import VuetifyCalousel from '~/pages/sample-component/vuetify/comp/vuetifyCalousel.vue'
-import VuetifyLoading from '~/pages/sample-component/vuetify/comp/vuetifyLoding.vue'
-import VuetifytImage from '~/pages/sample-component/vuetify/comp/vuetifytImage.vue'
-import VuetifyTimeline from '~/pages/sample-component/vuetify/comp/vuetifyTimeline.vue'
-import VuetifyStepper from '~/pages/sample-component/vuetify/comp/vuetifyStepper.vue'
-import VuetifyList from '~/pages/sample-component/vuetify/comp/vuetifyList.vue'
-import VuetifyBasic from '~/pages/sample-component/vuetify/comp/vuetifyBasic.vue'
-import VuetifyBasic2 from '~/pages/sample-component/vuetify/comp/vuetifyBasic2.vue'
-import VuetifyEtc from '~/pages/sample-component/vuetify/comp/vuetifyEtc.vue'
-import VuetifyAlert from '~/pages/sample-component/vuetify/comp/vuetifyAlert.vue'
-import VuetifyChip from '~/pages/sample-component/vuetify/comp/vuetifyChip.vue'
-import VuetifyCard from '~/pages/sample-component/vuetify/comp/vuetifyCard.vue'
-import VuetifySheet from '~/pages/sample-component/vuetify/comp/vuetifySheet.vue'
+import { defineComponent, ref } from 'vue'
+import VuetifyForm from '~/pages/sampleComponent/vuetify/comp/vuetifyForm.vue'
+import VuetifyFormValid from '~/pages/sampleComponent/vuetify/comp/vuetifyFormValid.vue'
+import VuetifyCalousel from '~/pages/sampleComponent/vuetify/comp/vuetifyCalousel.vue'
+import VuetifyLoading from '~/pages/sampleComponent/vuetify/comp/vuetifyLoding.vue'
+import VuetifytImage from '~/pages/sampleComponent/vuetify/comp/vuetifytImage.vue'
+import VuetifyTimeline from '~/pages/sampleComponent/vuetify/comp/vuetifyTimeline.vue'
+import VuetifyStepper from '~/pages/sampleComponent/vuetify/comp/vuetifyStepper.vue'
+import VuetifyList from '~/pages/sampleComponent/vuetify/comp/vuetifyList.vue'
+import VuetifyBasic from '~/pages/sampleComponent/vuetify/comp/vuetifyBasic.vue'
+import VuetifyBasic2 from '~/pages/sampleComponent/vuetify/comp/vuetifyBasic2.vue'
+import VuetifyEtc from '~/pages/sampleComponent/vuetify/comp/vuetifyEtc.vue'
+import VuetifyAlert from '~/pages/sampleComponent/vuetify/comp/vuetifyAlert.vue'
+import VuetifyChip from '~/pages/sampleComponent/vuetify/comp/vuetifyChip.vue'
+import VuetifyCard from '~/pages/sampleComponent/vuetify/comp/vuetifyCard.vue'
+import VuetifySheet from '~/pages/sampleComponent/vuetify/comp/vuetifySheet.vue'
 
 export default defineComponent({
-  name: 'Vuetify',
   components: {
     VuetifySheet,
     VuetifyCard,
