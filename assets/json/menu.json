@@ -63,6 +63,13 @@
     },
     {
       "menuId": "00013",
+      "menuNm": "Auto Animate",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/autoAnimate/autoAnimateView"
+    },
+    {
+      "menuId": "00014",
       "menuNm": "AG Grid",
       "prnMenuId": "00003",
       "icon": "",
