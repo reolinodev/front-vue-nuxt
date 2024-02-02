@@ -70,6 +70,13 @@
     },
     {
       "menuId": "00014",
+      "menuNm": "Echarts",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/echarts/echartsView"
+    },
+    {
+      "menuId": "00015",
       "menuNm": "AG Grid",
       "prnMenuId": "00003",
       "icon": "",

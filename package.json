@@ -34,8 +34,10 @@
     "@tiptap/extension-underline": "^2.2.0",
     "@tiptap/extension-youtube": "^2.2.1",
     "@tiptap/starter-kit": "^2.2.0",
+    "echarts": "^5.4.3",
     "nuxt": "^3.6.5",
     "vue": "^3.3.13",
+    "vue-echarts": "^6.6.8",
     "vuetify": "^3.3.8"
   },
   "devDependencies": {
