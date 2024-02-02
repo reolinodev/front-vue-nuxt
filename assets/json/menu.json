@@ -77,6 +77,13 @@
     },
     {
       "menuId": "00015",
+      "menuNm": "Vue3 Datepicker",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/datepicker/datepickerView"
+    },
+    {
+      "menuId": "00016",
       "menuNm": "AG Grid",
       "prnMenuId": "00003",
       "icon": "",
