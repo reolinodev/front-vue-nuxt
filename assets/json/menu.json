@@ -87,7 +87,7 @@
       "menuNm": "AG Grid",
       "prnMenuId": "00003",
       "icon": "",
-      "url": "/sampleComponent/agGrid/agGrid"
+      "url": "/sampleComponent/agGrid/agGridView"
     }
   ],
   "defaultLv1Icon": "mdi-folder-outline",

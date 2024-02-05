@@ -68,3 +68,23 @@
 
 
 
+.ag-root-wrapper.ag-layout-normal {
+  height: 100%;
+  border: none;
+  border-radius: inherit;
+}
+
+.ag-header.ag-header-allow-overflow .ag-header-row {
+  overflow: visible;
+  background: #212121;
+}
+
+.ag-row-animation .ag-row {
+  transition: transform 0.4s, top 0.4s;
+  background: #212121;
+}
+
+.ag-ltr .ag-body, .ag-ltr .ag-floating-top, .ag-ltr .ag-floating-bottom, .ag-ltr .ag-header, .ag-ltr .ag-sticky-top, .ag-ltr .ag-body-viewport, .ag-ltr .ag-body-horizontal-scroll {
+  flex-direction: row;
+  background: #212121;
+}
