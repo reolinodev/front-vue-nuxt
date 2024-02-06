@@ -21,7 +21,8 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-    'nuxt-tiptap-editor'
+    'nuxt-tiptap-editor',
+    'dayjs-nuxt'
   ],
   vite: {
     define: {
