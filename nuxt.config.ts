@@ -28,14 +28,11 @@ export default defineNuxtConfig({
       'process.env.DEBUG': false
     }
   },
-  plugins: [
-    { src: '~/plugins/echarts.ts', mode: 'client' }
-    // { src: '~/plugins/ag-grid-vue3.ts', mode: 'client' }
-  ],
+  plugins: [{ src: '~/plugins/echarts.ts', mode: 'client' }],
   tiptap: {
-    prefix: 'Tiptap', // prefix for Tiptap imports, composables not included
+    prefix: 'Tiptap',
     lowlight: {
-      theme: 'github-dark' // default theme
+      theme: 'github-dark'
     }
   }
 })

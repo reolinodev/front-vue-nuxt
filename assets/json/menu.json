@@ -88,6 +88,13 @@
       "prnMenuId": "00003",
       "icon": "",
       "url": "/sampleComponent/agGrid/agGridView"
+    },
+    {
+      "menuId": "00017",
+      "menuNm": "Full Calendar",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/fullCalendar/fullCalendarView"
     }
   ],
   "defaultLv1Icon": "mdi-folder-outline",
