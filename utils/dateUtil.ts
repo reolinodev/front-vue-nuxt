@@ -77,8 +77,7 @@ export function getDateCalculateFormat(
 
 export function getDiffDaytoDay(
   dateValue1: string,
-  dateValue2: string,
-  period: string
+  dateValue2: string
 ): string {
   let dateRetunVal: string = ''
   let date1 = dayjs()
@@ -92,7 +91,7 @@ export function getDiffDaytoDay(
     date2 = dayjs(dateValue2)
   }
 
-  dateRetunVal = `${date2.diff(date1, period)}`
+  dateRetunVal = `${date2.diff(date1)}`
 
   return dateRetunVal
 }
