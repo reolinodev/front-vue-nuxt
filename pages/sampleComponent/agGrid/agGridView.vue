@@ -9,9 +9,13 @@
         show-arrows
       >
         <v-tab :value="basic">Basic</v-tab>
-        <v-tab :value="basic2">Basic2</v-tab>
-        <v-tab :value="basic3">Basic3</v-tab>
-        <v-tab :value="sorting">Sorting</v-tab>
+        <v-tab :value="api">Api Call</v-tab>
+        <v-tab :value="checkSelect">Check Select</v-tab>
+        <v-tab :value="filters">Filter</v-tab>
+        <v-tab :value="columns">Column</v-tab>
+        <v-tab :value="rendering">Rendering</v-tab>
+        <v-tab :value="rendering2">Rendering2</v-tab>
+        <v-tab :value="editor">Editor</v-tab>
         <v-tab :value="dragging">Dragging</v-tab>
       </v-tabs>
 
@@ -19,14 +23,26 @@
         <v-window-item value="basic">
           <ag-grid-basic />
         </v-window-item>
-        <v-window-item value="basic2">
-          <ag-grid-basic2 />
+        <v-window-item value="api">
+          <ag-grid-api />
         </v-window-item>
-        <v-window-item value="basic3">
-          <ag-grid-basic3 />
+        <v-window-item value="checkSelect">
+          <ag-grid-check-select />
         </v-window-item>
-        <v-window-item value="sorting">
-          <ag-grid-sorting />
+        <v-window-item value="filters">
+          <ag-grid-filter />
+        </v-window-item>
+        <v-window-item value="columns">
+          <ag-grid-column />
+        </v-window-item>
+        <v-window-item value="rendering">
+          <ag-grid-render />
+        </v-window-item>
+        <v-window-item value="rendering2">
+          <ag-grid-render2 />
+        </v-window-item>
+        <v-window-item value="editor">
+          <ag-grid-editor />
         </v-window-item>
         <v-window-item value="dragging">
           <ag-grid-dragging />
@@ -38,18 +54,27 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+// @ts-ignore
 import AgGridBasic from '~/pages/sampleComponent/agGrid/comp/agGridBasic.vue'
-import AgGridBasic2 from '~/pages/sampleComponent/agGrid/comp/agGridBasic2.vue'
-import AgGridBasic3 from '~/pages/sampleComponent/agGrid/comp/agGridBasic3.vue'
+import AgGridApi from '~/pages/sampleComponent/agGrid/comp/agGridApi.vue'
 import AgGridDragging from '~/pages/sampleComponent/agGrid/comp/agGridDragging.vue'
-import AgGridSorting from '~/pages/sampleComponent/agGrid/comp/agGridSorting.vue'
+import AgGridCheckSelect from '~/pages/sampleComponent/agGrid/comp/agGridCheckSelect.vue'
+import AgGridFilter from '~/pages/sampleComponent/agGrid/comp/agGridFilter.vue'
+import AgGridColumn from '~/pages/sampleComponent/agGrid/comp/agGridColumn.vue'
+import AgGridRender from '~/pages/sampleComponent/agGrid/comp/agGridRender.vue'
+import AgGridRender2 from '~/pages/sampleComponent/agGrid/comp/agGridRender2.vue'
+import AgGridEditor from '~/pages/sampleComponent/agGrid/comp/agGridEditor.vue'
 
 export default defineComponent({
   components: {
-    AgGridSorting,
+    AgGridEditor,
+    AgGridRender2,
+    AgGridRender,
+    AgGridColumn,
+    AgGridFilter,
+    AgGridCheckSelect,
+    AgGridApi,
     AgGridDragging,
-    AgGridBasic3,
-    AgGridBasic2,
     AgGridBasic
   },
   setup: function () {

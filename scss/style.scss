@@ -88,3 +88,20 @@
   flex-direction: row;
   background: #212121;
 }
+
+.ag-overlay-loading-wrapper {
+  background-color: #212121;
+}
+
+.ag-paging-panel {
+  border-top: 1px solid;
+  border-top-color: var(--ag-border-color);
+  color: var(--ag-secondary-foreground-color);
+  height: var(--ag-header-height);
+  background: #212121;
+}
+
+.ag-paging-panel > .ag-paging-page-size .ag-wrapper {
+  min-width: calc(var(--ag-grid-size) * 10);
+  background: #212121;
+}

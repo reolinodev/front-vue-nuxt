@@ -5,7 +5,12 @@
         <v-card-item width="100%">
           <v-row class="ma-auto">
             <v-col cols="12">
-              <v-card-text># API Call</v-card-text>
+              <v-card-text># API Call & Download CSV</v-card-text>
+              <v-col class="d-flex justify-end">
+                <v-btn color="info" @click="onBtnExport()">
+                  Download CSV export file
+                </v-btn>
+              </v-col>
               <client-only>
                 <ag-grid-vue
                   style="height: 471px"
@@ -13,20 +18,22 @@
                   :column-defs="columnDefs"
                   :default-col-def="defaultColDef"
                   :row-data="rowData"
+                  :suppress-excel-export="true"
                   @grid-ready="onGridReady"
                 />
               </client-only>
             </v-col>
 
             <v-col cols="12">
-              <v-card-text># Auto resize</v-card-text>
+              <v-card-text># Auto resize & grid option</v-card-text>
+              selectedRow(single) : {{ selectedData }}
               <client-only>
                 <ag-grid-vue
                   style="height: 471px"
                   class="ag-theme-quartz-dark"
                   :column-defs="columnDefs"
-                  :auto-size-strategy="autoSizeStrategy"
                   :row-data="rowData"
+                  :grid-options="gridOptions"
                   @grid-ready="onGridReady"
                 />
               </client-only>
@@ -47,10 +54,16 @@ export default {
     AgGridVue
   },
   setup() {
-    let gridApi = null
+    const gridApi = ref(null)
 
     const columnDefs = ref([
-      { field: 'athlete' },
+      {
+        field: 'athlete',
+        cellStyle: {
+          'text-decoration': 'underline',
+          color: '#2196f3'
+        }
+      },
       { field: 'gold' },
       { field: 'silver' },
       { field: 'bronze' },
@@ -69,7 +82,7 @@ export default {
     const rowData = ref(null)
 
     const onGridReady = (params) => {
-      gridApi = params.api
+      gridApi.value = params.api
 
       const updateData = (data) => {
         rowData.value = data
@@ -80,24 +93,45 @@ export default {
         .then((data) => updateData(data))
     }
 
-    const autoSizeStrategy = ref({
-      type: 'fitGridWidth',
-      defaultMinWidth: 100,
-      columnLimits: [
-        {
-          colId: 'athlete',
-          minWidth: 300
+    const onBtnExport = () => {
+      gridApi.value.exportDataAsCsv()
+    }
+
+    const onSelectionChanged = () => {
+      console.log('11', gridApi.value.getSelectedRows())
+    }
+
+    const selectedData = ref([])
+
+    const gridOptions = {
+      rowSelection: 'single',
+      autoSizeStrategy: {
+        type: 'fitGridWidth',
+        defaultMinWidth: 100,
+        columnLimits: [
+          {
+            colId: 'athlete',
+            minWidth: 300
+          }
+        ]
+      },
+      onCellClicked: (params) => {
+        if (params.colDef.field === 'athlete') {
+          selectedData.value = gridApi.value.getSelectedRows()
         }
-      ]
-    })
+      }
+    }
 
     return {
       defaultColDef,
       columnDefs,
       gridApi,
       rowData,
-      autoSizeStrategy,
-      onGridReady
+      gridOptions,
+      selectedData,
+      onGridReady,
+      onBtnExport,
+      onSelectionChanged
     }
   }
 }

@@ -31,22 +31,6 @@
                 />
               </client-only>
             </v-col>
-
-            <v-row class="ma-auto">
-              <v-col cols="12">
-                <v-card-text># Filter</v-card-text>
-                <client-only>
-                  <ag-grid-vue
-                    style="height: 471px"
-                    class="ag-theme-quartz-dark"
-                    :column-defs="columnDefs3"
-                    :default-col-def="defaultColDef3"
-                    :row-data="rowData"
-                    @grid-ready="onGridReady"
-                  />
-                </client-only>
-              </v-col>
-            </v-row>
           </v-row>
         </v-card-item>
       </v-card>
@@ -91,7 +75,7 @@ export default {
       }
 
       fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
-        .then((resp) => resp.json())
+        .then(resp => resp.json())
         .then((data) => updateData(data))
     }
 
@@ -145,59 +129,6 @@ export default {
       minWidth: 150
     })
 
-    const filterParams = {
-      comparator: (filterLocalDateAtMidnight, cellValue) => {
-        const dateAsString = cellValue
-        if (dateAsString == null) {
-          return -1
-        }
-        const dateParts = dateAsString.split('/')
-        const cellDate = new Date(
-          Number(dateParts[2]),
-          Number(dateParts[1]) - 1,
-          Number(dateParts[0])
-        )
-        if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-          return 0
-        }
-        if (cellDate < filterLocalDateAtMidnight) {
-          return -1
-        }
-        if (cellDate > filterLocalDateAtMidnight) {
-          return 1
-        }
-        return 0
-      },
-      minValidYear: 2000,
-      maxValidYear: 2021,
-      inRangeFloatingFilterDateFormat: 'Do MMM YYYY'
-    }
-
-    const columnDefs3 = ref([
-      { field: 'year', sort: 'desc', filter: 'agTextColumnFilter' },
-      { field: 'sport', sort: 'desc', filter: 'agNumberColumnFilter' },
-      {
-        field: 'country'
-      },
-      {
-        field: 'date',
-        filter: 'agDateColumnFilter',
-        filterParams
-      },
-      { field: 'age' },
-      { field: 'athlete' },
-      { field: 'gold' },
-      { field: 'silver' },
-      { field: 'bronze' },
-      { field: 'total' }
-    ])
-
-    const defaultColDef3 = ref({
-      flex: 1,
-      minWidth: 200,
-      floatingFilter: true
-    })
-
     return {
       defaultColDef,
       columnDefs,
@@ -205,8 +136,6 @@ export default {
       rowData,
       columnDefs2,
       defaultColDef2,
-      columnDefs3,
-      defaultColDef3,
       onGridReady
     }
   }
