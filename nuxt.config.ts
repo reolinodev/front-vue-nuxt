@@ -11,7 +11,10 @@ export default defineNuxtConfig({
     '@/assets/css/app.css',
     '@mdi/font/css/materialdesignicons.min.css',
     'ag-grid-community/styles/ag-grid.css',
-    'ag-grid-community/styles/ag-theme-quartz.css'
+    'ag-grid-community/styles/ag-theme-quartz.css',
+    'primevue/resources/themes/aura-dark-blue/theme.css',
+    'primevue/resources/primevue.min.css',
+    'primeicons/primeicons.css'
   ],
   build: {
     transpile: ['vuetify', 'echarts', 'zrender', 'tslib', 'ag-grid-vue3']
@@ -25,7 +28,8 @@ export default defineNuxtConfig({
     'dayjs-nuxt',
     '@vueuse/nuxt',
     'nuxt-typed-router',
-    'nuxt-lodash'
+    'nuxt-lodash',
+    'nuxt-primevue'
   ],
   vite: {
     define: {

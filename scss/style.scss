@@ -105,3 +105,156 @@
   min-width: calc(var(--ag-grid-size) * 10);
   background: #212121;
 }
+
+.p-calendar {
+  display: inline-flex;
+  max-width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
+  outline: none;
+  outline-offset: -1px;
+  box-shadow: none;
+  border-color: #52525b;
+}
+.p-datepicker {
+  min-width: 300px; ;
+}
+
+.p-datepicker-group-container {
+  min-width: 300px; ;
+}
+
+.p-datepicker-group {
+  padding: 5px;
+  min-width: 300px; ;
+}
+
+.p-datepicker-header {
+  padding: 10px;
+  min-width: 300px; ;
+}
+
+.p-datepicker-calendar-container {
+  padding: 5px;
+}
+.p-datepicker-buttonbar {
+  padding: 10px;
+}
+.p-monthpicker {
+  min-width: 300px;
+  padding: 10px;
+}
+
+.p-yearpicker {
+  padding: 5px;
+}
+
+.p-float-label > label {
+  left: 0.75rem;
+  color: #a1a1aa;
+  transition-duration: 0.2s;
+  top: 12px;
+}
+
+.p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label, .p-float-label:has(input:-webkit-autofill) label, .p-float-label:has(textarea:focus) label, .p-float-label:has(textarea.p-filled) label, .p-float-label:has(.p-inputwrapper-focus) label, .p-float-label:has(.p-inputwrapper-filled) label {
+  top: -1.2rem;
+  font-size: 12px;
+}
+
+.p-treeselect .p-treeselect-label.p-placeholder {
+  color: #a1a1aa;
+  padding: 10px ;
+}
+
+.p-tree-container {
+  margin: 0;
+  padding: 10px;
+  list-style-type: none;
+  overflow: auto;
+}
+
+.p-tree .p-tree-container .p-treenode {
+  padding: 5px 5px;
+  outline: 0 none;
+}
+
+.p-treenode-label {
+  padding: 2px 5px;
+}
+
+.p-treenode-children {
+  padding: 3px 15px;
+}
+
+.p-treeselect-label {
+  padding: 10px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+  background: #18181b;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+  outline: 1px solid var(--p-focus-ring-color);
+  outline-offset: 2px;
+  box-shadow: 0 none;
+  padding: 1px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
+  margin-right: 5px;
+}
+
+.p-cascadeselect .p-cascadeselect-label {
+  box-shadow: none;
+  padding: 10px;
+}
+.p-cascadeselect-item-content {
+  padding: 10px;
+}
+
+.p-tree .p-tree-filter-container .p-tree-filter {
+  width: 100%;
+  padding-right: 1.75rem;
+  padding: 10px;
+  border: 1px solid #cccccc;
+}
+
+.p-tree-filter-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5rem;
+}
+
+.p-datatable .p-column-header-content {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+
+
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid #27272a;
+  border-width: 0 0 1px 0;
+  padding: 0.75rem 1rem;
+}
+
+.p-sidebar .p-sidebar-header .p-sidebar-header-content {
+  padding: 10px;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.p-sidebar {
+  background: #18181b;
+  color: #ffffff;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}

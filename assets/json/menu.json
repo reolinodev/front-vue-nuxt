@@ -95,6 +95,13 @@
       "prnMenuId": "00003",
       "icon": "",
       "url": "/sampleComponent/fullCalendar/fullCalendarView"
+    },
+    {
+      "menuId": "00018",
+      "menuNm": "PRIME VUE",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/primeVue/primeVueView"
     }
   ],
   "defaultLv1Icon": "mdi-folder-outline",
