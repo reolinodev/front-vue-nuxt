@@ -17,7 +17,7 @@ nuxt로 만든 vue.js 샘플 프로젝트입니다. <br>
    7. 간단한 로그인 화면과 헤더 화면 구현
 2. Vuetify 적용 : 웹 스타일의 기본을 vuetify로 설정 
    1. Vuetify 기본 예시 및 메뉴 적용  [Vuetify 공식홈](https://vuetifyjs.com)
-3. 기타 오픈소스 적용 : nuxt3에서 사용할 만한 오픈소스 적용. 자신에게 적합한 것 사용하고 삭제할것
+3. 기타 오픈소스 적용 : nuxt3에서 사용할 만한 오픈소스 적용. 자신에게 적합한 것 사용하고 삭제하세요.
    1. titpap 적용 및 예시 소스  [Tiptap 공식홈](https://tiptap.dev/)
    2. auto animate 적용 및 예시 소스 [AutoAnimate 공식홈](https://auto-animate.formkit.com/)
    3. Ecahrt 적용 및 예시 소스 [Ecahrt 공식홈](https://echarts.apache.org/en/index.html)
@@ -39,8 +39,8 @@ npm install
 npm run dev
 ```
 ### $ 주의점
-node 버전에 따라 정상적으로 설치가 안될 수 있다.
-개발시 20.10.0 버전을 사용하고 있었다.
+node 버전에 따라 정상적으로 설치가 안될 수 있습니다.
+개발시 20.10.0 버전을 사용하고 있었습니다.
 
 ### $ 팁
 1. 인텔리J를 사용할 경우 eslint를 자동으로 설정하려면 setting < Languages & Frameworks < Javascript < Code Quality Tools < ESLint에서
