@@ -10,67 +10,102 @@
       "menuNm": "Member",
       "prnMenuId": "00001",
       "icon": "mdi-account-box-edit-outline",
-      "url": "/member-setting/member"
+      "url": "/memberSetting/member"
     },
     {
       "menuId": "00006",
       "menuNm": "Member Auth Setting",
       "prnMenuId": "00001",
       "icon": "mdi-account-multiple",
-      "url": "/member-setting/memberAuthSetting"
+      "url": "/memberSetting/memberAuthSetting"
     },
     {
       "menuId": "00007",
       "menuNm": "Auth Setting",
       "prnMenuId": "00002",
       "icon": "mdi-wall-fire",
-      "url": "/system-setting/authSetting"
+      "url": "/systemSetting/authSetting"
     },
     {
       "menuId": "00008",
       "menuNm": "Menu Setting",
       "prnMenuId": "00002",
       "icon": "mdi-menu-open",
-      "url": "/system-setting/menuSetting"
+      "url": "/systemSetting/menuSetting"
     },
     {
       "menuId": "00009",
       "menuNm": "Menu Auth Setting",
       "prnMenuId": "00002",
       "icon": "mdi-filter-menu-outline",
-      "url": "/system-setting/menuAuthSetting"
+      "url": "/systemSetting/menuAuthSetting"
     },
     {
       "menuId": "00010",
       "menuNm": "System Code",
       "prnMenuId": "00002",
       "icon": "mdi-application-braces-outline",
-      "url": "/system-setting/systemCode"
+      "url": "/systemSetting/systemCode"
     },
     {
       "menuId": "00011",
       "menuNm": "Vuetify",
       "prnMenuId": "00003",
       "icon": "",
-      "url": "/sample-component/vuetify/vuetify"
+      "url": "/sampleComponent/vuetify/vuetifyView"
     },
     {
       "menuId": "00012",
-      "menuNm": "Toast UI",
+      "menuNm": "Tiptap",
       "prnMenuId": "00003",
       "icon": "",
-      "url": "/sample-component/toast-ui/toastUi"
+      "url": "/sampleComponent/tiptap/tiptapView"
     },
     {
       "menuId": "00013",
+      "menuNm": "Auto Animate",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/autoAnimate/autoAnimateView"
+    },
+    {
+      "menuId": "00014",
+      "menuNm": "Echarts",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/echarts/echartsView"
+    },
+    {
+      "menuId": "00015",
+      "menuNm": "Vue3 Datepicker",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/datepicker/datepickerView"
+    },
+    {
+      "menuId": "00016",
       "menuNm": "AG Grid",
       "prnMenuId": "00003",
       "icon": "",
-      "url": "/sample-component/ag-grid/agGrid"
+      "url": "/sampleComponent/agGrid/agGridView"
+    },
+    {
+      "menuId": "00017",
+      "menuNm": "Full Calendar",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/fullCalendar/fullCalendarView"
+    },
+    {
+      "menuId": "00018",
+      "menuNm": "PRIME VUE",
+      "prnMenuId": "00003",
+      "icon": "",
+      "url": "/sampleComponent/primeVue/primeVueView"
     }
   ],
   "defaultLv1Icon": "mdi-folder-outline",
   "defaultLv2Icon": "mdi-folder-open",
   "mainMenuUrl": "/dashboard",
-  "mainMenuNm": "대시보드"
+  "mainMenuNm": "Dashboard"
 }

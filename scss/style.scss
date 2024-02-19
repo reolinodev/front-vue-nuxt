@@ -66,56 +66,219 @@
   cursor: pointer;
 }
 
-//a {
-//  text-decoration: none;
-//  color : #ffffff;
-//}
-//
-//.container {
-//  display: flex;
-//  flex-direction: column;
-//  min-height: 100vh;
-//}
-//
-//.header {
-//  background-color: #333;
-//  color: #fff;
-//  padding: 0;
-//  display: flex;
-//  justify-content: space-between;
-//}
-//
-//.content {
-//  flex: 1;
-//  padding: 20px;
-//}
-//
-//.footer {
-//  background-color: #333;
-//  color: #fff;
-//  padding: 20px;
-//  display: flex;
-//  justify-content: center;
-//}
-//
-//.content-container {
-//  min-height: 500px;
-//  border-radius: 50px;
-//}
-//
-//.content-sub-title {
-//  padding: 10px;
-//}
-//
-//.item-container{
-//  padding: 10px;
-//  margin-top: 15px;
-//  min-height: 800px;
-//}
-//
-//.alert-button-container {
-//  margin-top: 30px;
-//  justify-content: center;
-//  margin-left: 50px;
-//  display: flex;
-//}
+
+
+.ag-root-wrapper.ag-layout-normal {
+  height: 100%;
+  border: none;
+  border-radius: inherit;
+}
+
+.ag-header.ag-header-allow-overflow .ag-header-row {
+  overflow: visible;
+  background: #212121;
+}
+
+.ag-row-animation .ag-row {
+  transition: transform 0.4s, top 0.4s;
+  background: #212121;
+}
+
+.ag-ltr .ag-body, .ag-ltr .ag-floating-top, .ag-ltr .ag-floating-bottom, .ag-ltr .ag-header, .ag-ltr .ag-sticky-top, .ag-ltr .ag-body-viewport, .ag-ltr .ag-body-horizontal-scroll {
+  flex-direction: row;
+  background: #212121;
+}
+
+.ag-overlay-loading-wrapper {
+  background-color: #212121;
+}
+
+.ag-paging-panel {
+  border-top: 1px solid;
+  border-top-color: var(--ag-border-color);
+  color: var(--ag-secondary-foreground-color);
+  height: var(--ag-header-height);
+  background: #212121;
+}
+
+.ag-paging-panel > .ag-paging-page-size .ag-wrapper {
+  min-width: calc(var(--ag-grid-size) * 10);
+  background: #212121;
+}
+
+.p-calendar {
+  display: inline-flex;
+  max-width: 100%;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
+  outline: none;
+  outline-offset: -1px;
+  box-shadow: none;
+  border-color: #52525b;
+}
+.p-datepicker {
+  min-width: 300px; ;
+}
+
+.p-datepicker-group-container {
+  min-width: 300px; ;
+}
+
+.p-datepicker-group {
+  padding: 5px;
+  min-width: 300px; ;
+}
+
+.p-datepicker-header {
+  padding: 10px;
+  min-width: 300px; ;
+}
+
+.p-datepicker-calendar-container {
+  padding: 5px;
+}
+.p-datepicker-buttonbar {
+  padding: 10px;
+}
+.p-monthpicker {
+  min-width: 300px;
+  padding: 10px;
+}
+
+.p-yearpicker {
+  padding: 5px;
+}
+
+.p-float-label > label {
+  left: 0.75rem;
+  color: #a1a1aa;
+  transition-duration: 0.2s;
+  top: 12px;
+}
+
+.p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label, .p-float-label:has(input:-webkit-autofill) label, .p-float-label:has(textarea:focus) label, .p-float-label:has(textarea.p-filled) label, .p-float-label:has(.p-inputwrapper-focus) label, .p-float-label:has(.p-inputwrapper-filled) label {
+  top: -1.2rem;
+  font-size: 12px;
+}
+
+.p-treeselect .p-treeselect-label.p-placeholder {
+  color: #a1a1aa;
+  padding: 10px ;
+}
+
+.p-tree-container {
+  margin: 0;
+  padding: 10px;
+  list-style-type: none;
+  overflow: auto;
+}
+
+.p-tree .p-tree-container .p-treenode {
+  padding: 5px 5px;
+  outline: 0 none;
+}
+
+.p-treenode-label {
+  padding: 2px 5px;
+}
+
+.p-treenode-children {
+  padding: 3px 15px;
+}
+
+.p-treeselect-label {
+  padding: 10px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
+  background: #18181b;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+  outline: 1px solid var(--p-focus-ring-color);
+  outline-offset: 2px;
+  box-shadow: 0 none;
+  padding: 1px;
+}
+
+.p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox {
+  margin-right: 5px;
+}
+
+.p-cascadeselect .p-cascadeselect-label {
+  box-shadow: none;
+  padding: 10px;
+}
+.p-cascadeselect-item-content {
+  padding: 10px;
+}
+
+.p-tree .p-tree-filter-container .p-tree-filter {
+  width: 100%;
+  padding-right: 1.75rem;
+  padding: 10px;
+  border: 1px solid #cccccc;
+}
+
+.p-tree-filter-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5rem;
+}
+
+.p-datatable .p-column-header-content {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+
+
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid #27272a;
+  border-width: 0 0 1px 0;
+  padding: 0.75rem 1rem;
+}
+
+.p-sidebar .p-sidebar-header .p-sidebar-header-content {
+  padding: 10px;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.p-sidebar {
+  background: #18181b;
+  color: #ffffff;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.fc .fc-button .fc-icon {
+  font-size: 1.5em;
+  vertical-align: baseline;
+}
+
+.fc .fc-button-primary:disabled {
+  background-color: #52525b;
+  border-color: var(--fc-button-border-color);
+  color: var(--fc-button-text-color);
+  padding: 9px;
+}
+
+.fc .fc-button-primary {
+  background-color: #3f3f46;
+  border-color: #52525b;
+  color: var(--fc-button-text-color);
+}
+
+.fc-theme-standard .fc-list-day-cushion {
+  background-color: #585c5f
+}
+
+

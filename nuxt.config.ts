@@ -9,18 +9,38 @@ export default defineNuxtConfig({
   css: [
     'vuetify/lib/styles/main.sass',
     '@/assets/css/app.css',
-    '@mdi/font/css/materialdesignicons.min.css'
+    '@mdi/font/css/materialdesignicons.min.css',
+    'ag-grid-community/styles/ag-grid.css',
+    'ag-grid-community/styles/ag-theme-quartz.css',
+    'primevue/resources/themes/aura-dark-blue/theme.css',
+    'primevue/resources/primevue.min.css',
+    'primeicons/primeicons.css'
   ],
   build: {
-    transpile: ['vuetify']
+    transpile: ['vuetify', 'echarts', 'zrender', 'tslib', 'ag-grid-vue3']
   },
   components: true,
 
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
-
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    'nuxt-tiptap-editor',
+    'dayjs-nuxt',
+    '@vueuse/nuxt',
+    'nuxt-typed-router',
+    'nuxt-lodash',
+    'nuxt-primevue'
+  ],
   vite: {
     define: {
       'process.env.DEBUG': false
+    }
+  },
+  plugins: [{ src: '~/plugins/echarts.ts', mode: 'client' }],
+  tiptap: {
+    prefix: 'Tiptap',
+    lowlight: {
+      theme: 'github-dark'
     }
   }
 })
