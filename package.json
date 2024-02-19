@@ -14,6 +14,7 @@
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@fullcalendar/vue3": "^6.1.10",
     "@mdi/font": "^7.2.96",
@@ -51,6 +52,7 @@
     "echarts": "^5.4.3",
     "nuxt": "^3.6.5",
     "nuxt-lodash": "^2.5.3",
+    "nuxt-primevue": "^0.2.2",
     "nuxt-tiptap-editor": "^0.0.13",
     "nuxt-typed-router": "^3.5.1",
     "pinia": "^2.1.7",
@@ -60,8 +62,7 @@
     "vue": "^3.3.13",
     "vue-echarts": "^6.6.8",
     "vue3-datepicker": "^0.4.0",
-    "vuetify": "^3.3.8",
-    "nuxt-primevue": "^0.2.2"
+    "vuetify": "^3.3.8"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",

@@ -258,3 +258,27 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
+
+.fc .fc-button .fc-icon {
+  font-size: 1.5em;
+  vertical-align: baseline;
+}
+
+.fc .fc-button-primary:disabled {
+  background-color: #52525b;
+  border-color: var(--fc-button-border-color);
+  color: var(--fc-button-text-color);
+  padding: 9px;
+}
+
+.fc .fc-button-primary {
+  background-color: #3f3f46;
+  border-color: #52525b;
+  color: var(--fc-button-text-color);
+}
+
+.fc-theme-standard .fc-list-day-cushion {
+  background-color: #585c5f
+}
+
+
