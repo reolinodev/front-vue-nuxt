@@ -12,7 +12,7 @@
     </div>
 
     <ag-grid-vue
-      style="height: 520px"
+      :style="{ height: gridHeight }"
       class="ag-theme-quartz-dark"
       :column-defs="columnDefs"
       :row-data="rowData"
@@ -44,6 +44,8 @@ export default defineComponent({
     const selectedData = ref<any[]>([])
     const excelExportUse = ref<boolean>(false)
     const clickEventUse = ref<boolean>(false)
+
+    const gridHeight = ref('520px')
 
     const onSelectionChanged = () => {
       selectedData.value = gridApi.value.getSelectedRows()
@@ -108,6 +110,9 @@ export default defineComponent({
           ...gridOptions.value,
           defaultColDef: gridRef.defaultColDef
         }
+
+        gridHeight.value = '570px'
+
         // todo dateFilter 나중에 추가할것
       }
 
@@ -139,6 +144,7 @@ export default defineComponent({
       rowData,
       gridOptions,
       excelExportUse,
+      gridHeight,
       onSelectionChanged,
       onGridReady,
       exportCsv
