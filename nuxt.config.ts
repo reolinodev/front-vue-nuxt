@@ -26,10 +26,9 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-tiptap-editor',
     'dayjs-nuxt',
-    '@vueuse/nuxt',
-    'nuxt-typed-router',
     'nuxt-lodash',
-    'nuxt-primevue'
+    'nuxt-primevue',
+    'nuxt-typed-router'
   ],
   vite: {
     define: {

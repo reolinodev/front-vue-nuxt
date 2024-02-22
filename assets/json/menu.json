@@ -14,31 +14,31 @@
     },
     {
       "menuId": "00006",
-      "menuNm": "Member Auth Setting",
+      "menuNm": "Member Auth",
       "prnMenuId": "00001",
       "icon": "mdi-account-multiple",
-      "url": "/memberSetting/memberAuthSetting"
+      "url": "/memberSetting/memberAuth"
     },
     {
       "menuId": "00007",
       "menuNm": "Auth Setting",
       "prnMenuId": "00002",
       "icon": "mdi-wall-fire",
-      "url": "/systemSetting/authSetting"
+      "url": "/systemSetting/auth"
     },
     {
       "menuId": "00008",
       "menuNm": "Menu Setting",
       "prnMenuId": "00002",
       "icon": "mdi-menu-open",
-      "url": "/systemSetting/menuSetting"
+      "url": "/systemSetting/menu"
     },
     {
       "menuId": "00009",
       "menuNm": "Menu Auth Setting",
       "prnMenuId": "00002",
       "icon": "mdi-filter-menu-outline",
-      "url": "/systemSetting/menuAuthSetting"
+      "url": "/systemSetting/menuAuth"
     },
     {
       "menuId": "00010",

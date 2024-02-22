@@ -41,6 +41,8 @@ module.exports = {
     'no-plusplus': 'off', // no-plusplus 규칙을 비활성화합니다.
     'no-param-reassign': 'off',
     'func-names': 'off',
+    'vue/no-dupe-keys': 'off',
+    'vue/require-prop-types': 'off',
 
     // Prettier 코드 스타일 설정
     'prettier/prettier': [
