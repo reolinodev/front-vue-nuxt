@@ -15,11 +15,18 @@
           <v-col cols="2">
             <v-text-field v-model="email" label="Email" clearable />
           </v-col>
-          <v-col cols="4" class="d-flex justify-end">
-            <v-btn color="primary" size="x-large">
+          <v-col cols="4" class="d-flex justify-end ga-3">
+            <v-btn color="primary" size="x-large" variant="outlined">
               Search
               <v-icon end icon="mdi-magnify" />
             </v-btn>
+
+            <NuxtLink to="/memberSetting/member/write">
+              <v-btn color="success" size="x-large" variant="outlined">
+                Add
+                <v-icon end icon="mdi-plus-circle" />
+              </v-btn>
+            </NuxtLink>
           </v-col>
         </v-card>
 
@@ -38,12 +45,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { memberStore } from '@/stores/member'
-import GridListComp from '~/components/GridListComp.vue'
+import GridListComp from '@/components/GridListComp.vue'
 
 export default defineComponent({
   components: { GridListComp },
   setup: function () {
+    const router = useRouter()
     const member = memberStore()
     const rowData = ref([])
     const columnDefs = ref([
@@ -124,8 +133,8 @@ export default defineComponent({
       rowData.value = member.members
     })
 
-    const cellClickData = (value: any) => {
-      console.log('cellClickData', value)
+    const cellClickData = (cellValue: any) => {
+      router.push(`/memberSetting/member/${cellValue[0].id}`)
     }
 
     return {
@@ -142,14 +151,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-.search-bar {
-  display: flex;
-  justify-content: end;
-  width: 100%;
-  opacity: 0.9;
-  padding-right: 10px;
-  border-bottom: 1px solid #cccccc;
-  margin-bottom: 20px;
-}
-</style>
+<style scoped></style>

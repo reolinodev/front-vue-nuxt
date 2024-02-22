@@ -30,6 +30,18 @@
   margin-top: 50px;
 }
 
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  opacity: 0.9;
+  padding-right: 10px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 20px;
+}
+
+/*** 외부라이브러리 커스터마이징 ***/
+
 .v-list-group__items {
   --indent-padding: calc(var(--parent-padding));
 }
@@ -307,3 +319,4 @@
   border: var(--ag-borders) var(--ag-border-color);
   background: #2d2d2e;
 }
+
