@@ -60,10 +60,7 @@ export default defineComponent({
         headerName: 'No',
         field: 'no',
         type: 'number',
-        width: '80',
-        cellStyle: {
-          'text-align': 'center'
-        }
+        width: '120'
       },
       { headerName: 'ID', field: 'id', type: 'number', flex: 1, hide: true },
       {
@@ -71,7 +68,6 @@ export default defineComponent({
         field: 'loginId',
         type: 'text',
         flex: 1,
-        filter: 'agTextColumnFilter',
         cellStyle: {
           'text-decoration': 'underline',
           color: '#2196f3'
@@ -81,15 +77,13 @@ export default defineComponent({
         headerName: 'Name',
         field: 'userNm',
         type: 'text',
-        flex: 1,
-        filter: 'agTextColumnFilter'
+        flex: 1
       },
       {
         headerName: 'Mobile No',
         field: 'mobileNo',
         type: 'text',
         flex: 1,
-        filter: 'agTextColumnFilter',
         valueFormatter: (params: string) => {
           // prettier-ignore
           return `(${params.value.substring(0, 3)}) ${params.value.substring(3, 7)}-${params.value.substring(7)}`
@@ -99,8 +93,7 @@ export default defineComponent({
         headerName: 'Email',
         field: 'email',
         type: 'text',
-        flex: 1,
-        filter: 'agTextColumnFilter'
+        flex: 1
       }
     ])
 
@@ -109,7 +102,7 @@ export default defineComponent({
     }
 
     const defaultColDef = ref({
-      filter: false, // 전체필터
+      filter: true, // 전체필터
       floatingFilter: true // 필터 플롯팅
     })
 
@@ -119,8 +112,7 @@ export default defineComponent({
       pagingUse: true, // 페이징 사용여부
       checkBoxUse: false, // 체크박스 사용여부
       isRowSelectable, // 체크박스시 사용가능한 로우 지정
-      excelExportUse: true, // 엑셀다운로드 사용여부
-      defaultColDef // 필터 옵션
+      excelExportUse: true // 엑셀다운로드 사용여부
     })
 
     const loginId = ref<string | null>('')

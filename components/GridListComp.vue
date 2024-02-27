@@ -1,6 +1,15 @@
 <template>
   <client-only>
-    <div class="d-flex justify-end mb-2">
+    <div class="d-flex justify-end mb-2 ga-3">
+      <v-btn
+        v-if="excelExportUse"
+        variant="tonal"
+        color="primary"
+        @click="filterCheck()"
+      >
+        Filter
+      </v-btn>
+
       <v-btn
         v-if="excelExportUse"
         variant="tonal"
@@ -46,6 +55,8 @@ export default defineComponent({
     const clickEventUse = ref<boolean>(false)
 
     const gridHeight = ref('520px')
+
+    const filterUse = ref<boolean>(false)
 
     const onSelectionChanged = () => {
       selectedData.value = gridApi.value.getSelectedRows()
@@ -104,18 +115,6 @@ export default defineComponent({
         gridOptions.value.rowSelection = 'multiple'
       }
 
-      // 필터 사용여부
-      if (gridRef.defaultColDef) {
-        gridOptions.value = {
-          ...gridOptions.value,
-          defaultColDef: gridRef.defaultColDef
-        }
-
-        gridHeight.value = '570px'
-
-        // todo dateFilter 나중에 추가할것
-      }
-
       // csv 다운로드 기능 사용할지 체크
       if (gridRef.excelExportUse) {
         excelExportUse.value = gridRef.excelExportUse
@@ -135,8 +134,31 @@ export default defineComponent({
         rowData.value = newValue
       }
     )
+
+    watch(
+      () => filterUse.value,
+      (newValue) => {
+        const defaultColDef = {
+          filter: newValue,
+          floatingFilter: newValue
+        }
+
+        if (newValue) {
+          gridHeight.value = '570px'
+        } else {
+          gridHeight.value = '520px'
+        }
+
+        gridApi.value.setGridOption('defaultColDef', defaultColDef)
+      }
+    )
+
     const exportCsv = () => {
       gridApi.value.exportDataAsCsv()
+    }
+
+    const filterCheck = () => {
+      filterUse.value = !filterUse.value
     }
 
     return {
@@ -147,7 +169,8 @@ export default defineComponent({
       gridHeight,
       onSelectionChanged,
       onGridReady,
-      exportCsv
+      exportCsv,
+      filterCheck
     }
   }
 })
