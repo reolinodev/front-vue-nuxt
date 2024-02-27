@@ -13,11 +13,7 @@
    3. 체크박스 선택 이벤트
       1. 선택할수 있는 로우 지정
    4. 페이징처리
-   5. 필터처리
-      1. 전체 컬럼 필터처리
-      2. 개별 컬럼 필터처리
-      3. 필터 히든 처리
-   6. CSV Import 
+   5. CSV Import 
 2. GridEditorComp.vue
    1. 로우 에디팅 기능 및 데이터 처리
 
@@ -263,75 +259,8 @@ gridRef의 pagingUse를 수정하세요. true, false 입니다.
       defaultColDef: null // 필터 옵션
     })
 ```
-#### 5. 필터처리
-필터는 defaultColDef를 수정하세요.필터 옵션에 따라 처리 방법이 다릅니다.
 
-#### 5-1. 전체 컬럼 필터처리
-```typescript
-    //필터 옵션
-    const defaultColDef = ref({
-      minWidth: 150, //최소 넓이
-      filter: true, // 전체필터
-      floatingFilter: true // 필터 플롯팅
-    })
-
-    //그리드 옵션
-    const gridRef = ref({
-      clickEventUse: false, // 클릭 이벤트 사용
-      clickField: [], // 클릭 이벤트에 사용할 컬럼
-      pagingUse: true, // 페이징 사용여부
-      checkBoxUse: false, // 체크박스 사용여부
-      isRowSelectable:  null // 체크박스시 사용가능한 로우 지정
-      excelExportUse: false, // 엑셀다운로드 사용여부
-      defaultColDef // 필터 옵션
-    })
-```
-#### 5-2. 개별 컬럼 필터처리
-```typescript
-    //필터 옵션
-    const defaultColDef = ref({
-      filter: false, // 전체필터
-      floatingFilter: true // 필터 플롯팅
-    })
-
-    //그리드 옵션
-    const gridRef = ref({
-      clickEventUse: false, // 클릭 이벤트 사용
-      clickField: [], // 클릭 이벤트에 사용할 컬럼
-      pagingUse: true, // 페이징 사용여부
-      checkBoxUse: false, // 체크박스 사용여부
-      isRowSelectable:  null // 체크박스시 사용가능한 로우 지정
-      excelExportUse: false, // 엑셀다운로드 사용여부
-      defaultColDef  // 필터 옵션
-    })
-
-    const columnDefs = ref([
-      {
-        headerName: 'No', field: 'no', type: 'number', width: '80',
-        cellStyle: {'text-align': 'center'},
-        filter: 'agNumberColumnFilter'
-      },
-      {
-        headerName: 'Login Id', field: 'loginId', type: 'text', flex: 1,
-        filter: 'agTextColumnFilter'
-      }
-    ])
-
-```
-
-#### 5-3. 필터 히든 처리
-floatingFilter를 false로 수정합니다.
-
-```typescript
-    //필터 옵션
-    const defaultColDef = ref({
-      filter: true, // 전체필터
-      floatingFilter: false // 필터 플롯팅
-    })
-```
-
-
-#### 6. CSV Import
+#### 5. CSV Import
 CSV import는 gridRef의 excelExportUse 수정하세요. true, false 입니다.
 ```typescript
    //그리드 옵션
