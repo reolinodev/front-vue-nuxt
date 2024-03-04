@@ -31,7 +31,7 @@ import { ref, watch } from 'vue'
 const props = defineProps<{
   popupOpen: boolean
   popupTitle: string
-  popupWidth: number
+  popupWidth: string
   popupType: string
 }>()
 
@@ -39,7 +39,7 @@ const emits = defineEmits(['eventName', 'callBackPopup', 'callBackSave'])
 
 const popupOpen = ref<boolean>(props.popupOpen)
 const popupTitle = ref<string>(props.popupTitle)
-const popupWidth = ref<number>(props.popupWidth)
+const popupWidth = ref<string>(props.popupWidth)
 const popupType = ref<string>(props.popupType)
 
 const closePopup = () => {

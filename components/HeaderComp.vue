@@ -41,57 +41,43 @@
   </v-toolbar>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { commonStore } from '@/stores/common'
 import { headerStore } from '@/stores/header'
 import { clearSessionStorage } from '@/utils/storage'
 
-export default defineComponent({
-  name: 'HeaderComp',
+const common = commonStore()
+const header = headerStore()
+const router = useRouter()
 
-  setup: function () {
-    const common = commonStore()
-    const header = headerStore()
-    const router = useRouter()
+const menuNm = ref('')
+const alertCount = ref(0)
 
-    const menuNm = ref('')
-    const alertCount = ref(0)
+const infoShow = ref(false)
+const exportshow = ref(false)
 
-    const infoShow = ref(false)
-    const exportshow = ref(false)
+const logout = () => {
+  common.isLogin = false
+  common.isLoding = false
+  common.currentMenuNm = ''
+  common.currentUrl = ''
+  clearSessionStorage()
+  router.push('/login')
+}
 
-    const logout = () => {
-      common.isLogin = false
-      common.isLoding = false
-      common.currentMenuNm = ''
-      common.currentUrl = ''
-      clearSessionStorage()
-      router.push('/login')
-    }
-
-    onMounted(() => {
-      header.getAlertCount()
-      alertCount.value = header.alertCount
-      menuNm.value = common.currentMenuNm
-    })
-
-    watch(
-      () => common.currentMenuNm,
-      (newValue) => {
-        menuNm.value = newValue
-      }
-    )
-
-    return {
-      menuNm,
-      alertCount,
-      infoShow,
-      exportshow,
-      logout
-    }
-  }
+onMounted(() => {
+  header.getAlertCount()
+  alertCount.value = header.alertCount
+  menuNm.value = common.currentMenuNm
 })
+
+watch(
+  () => common.currentMenuNm,
+  (newValue) => {
+    menuNm.value = newValue
+  }
+)
 </script>
 
 <style scoped></style>

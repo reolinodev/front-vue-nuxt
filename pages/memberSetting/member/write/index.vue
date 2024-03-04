@@ -17,20 +17,12 @@
   </v-card>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const memberId = ref<number | null>(null)
+const memberId = ref<number | null>(null)
 
-    onMounted(() => {})
-
-    return {
-      memberId
-    }
-  }
-})
+onMounted(() => {})
 </script>
 
 <style scoped></style>

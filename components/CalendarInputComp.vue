@@ -17,19 +17,19 @@ const emits = defineEmits(['eventName', 'callBackCalendarInput'])
 
 const props = defineProps<{
   inputDate: string | null
-  showIcon: boolean | null
-  showOnFocus: boolean | null
-  width: string | null
-  height: string | null
-  dateFormat: string | null
+  showIcon: boolean
+  showOnFocus: boolean
+  width: string | undefined
+  height: string | undefined
+  dateFormat: string | undefined
 }>()
 
 const inputDate = ref<string | null>(null)
-const showIcon = ref<boolean | null>(true)
-const showOnFocus = ref<boolean | null>(true)
-const width = ref<string | null>('180px')
-const height = ref<string | null>('48px')
-const dateFormat = ref<string | null>('yy-mm-dd')
+const showIcon = ref<boolean>(true)
+const showOnFocus = ref<boolean>(true)
+const width = ref<string | undefined>('180px')
+const height = ref<string | undefined>('48px')
+const dateFormat = ref<string | undefined>('yy-mm-dd')
 
 onMounted(() => {
   // todo prime Vue의 locale 변경 필요
@@ -38,19 +38,19 @@ onMounted(() => {
   showIcon.value = props.showIcon
   showOnFocus.value = props.showOnFocus
 
-  if (props.width === null || props.width === undefined) {
+  if (props.width === undefined) {
     width.value = '180px'
   } else {
     width.value = props.width
   }
 
-  if (props.height === null || props.height === undefined) {
+  if (props.height === undefined) {
     height.value = '48px'
   } else {
     height.value = props.height
   }
 
-  if (props.dateFormat === null || props.dateFormat === undefined) {
+  if (props.dateFormat === undefined) {
     dateFormat.value = 'yy-mm-dd'
   } else {
     dateFormat.value = props.dateFormat
@@ -99,8 +99,10 @@ watch(
   }
 )
 
-watch(inputDate, (val) => {
-  emits('callBackCalendarInput', getDateFormat(val, 'YYYY-MM-DD'))
+watch(inputDate, (val: string | null) => {
+  if (val != null) {
+    emits('callBackCalendarInput', getDateFormat(val, 'YYYY-MM-DD'))
+  }
 })
 </script>
 

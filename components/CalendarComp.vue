@@ -1,13 +1,21 @@
 <template>
-  <FullCalendar
-    ref="calendarRef"
-    :options="calendarOptions"
-    style="width: 1195px"
-  >
-    <template #eventContent="arg">
-      <b>{{ arg.event.title }}</b>
-    </template>
-  </FullCalendar>
+  <v-layout class="d-flex justify-center">
+    <FullCalendar
+      ref="calendarRef"
+      :options="calendarOptions"
+      style="width: 1195px"
+    >
+      <template #eventContent="arg">
+        <b>{{ arg.event.title }}</b>
+      </template>
+    </FullCalendar>
+
+    <dashboard-schedule-pop
+      :schedule-popup="schedulePopup"
+      :schedule-id="scheduleId"
+      @call-back-schedule-popup="callBackSchedulePopup"
+    />
+  </v-layout>
 </template>
 
 <script setup lang="ts">
@@ -16,21 +24,22 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import DashboardSchedulePop from '@/pages/dashboard/comp/dashboardSchedulePop.vue'
 import { getDateCalculateFormat, getDateFormat } from '@/utils/dateUtil'
 
 const props = defineProps<{
   events: any[]
   calendarType: string
-  selectedDate: string
+  selectedDate: string | null
 }>()
 
 const calendarRef = ref(null)
 const schedulePopup = ref<boolean>(false)
 const calendarType = ref<string>(props.calendarType)
-const selectedDate = ref<string>(props.selectedDate)
+const selectedDate = ref<string | null>(props.selectedDate)
 const scheduleId = ref<string>('')
 
-const handleEventClick = (arg) => {
+const handleEventClick = (arg: any) => {
   scheduleId.value = arg.event.id
   schedulePopup.value = true
 }
@@ -100,6 +109,10 @@ const setData = (events: any) => {
   }
 
   return eventItems
+}
+
+const callBackSchedulePopup = (val: boolean) => {
+  schedulePopup.value = val
 }
 
 watch(

@@ -17,24 +17,16 @@
   </v-card>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-export default defineComponent({
-  setup() {
-    const route = useRoute()
-    const memberId = ref<number | null>(null)
+const route = useRoute()
+const memberId = ref<number | null>(null)
 
-    onMounted(() => {
-      // prettier-ignore
-      memberId.value = typeof route.params.id === 'string' ? parseInt(route.params.id, 10) : null
-    })
-
-    return {
-      memberId
-    }
-  }
+onMounted(() => {
+  // prettier-ignore
+  memberId.value = typeof route.params.id === 'string' ? parseInt(route.params.id, 10) : null
 })
 </script>
 
