@@ -48,77 +48,54 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { memberStore } from '@/stores/member'
 import GridListComp from '@/components/GridListComp.vue'
+import { ColumnDefs, GridRef } from '~/components/class/Grid'
 
+// todo 화면 전환 후 이전 기록이 남아 있는채로 이동해야 한다.
 const router = useRouter()
 const member = memberStore()
+
 const rowData = ref([])
 const columnDefs = ref([
-  {
-    headerName: 'No',
-    field: 'no',
-    type: 'number',
-    width: '120'
-  },
-  { headerName: 'ID', field: 'id', type: 'number', flex: 1, hide: true },
-  {
-    headerName: 'Login Id',
-    field: 'loginId',
-    type: 'text',
+  new ColumnDefs('No', 'no', 'number', { width: 120 }),
+  new ColumnDefs('ID', 'id', 'text', { flex: 1, hide: true }),
+  new ColumnDefs('Login Id', 'loginId', 'text', {
     flex: 1,
     cellStyle: {
       'text-decoration': 'underline',
       color: '#2196f3'
     }
-  },
-  {
-    headerName: 'Name',
-    field: 'userNm',
-    type: 'text',
-    flex: 1
-  },
-  {
-    headerName: 'Mobile No',
-    field: 'mobileNo',
-    type: 'text',
+  }),
+  new ColumnDefs('Name', 'userNm', 'text', { flex: 1 }),
+  new ColumnDefs('Mobile No', 'mobileNo', 'text', {
     flex: 1,
     valueFormatter: (params: string) => {
       // prettier-ignore
       return `(${params.value.substring(0, 3)}) ${params.value.substring(3, 7)}-${params.value.substring(7)}`
     }
-  },
-  {
-    headerName: 'Email',
-    field: 'email',
-    type: 'text',
-    flex: 1
-  }
+  }),
+  new ColumnDefs('Email', 'email', 'text', { flex: 1 })
 ])
 
-const isRowSelectable = (params: any) => {
-  return params.data.userNm === 'Kim1'
-}
-
-const gridRef = ref({
-  clickEventUse: true, // 클릭 이벤트 사용
-  clickField: ['loginId'], // 클릭 이벤트에 사용할 컬럼
-  pagingUse: true, // 페이징 사용여부
-  checkBoxUse: false, // 체크박스 사용여부
-  isRowSelectable, // 체크박스시 사용가능한 로우 지정
-  excelExportUse: true // 엑셀다운로드 사용여부
-})
+const gridRef = ref(
+  new GridRef(true, true, false, true, true, { clickField: ['loginId'] })
+)
 
 const loginId = ref<string | null>('')
 const name = ref<string | null>('')
 const mobileNo = ref<string | null>('')
 const email = ref<string | null>('')
 
-onMounted(() => {
+// 사용자 조회
+const getMember = async (): Promise<void> => {
   member.getMembers()
   rowData.value = member.members
+}
+
+onMounted(() => {
+  getMember()
 })
 
 const cellClickData = (cellValue: any) => {
-  console.log('aaa', cellValue)
   router.push(`/memberSetting/member/${cellValue[0].id}`)
 }
 </script>

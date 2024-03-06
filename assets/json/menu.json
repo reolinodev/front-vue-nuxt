@@ -1,6 +1,6 @@
 {
   "menuLv1Items": [
-    { "menuId": "00001", "menuNm": "Member Setting", "icon": "mdi-folder-account", "url": "" },
+    { "menuId": "00001", "menuNm": "Member Manage", "icon": "mdi-folder-account", "url": "" },
     { "menuId": "00002", "menuNm": "System Setting", "icon": "mdi-folder-wrench", "url": ""  },
     { "menuId": "00003", "menuNm": "Sample Component", "icon": "mdi-folder-pound", "url": ""  }
   ],
@@ -13,20 +13,6 @@
       "url": "/memberSetting/member"
     },
     {
-      "menuId": "00006",
-      "menuNm": "Member Auth",
-      "prnMenuId": "00001",
-      "icon": "mdi-account-multiple",
-      "url": "/memberSetting/memberAuth"
-    },
-    {
-      "menuId": "00007",
-      "menuNm": "Auth Setting",
-      "prnMenuId": "00002",
-      "icon": "mdi-wall-fire",
-      "url": "/systemSetting/auth"
-    },
-    {
       "menuId": "00008",
       "menuNm": "Menu Setting",
       "prnMenuId": "00002",
@@ -34,11 +20,11 @@
       "url": "/systemSetting/menu"
     },
     {
-      "menuId": "00009",
-      "menuNm": "Menu Auth Setting",
+      "menuId": "00007",
+      "menuNm": "Auth Setting",
       "prnMenuId": "00002",
-      "icon": "mdi-filter-menu-outline",
-      "url": "/systemSetting/menuAuth"
+      "icon": "mdi-wall-fire",
+      "url": "/systemSetting/auth"
     },
     {
       "menuId": "00010",
