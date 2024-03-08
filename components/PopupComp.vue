@@ -35,7 +35,7 @@ const props = defineProps<{
   popupType: string
 }>()
 
-const emits = defineEmits(['eventName', 'callBackPopup', 'callBackSave'])
+const emits = defineEmits(['callBackPopup', 'callBackSave'])
 
 const popupOpen = ref<boolean>(props.popupOpen)
 const popupTitle = ref<string>(props.popupTitle)

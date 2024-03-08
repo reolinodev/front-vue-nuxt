@@ -13,7 +13,7 @@ import Calendar from 'primevue/calendar'
 import { onMounted, ref, watch } from 'vue'
 import { getDateFormat } from '@/utils/dateUtil'
 
-const emits = defineEmits(['eventName', 'callBackCalendarInput'])
+const emits = defineEmits(['callBackCalendarInput'])
 
 const props = defineProps<{
   inputDate: string | null

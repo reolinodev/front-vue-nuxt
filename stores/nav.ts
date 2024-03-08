@@ -2,14 +2,14 @@ import { defineStore } from 'pinia'
 import menuData from '@/assets/json/menu.json'
 
 interface MenuLv1Item {
-  menuId: string
+  id: string
   menuNm: string
   icon: string
   url: string
 }
 
 interface MenuLv2Item {
-  menuId: string
+  id: string
   menuNm: string
   prnMenuId: string
   icon: string
@@ -31,7 +31,7 @@ export const navStore = defineStore('nav', {
       this.mainMenuNm = ''
       this.setMenuState(menuData)
     },
-    // eslint-disable-next-line @typescript-eslint/no-shadow
+
     setMenuState(menuData: {
       mainMenuUrl: string
       mainMenuNm: string
@@ -39,14 +39,14 @@ export const navStore = defineStore('nav', {
       defaultLv2Icon: string
 
       menuLv1Items: {
-        menuId: string
+        id: string
         menuNm: string
         icon: string
         url: string
       }[]
 
       menuLv2Items: {
-        menuId: string
+        id: string
         menuNm: string
         prnMenuId: string
         icon: string
@@ -58,7 +58,7 @@ export const navStore = defineStore('nav', {
 
       menuData.menuLv1Items.forEach((menuDataMenuLv1Item) => {
         const menuLv1Item: MenuLv1Item = {
-          menuId: menuDataMenuLv1Item.menuId,
+          id: menuDataMenuLv1Item.id,
           menuNm: menuDataMenuLv1Item.menuNm,
           url: menuDataMenuLv1Item.url,
           icon:
@@ -71,7 +71,7 @@ export const navStore = defineStore('nav', {
 
       menuData.menuLv2Items.forEach((menuDataMenuLv2Item) => {
         const menuLv2Item: MenuLv2Item = {
-          menuId: menuDataMenuLv2Item.menuId,
+          id: menuDataMenuLv2Item.id,
           menuNm: menuDataMenuLv2Item.menuNm,
           prnMenuId: menuDataMenuLv2Item.prnMenuId,
           url: menuDataMenuLv2Item.url,
