@@ -142,7 +142,8 @@
       "url": "",
       "prnMenuId": "",
       "useYn" : "Y",
-      "menuLv": "1"
+      "menuLv": "1",
+      "ord": "1"
     },
     { "id": "00002",
       "menuNm": "System Setting",
@@ -150,7 +151,8 @@
       "url": "",
       "prnMenuId": "" ,
       "useYn" : "Y",
-      "menuLv": "1"
+      "menuLv": "1",
+      "ord": "2"
     },
     { "id": "00003",
       "menuNm": "Sample Component",
@@ -158,7 +160,8 @@
       "url": "",
       "prnMenuId": "" ,
       "useYn" : "Y",
-      "menuLv": "1"
+      "menuLv": "1",
+      "ord": "3"
     },
     {
       "id": "00005",
@@ -167,7 +170,8 @@
       "icon": "mdi-account-box-edit-outline",
       "url": "/memberSetting/member",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "1"
     },
     {
       "id": "00008",
@@ -176,7 +180,8 @@
       "icon": "mdi-menu-open",
       "url": "/systemSetting/menu",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "1"
     },
     {
       "id": "00007",
@@ -185,7 +190,8 @@
       "icon": "mdi-wall-fire",
       "url": "/systemSetting/auth",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "2"
     },
     {
       "id": "00010",
@@ -194,7 +200,8 @@
       "icon": "mdi-application-braces-outline",
       "url": "/systemSetting/systemCode",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "3"
     },
     {
       "id": "00011",
@@ -203,7 +210,8 @@
       "icon": "",
       "url": "/sampleComponent/vuetify/vuetifyView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "1"
     },
     {
       "id": "00012",
@@ -212,7 +220,8 @@
       "icon": "",
       "url": "/sampleComponent/tiptap/tiptapView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "2"
     },
     {
       "id": "00013",
@@ -221,7 +230,8 @@
       "icon": "",
       "url": "/sampleComponent/autoAnimate/autoAnimateView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "3"
     },
     {
       "id": "00014",
@@ -230,7 +240,8 @@
       "icon": "",
       "url": "/sampleComponent/echarts/echartsView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "4"
     },
     {
       "id": "00015",
@@ -239,7 +250,8 @@
       "icon": "",
       "url": "/sampleComponent/datepicker/datepickerView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "5"
     },
     {
       "id": "00016",
@@ -248,7 +260,8 @@
       "icon": "",
       "url": "/sampleComponent/agGrid/agGridView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "6"
     },
     {
       "id": "00017",
@@ -257,7 +270,8 @@
       "icon": "",
       "url": "/sampleComponent/fullCalendar/fullCalendarView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "7"
     },
     {
       "id": "00018",
@@ -266,7 +280,8 @@
       "icon": "",
       "url": "/sampleComponent/primeVue/primeVueView",
       "useYn" : "Y",
-      "menuLv": "2"
+      "menuLv": "2",
+      "ord": "8"
     }
   ],
 

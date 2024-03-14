@@ -14,10 +14,9 @@
 
       <v-divider />
 
-      <v-card-actions>
+      <v-card-actions class="justify-end">
         <v-btn color="error" @click="closePopup"> close </v-btn>
-        <v-spacer />
-        <v-btn v-if="popupType === 'save'" color="primary" @click="saveEvent">
+        <v-btn v-if="popupType === 'edit'" color="primary" @click="saveEvent">
           save
         </v-btn>
       </v-card-actions>

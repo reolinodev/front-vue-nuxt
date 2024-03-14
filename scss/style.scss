@@ -34,11 +34,86 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  opacity: 0.9;
+  opacity: 0.7;
   padding-right: 10px;
   border-bottom: 1px solid #cccccc;
-  margin-bottom: 20px;
 }
+
+.card-item-basic {
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+                  145.5deg,
+                  rgba(214, 97, 255, 0.096) 7.34%,
+                  rgba(77, 14, 255, 0) 66.69%
+  ),
+  #1f2128;
+  box-shadow: 0 13px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(42, 45, 51, 0.45);
+}
+
+.card-item-basic_symbor {
+  height: 250px;
+}
+
+.card-item-basic_descript {
+  height: 250px;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.card-item-basic_descript_item {
+  display: flex;
+  min-width: 200px;
+  gap: 10px;
+}
+
+.card-item-green {
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+                  145.5deg,
+                  rgba(97, 255, 129, 0.09) 7.34%,
+                  rgba(77, 14, 255, 0) 66.69%
+  ),
+  #1f2128;
+  box-shadow: 0 13px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(42, 45, 51, 0.45);
+}
+
+.card-item-black {
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(
+                  145.5deg,
+                  rgba(75, 98, 168, 0.09) 7.34%,
+                  rgba(173, 156, 165, 0) 66.69%
+  ),
+  #05050a;
+  box-shadow: 0 13px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(42, 45, 51, 0.45);
+  min-height: 800px;
+}
+
+.card-item-blue {
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(
+                  145.5deg,
+                  rgba(97, 123, 255, 0.09) 7.34%,
+                  rgba(77, 14, 255, 0) 66.69%
+  ),
+  #1f2128;
+  box-shadow: 0 13px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(42, 45, 51, 0.45);
+}
+
+.search-input {
+  border: 1px solid #cccccc;
+}
+
 
 /*** 외부라이브러리 커스터마이징 ***/
 
@@ -126,7 +201,7 @@
   padding: 5px;
 }
 
-.p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
+.p-calendar:not(.p-calendar-disabled).p-focus > .parentMenuItemstext {
   outline: none;
   outline-offset: -1px;
   box-shadow: none;
@@ -327,12 +402,24 @@
 
 .p-inputtext {
   padding-left: 10px;
+  border-radius: 5px;
+  height: 40px;
 }
 
 
 .fc-h-event .fc-event-main {
-  font-size: 0.9em;
   font-family: ui-sans-serif;
   padding-left: 3px;
 }
 
+.v-overlay__scrim {
+  pointer-events: auto;
+  background: rgb(var(--v-theme-on-surface));
+  border-radius: inherit;
+  bottom: 0;
+  left: 0;
+  opacity: 0.05;
+  position: fixed;
+  right: 0;
+  top: 0;
+}

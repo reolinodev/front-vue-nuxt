@@ -43,7 +43,7 @@ const props = defineProps<{
 
 const emits = defineEmits(['selectedTreeData'])
 
-const nodes = ref([
+const nodes = ref<TreeNode[]>([
   {
     key: '0',
     label: 'No Data',
@@ -89,7 +89,6 @@ const setNode = () => {
   const rootNode: TreeNode = {
     key: '0',
     label,
-    style: { color: '#476cef' },
     children: []
   }
 
@@ -105,7 +104,6 @@ const setNode = () => {
     const lv1Node = {
       key: lv1Item.id,
       label: lv1Item.label,
-      style: { color: '#0dacbb' },
       children: []
     }
 

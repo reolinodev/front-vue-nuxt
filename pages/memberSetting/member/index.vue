@@ -2,35 +2,41 @@
   <v-card min-height="900">
     <v-card-item width="100%">
       <v-row class="ma-auto">
-        <v-card class="search-bar">
-          <v-col cols="2">
-            <v-text-field v-model="loginId" label="LOGIN ID" clearable />
-          </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="name" label="Name" clearable />
-          </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="mobileNo" label="Mobile No" clearable />
-          </v-col>
-          <v-col cols="2">
-            <v-text-field v-model="email" label="Email" clearable />
-          </v-col>
-          <v-col cols="4" class="d-flex justify-end ga-3">
-            <v-btn color="primary" size="x-large" variant="outlined">
-              Search
-              <v-icon end icon="mdi-magnify" />
-            </v-btn>
-
-            <NuxtLink to="/memberSetting/member/write">
-              <v-btn color="success" size="x-large" variant="outlined">
-                Add
-                <v-icon end icon="mdi-plus-circle" />
-              </v-btn>
-            </NuxtLink>
-          </v-col>
-        </v-card>
-
         <v-col cols="12">
+          <v-row class="ma-auto">
+            <v-col cols="12" class="d-flex" style="height: 80px">
+              <v-col cols="8" class="d-flex ga-2">
+                <FloatLabel>
+                  <InputText
+                    id="username"
+                    v-model="loginId"
+                    class="search-input"
+                  />
+                  <label for="username">ID</label>
+                </FloatLabel>
+                <FloatLabel>
+                  <InputText
+                    id="username"
+                    v-model="name"
+                    class="search-input"
+                  />
+                  <label for="username">Name</label>
+                </FloatLabel>
+              </v-col>
+              <v-col cols="4" class="d-flex justify-end ga-2">
+                <v-btn color="primary" variant="text" @click="getMember()">
+                  SEARCH
+                </v-btn>
+
+                <v-btn color="success" variant="text" @click="addMember()">
+                  ADD
+                </v-btn>
+              </v-col>
+            </v-col>
+          </v-row>
+
+          <v-divider class="border-opacity-75 pt-0" color="#ffffff" />
+
           <grid-list-comp
             :column-defs="columnDefs"
             :row-data="rowData"
@@ -49,6 +55,7 @@ import { useRouter } from 'vue-router'
 import { memberStore } from '@/stores/member'
 import GridListComp from '@/components/GridListComp.vue'
 import { ColumnDefs, GridRef } from '~/components/class/Grid'
+import FloatLabel from 'primevue/floatlabel'
 
 // todo 화면 전환 후 이전 기록이 남아 있는채로 이동해야 한다.
 const router = useRouter()
@@ -82,13 +89,15 @@ const gridRef = ref(
 
 const loginId = ref<string | null>('')
 const name = ref<string | null>('')
-const mobileNo = ref<string | null>('')
-const email = ref<string | null>('')
 
 // 사용자 조회
 const getMember = async (): Promise<void> => {
   member.getMembers()
   rowData.value = member.members
+}
+
+const addMember = () => {
+  console.log('add')
 }
 
 onMounted(() => {

@@ -5,6 +5,10 @@
     </div>
     <div class="right">
       <div class="right-container">
+        <loading-comp />
+        <confirm-alert-comp />
+        <alert-comp />
+
         <div class="header">
           <header-comp />
         </div>
@@ -22,36 +26,24 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { commonStore } from '~/stores/common'
-import { ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
-export default {
-  setup() {
-    const common = commonStore()
-    const isLogin = ref(common.isLogin)
-    const isLoginContainer = ref(false)
+const common = commonStore()
+const isLogin = ref<boolean>(common.isLogin)
+const isLoginContainer = ref<boolean>(false)
 
-    onMounted(() => {
-      if (isLogin.value === true) {
-        isLoginContainer.value = true
-      } else {
-        isLoginContainer.value = false
-      }
-    })
+onMounted(() => {
+  isLoginContainer.value = isLogin.value === true
+})
 
-    watch(
-      () => common.isLogin,
-      (newValue) => {
-        isLoginContainer.value = newValue
-      }
-    )
-
-    return {
-      isLoginContainer
-    }
+watch(
+  () => common.isLogin,
+  (newValue) => {
+    isLoginContainer.value = newValue
   }
-}
+)
 </script>
 
 <style lang="scss">

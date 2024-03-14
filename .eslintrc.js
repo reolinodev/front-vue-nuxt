@@ -46,6 +46,8 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/require-prop-types': 'off',
     'max-classes-per-file': 'off',
+    'no-restricted-syntax': 'off',
+    'prefer-destructuring': 'off',
     // Prettier 코드 스타일 설정
     'prettier/prettier': [
       'error',
