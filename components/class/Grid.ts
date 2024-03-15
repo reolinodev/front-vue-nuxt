@@ -67,3 +67,14 @@ export class GridRef {
     this.height = options.height
   }
 }
+
+export class GridValidOption {
+  label: string
+  field: string
+  type: string
+  constructor(label: string, field: string, type: string) {
+    this.label = label
+    this.field = field
+    this.type = type
+  }
+}

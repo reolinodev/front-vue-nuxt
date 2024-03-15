@@ -205,6 +205,8 @@ const delRow = () => {
 }
 
 const saveRow = () => {
+  gridApi.value.stopEditing()
+
   const rowData: any = []
   gridApi.value.forEachNode(function (node: any) {
     rowData.push(node.data)

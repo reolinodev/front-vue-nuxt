@@ -24,13 +24,9 @@
                 </FloatLabel>
               </v-col>
               <v-col cols="4" class="d-flex justify-end ga-2">
-                <v-btn color="primary" variant="text" @click="getMember()">
-                  SEARCH
-                </v-btn>
+                <v-btn color="primary" @click="getMember()"> SEARCH </v-btn>
 
-                <v-btn color="success" variant="text" @click="addMember()">
-                  ADD
-                </v-btn>
+                <v-btn color="success" @click="addMember()"> ADD </v-btn>
               </v-col>
             </v-col>
           </v-row>
@@ -97,7 +93,7 @@ const getMember = async (): Promise<void> => {
 }
 
 const addMember = () => {
-  console.log('add')
+  router.push('/memberSetting/member/write')
 }
 
 onMounted(() => {
