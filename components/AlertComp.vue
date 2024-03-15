@@ -7,9 +7,9 @@
         <div class="d-flex justify-end pt-8 ga-2">
           <v-btn
             class="me-2 text-none"
-            color="success"
+            color="error"
             variant="outlined"
-            prepend-icon="mdi-check"
+            prepend-icon="mdi-close-thick"
             width="120"
             @click="closeAlert()"
           >

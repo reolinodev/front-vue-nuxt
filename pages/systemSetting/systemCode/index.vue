@@ -3,53 +3,97 @@
     <v-card-item width="100%">
       <v-row class="ma-auto">
         <v-col cols="5">
-          <v-card-text>그룹코드</v-card-text>
-          <v-col cols="12" class="d-flex justify-end ga-2">
-            <v-btn
-              v-if="groupCodeMode == 'search'"
-              color="success"
-              @click="chanegeGroupCodeMode('edit')"
-            >
-              Edit
-            </v-btn>
-            <div v-if="groupCodeMode == 'edit'" class="d-flex justify-end ga-2">
-              <v-btn color="primary" @click="addGroupCode()">ADD</v-btn>
-              <v-btn color="error" @click="delGroupCode()">DEL</v-btn>
-              <v-btn color="success" @click="saveGroupCode()">SAVE</v-btn>
-              <v-btn color="warning" @click="chanegeGroupCodeMode('search')">BACK</v-btn>
-            </div>
-          </v-col>
-          <grid-list-comp
-            :column-defs="groupCodeColumnDefs"
-            :row-data="groupCodeData"
-            :grid-ref="groupCodeGridRef"
-            @cell-click-data="GroupCodeCellClick"
-            ref="groupCodeRef"
-          />
+            <v-row class="ma-auto">
+              <v-col cols="12" class="d-flex justify-space-between pa-0">
+                <span class="card-item-basic_span">
+
+                  <v-btn
+                      v-if="groupCodeMode == 'view'"
+                      class="ma-1 v-icon--size-x-small"
+                      icon="mdi-view-grid-outline"
+                  />
+                  <v-btn
+                      v-else
+                      class="ma-1 v-icon--size-x-small"
+                      icon="mdi-square-edit-outline"
+                  />
+
+                  Group Code
+                </span>
+                <v-col cols="6" class="d-flex justify-end ga-2">
+                  <v-btn
+                      v-if="groupCodeMode == 'view'"
+                      color="warning"
+                      @click="changeGroupCodeMode('edit')"
+                  >
+                    Edit
+                  </v-btn>
+                  <div v-if="groupCodeMode == 'edit'" class="d-flex justify-end ga-2">
+                    <v-btn color="success"   @click="addGroupCode()">ADD</v-btn>
+                    <v-btn color="error"  @click="delGroupCode()">DEL</v-btn>
+                    <v-btn color="primary"  @click="confirmSaveGroupCode()">SAVE</v-btn>
+                    <v-btn color="warning"  @click="changeGroupCodeMode('view')">VIEW</v-btn>
+                  </div>
+                </v-col>
+              </v-col>
+            </v-row>
+
+            <v-divider class="border-opacity-75 pa-2" color="#ffffff" />
+
+            <grid-list-comp
+                :column-defs="groupCodeColumnDefs"
+                :row-data="groupCodeData"
+                :grid-ref="groupCodeGridRef"
+                @cell-click-data="GroupCodeCellClick"
+                ref="groupCodeRef"
+            />
         </v-col>
         <v-col cols="7">
-          <v-card-text> 코드 </v-card-text>
-          <v-col cols="12" class="d-flex justify-end ga-2">
-            <v-btn
-                v-if="codeMode == 'search'"
-                color="success"
-                @click="chanegeCodeMode('edit')"
-            >
-              Edit
-            </v-btn>
-            <div v-if="codeMode == 'edit'" cols="12" class="d-flex justify-end ga-2">
-              <v-btn color="primary" @click='addCode()'>ADD</v-btn>
-              <v-btn color="error"  @click='delCode()'>DEL</v-btn>
-              <v-btn color="success"  @click='saveCode()'>SAVE</v-btn>
-              <v-btn color="warning" @click="chanegeCodeMode('search')">BACK</v-btn>
-            </div>
-          </v-col>
-          <grid-list-comp
-            :column-defs="codeColumnDefs"
-            :row-data="codeData"
-            :grid-ref="codeGridRef"
-            ref="codeRef"
-          />
+            <v-row class="ma-auto">
+              <v-col cols="12" class="d-flex justify-space-between pa-0">
+                <span class="card-item-basic_span">
+                  <v-btn
+                      v-if="codeMode == 'view'"
+                      class="ma-1 v-icon--size-x-small"
+                      icon="mdi-view-grid-outline"
+                  />
+                   <v-btn
+                       v-else
+                       class="ma-1 v-icon--size-x-small"
+                       icon="mdi-square-edit-outline"
+                   />
+
+                  Code
+                  <span v-if="selectedGroupCodeNm !== ''" class="font-weight-bold pa-3">
+                        [ {{selectedGroupCodeNm}} ]
+                  </span>
+                </span>
+                <v-col cols="6" class="d-flex justify-end ga-2">
+                  <v-btn
+                      v-if="codeMode == 'view'"
+                      color="warning"
+                      @click="changeCodeMode('edit')"
+                  >
+                    Edit
+                  </v-btn>
+                  <div v-if="codeMode == 'edit'"  class="d-flex justify-end ga-2">
+                    <v-btn color="success"  @click='addCode()'>ADD</v-btn>
+                    <v-btn color="error"   @click='delCode()'>DEL</v-btn>
+                    <v-btn color="primary"   @click='confirmGroupCode()'>SAVE</v-btn>
+                    <v-btn color="warning"  @click="changeCodeMode('view')">VIEW</v-btn>
+                  </div>
+                </v-col>
+              </v-col>
+            </v-row>
+
+            <v-divider class="border-opacity-75 pa-2" color="#ffffff" />
+
+            <grid-list-comp
+                :column-defs="codeColumnDefs"
+                :row-data="codeData"
+                :grid-ref="codeGridRef"
+                ref="codeRef"
+            />
         </v-col>
       </v-row>
     </v-card-item>
@@ -61,10 +105,13 @@ import GridListComp from '~/components/GridListComp.vue'
 import { ref, onMounted, watch } from 'vue'
 import { groupCodeStore } from '@/stores/groupCode'
 import { codeStore } from '@/stores/code'
+import { mainStore } from '@/stores/main'
 import { ColumnDefs, GridRef} from '~/components/class/Grid'
 
-const groupCodeMode = ref('search')
-const codeMode = ref('search')
+const main = mainStore()
+
+const groupCodeMode = ref('view')
+const codeMode = ref('view')
 
 //그룹 코드 그리드
 const groupCode = groupCodeStore() //그룹코드 스토어
@@ -73,6 +120,7 @@ const groupCodeColumnDefs = ref([])  // 그롭코드 그리드 컬럼속성
 const groupCodeGridRef = ref({}) // 그룹코드 그리드 속성
 const groupCodeRef = ref(null) // 그릅코드 참조
 const selectedGroupCode = ref<string>('') //선택된 그룹코드값
+const selectedGroupCodeNm = ref<string>('') //선택된 그룹코드명
 
 //코드 그리드
 const code = codeStore() //코드 스토어
@@ -85,7 +133,8 @@ const codeRef = ref(null) //코드 참조
 //그릅코드 클릭 이벤트
 const GroupCodeCellClick = (cellValue: any) => {
   selectedGroupCode.value = cellValue[0].id
-  getCode( cellValue[0].id);
+  selectedGroupCodeNm.value = cellValue[0].codeGrpNm
+  getCode(cellValue[0].id);
 }
 
 //그룹 코드 조회
@@ -101,17 +150,17 @@ const getCode = async (groupCodeId : string): Promise<void> => {
 }
 
 //그룹코드 모드 변경
-const chanegeGroupCodeMode = (groupCodeModeVal: string) => {
+const changeGroupCodeMode = (groupCodeModeVal: string) => {
   groupCodeMode.value = groupCodeModeVal
 }
 
 //코드 모드 변경
-const chanegeCodeMode = (codeModeVal: string) => {
+const changeCodeMode = (codeModeVal: string) => {
   codeMode.value = codeModeVal
 }
 
 
-//그룹코드 그리드 세팅 (search, edit)
+//그룹코드 그리드 세팅 (view, edit)
 const setGroupCodeGridSetting = (val: string) => {
   if (val === 'edit') {
 
@@ -135,7 +184,8 @@ const setGroupCodeGridSetting = (val: string) => {
           true,
           false,
           false,
-          true
+          true,
+          { height :700}
         )
   } else {
 
@@ -160,12 +210,12 @@ const setGroupCodeGridSetting = (val: string) => {
         false,
         true,
         true,
-        { clickField :['codeGrpNm']}
+        { clickField :['codeGrpNm'], height :700}
       )
   }
 }
 
-//코드 그리드 세팅 (search, edit)
+//코드 그리드 세팅 (view, edit)
 const setCodeGridSetting = (val: string) => {
   if (val === 'edit') {
 
@@ -189,7 +239,8 @@ const setCodeGridSetting = (val: string) => {
           true,
           false,
           false,
-          true
+          true,
+          { height :700}
         )
   } else {
 
@@ -212,7 +263,8 @@ const setCodeGridSetting = (val: string) => {
           true,
           false,
           true,
-          true
+          true,
+          { height :700}
         )
   }
 }
@@ -231,15 +283,36 @@ const addGroupCode = () => {
 }
 
 const delGroupCode = async (): Promise<void> => {
-  //todo 삭제할껀지 물어보는 confirm, 삭제 API 호출
-  const groupCode = groupCodeRef.value.delRow();
-  console.log('del', groupCode)
+   groupCodeRef.value.delRow();
+}
+
+const confirmSaveGroupCode = () => {
+
+  main.confirmAlertOption = {
+    text: `저장 하시겠습니까?`,
+    fnc: saveGroupCode
+  }
+  main.isConfirmAlert = true
 }
 
 const saveGroupCode = async (): Promise<void> => {
-  //todo 저장확인 confirm 추가, 실제 저장 API 호출, 중복된 값이 존재했을때 있다고 경고해야 함
+  main.isLoading = true
   const groupCodes = groupCodeRef.value.saveRow()
   console.log('save', groupCodes)
+
+  setTimeout(() => {
+    main.isLoading = false
+
+    main.alertOption = {
+      title: 'Success',
+      text: '정상적으로 저장 되었습니다.'
+    }
+    main.isAlert = true
+
+    changeGroupCodeMode('view')
+
+  }, 2000)
+
 }
 
 const addCode = () => {
@@ -257,15 +330,38 @@ const addCode = () => {
 }
 
 const delCode = async (): Promise<void> => {
-  //todo 삭제할껀지 물어보는 confirm, 삭제 API 호출
-  const code = codeRef.value.delRow();
-  console.log('del', code)
+  codeRef.value.delRow();
+}
+
+
+const confirmGroupCode = () => {
+
+  main.confirmAlertOption = {
+    text: `저장 하시겠습니까?`,
+    fnc: saveCode
+  }
+  main.isConfirmAlert = true
 }
 
 const saveCode = async (): Promise<void> => {
-  //todo 저장확인 confirm 추가, 실제 저장 API 호출, 중복된 값이 존재했을때 있다고 경고해야 함
+
+  main.isLoading = true
   const codes = codeRef.value.saveRow()
   console.log('save', codes)
+
+  setTimeout(() => {
+    main.isLoading = false
+
+    main.alertOption = {
+      title: 'Success',
+      text: '정상적으로 저장 되었습니다.'
+    }
+    main.isAlert = true
+
+    changeCodeMode('view')
+
+  }, 2000)
+
 }
 
 watch(
@@ -274,9 +370,11 @@ watch(
     if (newValue === 'edit') {
       setGroupCodeGridSetting('edit')
       codeData.value = [];
+      selectedGroupCode.value = ''
+      codeMode.value = 'view'
     } else {
       getGroupCode()
-      setGroupCodeGridSetting('search')
+      setGroupCodeGridSetting('view')
     }
   }
 )
@@ -288,15 +386,24 @@ watch(
         setCodeGridSetting('edit')
       } else {
         getCode(selectedGroupCode.value)
-        setCodeGridSetting('search')
+        setCodeGridSetting('view')
+      }
+    }
+)
+
+watch(
+    () => selectedGroupCode.value,
+    (newValue) => {
+      if (newValue === '') {
+        selectedGroupCodeNm.value = ''
       }
     }
 )
 
 
 onMounted(() => {
-  setGroupCodeGridSetting('search')
-  setCodeGridSetting('search')
+  setGroupCodeGridSetting('view')
+  setCodeGridSetting('view')
   getGroupCode();
 })
 </script>

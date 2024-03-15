@@ -21,21 +21,20 @@
     <v-divider class='mb-3'></v-divider>
 
     <v-row>
-      <v-col cols='9'>
+      <v-col cols='10'>
         <v-text-field
             v-model="activeIcon"
             variant="filled"
             label="Icon"
         />
       </v-col>
-      <v-col cols='3' class='pt-5'>
+      <v-col cols='2' class='pt-5'>
         <v-btn
-            class="ma-1 v-icon--size-x-small"
-            color="warning"
-            variant='outlined'
+            class="v-icon--size-x-small"
+            color="#F50057"
             @click="clearMenuIcon()"
         >
-          CLEAR
+          <v-icon icon='mdi-close-circle-outline'></v-icon>
         </v-btn>
       </v-col>
     </v-row>

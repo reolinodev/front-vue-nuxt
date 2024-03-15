@@ -16,12 +16,8 @@
                 </span>
                 <v-col cols="6" class="d-flex justify-end ga-2">
                   <div class="d-flex justify-end ga-2">
-                    <v-btn color="success" variant="flat" @click="addMenu()">
-                      ADD
-                    </v-btn>
-                    <v-btn color="error" variant="flat" @click="delConfirm()">
-                      DEL
-                    </v-btn>
+                    <v-btn color="success" @click="addMenu()"> ADD </v-btn>
+                    <v-btn color="error" @click="delConfirm()"> DEL </v-btn>
                   </div>
                 </v-col>
               </v-col>
@@ -58,7 +54,10 @@
                   />
 
                   {{ subCompTitle }}
-                  <span v-if="selectedMenuNm !== ''">
+                  <span
+                    v-if="selectedMenuNm !== ''"
+                    class="font-weight-bold pa-3"
+                  >
                     [ {{ selectedMenuNm }} ]
                   </span>
                 </span>
@@ -67,27 +66,18 @@
                   <v-btn
                     v-if="mode == 'view'"
                     color="warning"
-                    variant="flat"
                     @click="changeMode('edit')"
                   >
                     Edit
                   </v-btn>
                   <div v-if="mode === 'edit'" class="d-flex justify-end ga-2">
-                    <v-btn color="primary" variant="flat" @click="saveMenu()">
-                      SAVE
-                    </v-btn>
-                    <v-btn
-                      color="warning"
-                      variant="flat"
-                      @click="changeMode('view')"
-                    >
+                    <v-btn color="primary" @click="saveMenu()"> SAVE </v-btn>
+                    <v-btn color="warning" @click="changeMode('view')">
                       VIEW
                     </v-btn>
                   </div>
                   <div v-if="mode === 'add'" class="d-flex justify-end ga-2">
-                    <v-btn color="primary" variant="flat" @click="saveMenu()">
-                      SAVE
-                    </v-btn>
+                    <v-btn color="primary" @click="saveMenu()"> SAVE </v-btn>
                   </div>
                 </v-col>
               </v-col>

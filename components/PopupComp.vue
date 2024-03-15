@@ -14,9 +14,24 @@
 
       <v-divider />
 
-      <v-card-actions class="justify-end">
-        <v-btn color="error" @click="closePopup"> close </v-btn>
-        <v-btn v-if="popupType === 'edit'" color="primary" @click="saveEvent">
+      <v-card-actions class="justify-end ga-1 mt-2 mr-3">
+        <v-btn
+          color="error"
+          variant="outlined"
+          prepend-icon="mdi-close-thick"
+          width="120"
+          @click="closePopup"
+        >
+          close
+        </v-btn>
+        <v-btn
+          v-if="popupType === 'edit'"
+          color="primary"
+          variant="outlined"
+          prepend-icon="mdi-check"
+          width="120"
+          @click="saveEvent"
+        >
           save
         </v-btn>
       </v-card-actions>

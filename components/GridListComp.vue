@@ -1,22 +1,29 @@
 <template>
   <client-only>
-    <div class="d-flex justify-end mb-2 ga-3">
+    <div class="d-flex justify-end mb-2 ga-1">
       <v-btn
         v-if="filterUse"
-        variant="tonal"
+        variant="text"
         color="primary"
+        icon="mdi-filter"
         @click="filterCheck()"
       >
-        Filter
+        <v-icon icon="mdi-filter" />
+
+        <v-tooltip activator="parent" location="bottom"> Filter </v-tooltip>
       </v-btn>
 
       <v-btn
         v-if="excelExportUse"
-        variant="tonal"
+        variant="text"
         color="warning"
+        icon="mdi-arrow-down-bold-box"
         @click="exportCsv()"
       >
-        Download CSV
+        <v-icon icon="mdi-arrow-down-bold-box" />
+        <v-tooltip activator="parent" location="bottom">
+          Download CSV
+        </v-tooltip>
       </v-btn>
     </div>
 
@@ -35,6 +42,7 @@
 <script setup lang="ts">
 import { ref, onBeforeMount, onMounted, watch } from 'vue'
 import { AgGridVue } from 'ag-grid-vue3'
+import { mainStore } from '@/stores/main'
 
 const props = defineProps({
   columnDefs: [],
@@ -42,7 +50,9 @@ const props = defineProps({
   gridRef: []
 })
 
-const emits = defineEmits(['eventName', 'cellClickData'])
+const emits = defineEmits(['cellClickData'])
+
+const main = mainStore()
 
 const gridApi = ref<any>(null)
 const gridOptions = ref<any>(null)
@@ -183,8 +193,11 @@ const addRow = (newItems: any) => {
 const delRow = () => {
   const selectedData = gridApi.value.getSelectedRows()
   if (selectedData.length === 0) {
-    // todo 얼럿으로 변경
-    console.log('선택된 Row가 존재하지 않습니다.')
+    main.alertOption = {
+      title: 'Warning',
+      text: '선택된 항목이 존재하지 않습니다.'
+    }
+    main.isAlert = true
   } else {
     gridApi.value.applyTransaction({ remove: selectedData })
   }
