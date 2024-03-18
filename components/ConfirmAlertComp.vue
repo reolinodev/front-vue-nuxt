@@ -28,7 +28,7 @@
             width="120"
             @click="save"
           >
-            SAVE
+            OK
           </v-btn>
         </div>
       </v-alert>

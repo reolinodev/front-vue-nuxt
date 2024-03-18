@@ -10,7 +10,9 @@
           <v-btn color="primary" variant="flat" @click="confirmSaveMember()">
             SAVE
           </v-btn>
-          <v-btn color="warning" variant="flat" @click="moveBack()">BACK</v-btn>
+          <v-btn color="warning" variant="flat" @click="confirmMoveBack()">
+            BACK
+          </v-btn>
         </v-col>
         <v-col cols="12">
           <grid-list-comp
@@ -113,6 +115,14 @@ const validation = (value: any) => {
   ]
 
   return gridValidation(value, filters)
+}
+
+const confirmMoveBack = () => {
+  main.confirmAlertOption = {
+    text: '이전 화면으로 이동 하시겠습니까?',
+    fnc: moveBack
+  }
+  main.isConfirmAlert = true
 }
 
 const moveBack = () => {

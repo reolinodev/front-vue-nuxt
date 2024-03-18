@@ -8,6 +8,8 @@ interface Member {
   userNm: string
   mobileNo: string
   email: string
+  useYn: string
+  useYnLabel: string
 }
 
 export const memberStore = defineStore('member', {
@@ -27,6 +29,8 @@ export const memberStore = defineStore('member', {
           userNm: string
           mobileNo: string
           email: string
+          useYn: string
+          useYnLabel: string
         }
       ]
     ) {
@@ -37,7 +41,9 @@ export const memberStore = defineStore('member', {
           loginId: data[i].loginId,
           userNm: data[i].userNm,
           mobileNo: data[i].mobileNo,
-          email: data[i].email
+          email: data[i].email,
+          useYn: data[i].useYn,
+          useYnLabel: data[i].useYnLabel
         }
 
         this.members.push(member)

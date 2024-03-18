@@ -40,6 +40,12 @@
             @cell-click-data="cellClickData"
           />
         </v-col>
+        <member-edit-pop
+          :member-edit-pop="memberEditPop"
+          :member-edit-data="memberEditData"
+          @call-back-member-edit-popup="handleMemberEditPopup"
+          @call-back-member-edit-save="handleMemberEditSave"
+        />
       </v-row>
     </v-card-item>
   </v-card>
@@ -49,11 +55,21 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { memberStore } from '@/stores/member'
-import GridListComp from '@/components/GridListComp.vue'
-import { ColumnDefs, GridRef } from '~/components/class/Grid'
 import FloatLabel from 'primevue/floatlabel'
+import { ColumnDefs, GridRef } from '~/components/class/Grid'
+import GridListComp from '@/components/GridListComp.vue'
+import MemberEditPop from '@/pages/memberSetting/member/comp/memberEditPop.vue'
 
-// todo 화면 전환 후 이전 기록이 남아 있는채로 이동해야 한다.
+interface Member {
+  id: string
+  loginId: string
+  userNm: string
+  mobileNo: string
+  email: string
+  useYn: string
+  useYnLabel: string
+}
+
 const router = useRouter()
 const member = memberStore()
 
@@ -76,7 +92,9 @@ const columnDefs = ref([
       return `(${params.value.substring(0, 3)}) ${params.value.substring(3, 7)}-${params.value.substring(7)}`
     }
   }),
-  new ColumnDefs('Email', 'email', 'text', { flex: 1 })
+  new ColumnDefs('Email', 'email', 'text', { flex: 1 }),
+  new ColumnDefs('Use', 'useYn', 'text', { flex: 1, hide: true }),
+  new ColumnDefs('Use', 'useYnLabel', 'text', { flex: 1 })
 ])
 
 const gridRef = ref(
@@ -85,6 +103,9 @@ const gridRef = ref(
 
 const loginId = ref<string | null>('')
 const name = ref<string | null>('')
+
+const memberEditPop = ref<boolean>(false)
+const memberEditData = ref<Member>()
 
 // 사용자 조회
 const getMember = async (): Promise<void> => {
@@ -96,12 +117,30 @@ const addMember = () => {
   router.push('/memberSetting/member/write')
 }
 
+const handleMemberEditSave = () => {
+  member.getMembers()
+}
+
+const handleMemberEditPopup = (value: boolean) => {
+  memberEditPop.value = value
+}
+
 onMounted(() => {
   getMember()
 })
 
 const cellClickData = (cellValue: any) => {
-  router.push(`/memberSetting/member/${cellValue[0].id}`)
+  const cellData = cellValue[0]
+  memberEditData.value = {
+    id: cellData.id,
+    loginId: cellData.loginId,
+    userNm: cellData.userNm,
+    mobileNo: cellData.mobileNo,
+    email: cellData.email,
+    useYn: cellData.useYn,
+    useYnLabel: cellData.useYnLabel
+  }
+  memberEditPop.value = true
 }
 </script>
 
