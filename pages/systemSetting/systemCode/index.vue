@@ -44,7 +44,7 @@
                 :column-defs="groupCodeColumnDefs"
                 :row-data="groupCodeData"
                 :grid-ref="groupCodeGridRef"
-                @cell-click-data="GroupCodeCellClick"
+                @cell-click-data="groupCodeCellClick"
                 ref="groupCodeRef"
             />
         </v-col>
@@ -101,11 +101,11 @@
 </template>
 
 <script setup lang="ts">
-import GridListComp from '~/components/GridListComp.vue'
 import { ref, onMounted, watch } from 'vue'
 import { groupCodeStore } from '@/stores/groupCode'
 import { codeStore } from '@/stores/code'
 import { mainStore } from '@/stores/main'
+import GridListComp from '~/components/GridListComp.vue'
 import {ColumnDefs, GridRef, GridValidOption} from '~/components/class/Grid'
 import { gridValidation } from '~/utils/gridUtil'
 
@@ -132,7 +132,7 @@ const codeRef = ref(null) //코드 참조
 
 
 //그릅코드 클릭 이벤트
-const GroupCodeCellClick = (cellValue: any) => {
+const groupCodeCellClick = (cellValue: any) => {
   selectedGroupCode.value = cellValue[0].id
   selectedGroupCodeNm.value = cellValue[0].codeGrpNm
   getCode(cellValue[0].id);

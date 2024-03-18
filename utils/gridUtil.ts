@@ -1,10 +1,11 @@
 import _ from 'lodash'
 import { mainStore } from '~/stores/main'
 
-const main = mainStore()
-
 export function gridValidation(data: any, filters: []): boolean {
+  const main = mainStore()
+
   let chk: boolean = true
+
   for (let i: number = 0; i < filters.length; i++) {
     let message: string = ''
 
