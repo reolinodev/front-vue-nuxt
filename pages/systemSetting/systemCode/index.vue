@@ -106,7 +106,8 @@ import { ref, onMounted, watch } from 'vue'
 import { groupCodeStore } from '@/stores/groupCode'
 import { codeStore } from '@/stores/code'
 import { mainStore } from '@/stores/main'
-import { ColumnDefs, GridRef} from '~/components/class/Grid'
+import {ColumnDefs, GridRef, GridValidOption} from '~/components/class/Grid'
+import { gridValidation } from '~/utils/gridUtil'
 
 const main = mainStore()
 
@@ -156,7 +157,15 @@ const changeGroupCodeMode = (groupCodeModeVal: string) => {
 
 //코드 모드 변경
 const changeCodeMode = (codeModeVal: string) => {
-  codeMode.value = codeModeVal
+  if(codeModeVal === 'edit'&& selectedGroupCode.value ===''){
+    main.alertOption = {
+      title: 'Warning',
+      text: '그룹 코드를 선택하세요.'
+    }
+    main.isAlert = true
+  }else{
+    codeMode.value = codeModeVal
+  }
 }
 
 
@@ -296,24 +305,40 @@ const confirmSaveGroupCode = () => {
 }
 
 const saveGroupCode = async (): Promise<void> => {
-  main.isLoading = true
   const groupCodes = groupCodeRef.value.saveRow()
   console.log('save', groupCodes)
 
-  setTimeout(() => {
-    main.isLoading = false
-
+  if (groupCodes.length === 0) {
     main.alertOption = {
-      title: 'Success',
-      text: '정상적으로 저장 되었습니다.'
+      title: 'Warning',
+      text: '저장할 항목이 존재하지 않습니다.'
     }
     main.isAlert = true
+  }else if (validationGroupCode(groupCodes)) {
+    main.isLoading = true
 
-    changeGroupCodeMode('view')
+    setTimeout(() => {
+      main.isLoading = false
 
-  }, 2000)
-
+      main.alertOption = {
+        title: 'Success',
+        text: '정상적으로 저장 되었습니다.'
+      }
+      main.isAlert = true
+      changeGroupCodeMode('view')
+    }, 2000)
+  }
 }
+
+const validationGroupCode = (value: any) => {
+  const filters = [
+    new GridValidOption('Code Name', 'codeGrpNm', 'NULL|DUP'),
+    new GridValidOption('Code Value', 'codeGrpVal', 'NULL|DUP')
+  ]
+
+  return gridValidation(value, filters)
+}
+
 
 const addCode = () => {
   const newItems = [
@@ -345,23 +370,39 @@ const confirmGroupCode = () => {
 
 const saveCode = async (): Promise<void> => {
 
-  main.isLoading = true
   const codes = codeRef.value.saveRow()
   console.log('save', codes)
 
-  setTimeout(() => {
-    main.isLoading = false
-
+  if (codes.length === 0) {
     main.alertOption = {
-      title: 'Success',
-      text: '정상적으로 저장 되었습니다.'
+      title: 'Warning',
+      text: '저장할 항목이 존재하지 않습니다.'
     }
     main.isAlert = true
+  } else if (validationCode(codes)) {
+    main.isLoading = true
 
-    changeCodeMode('view')
+    setTimeout(() => {
+      main.isLoading = false
 
-  }, 2000)
+      main.alertOption = {
+        title: 'Success',
+        text: '정상적으로 저장 되었습니다.'
+      }
+      main.isAlert = true
+      changeCodeMode('view')
+    }, 2000)
+  }
+}
 
+
+const validationCode = (value: any) => {
+  const filters = [
+    new GridValidOption('Code Name', 'codeNm', 'NULL|DUP'),
+    new GridValidOption('Code Value', 'codeVal', 'NULL|DUP')
+  ]
+
+  return gridValidation(value, filters)
 }
 
 watch(
