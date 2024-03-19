@@ -105,6 +105,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import type { Ref } from 'vue'
 import { mainStore } from '@/stores/main'
 import { menuStore } from '@/stores/menu'
 import _ from 'lodash'
@@ -112,10 +113,14 @@ import TreeComp from '~/components/TreeComp.vue'
 import MenuEdit from '~/pages/systemSetting/menu/comp/menuEdit.vue'
 import MenuView from '~/pages/systemSetting/menu/comp/menuView.vue'
 
-const menu = menuStore()
-const menuEditRef = ref(null)
+interface menuEditComponentRef {
+  saveConfirm: () => void
+}
 
+const menu = menuStore()
 const main = mainStore()
+
+const menuEditRef: Ref<menuEditComponentRef | null> = ref(null)
 
 const mode = ref<string>('view')
 const subCompTitle = ref<string>('Menu Info')
@@ -199,7 +204,7 @@ const delMenu = () => {
 
 // menuEdit 컴퍼넌트의 save 버튼 이벤트 호출
 const saveMenu = () => {
-  menuEditRef.value.saveConfirm()
+  menuEditRef.value?.saveConfirm()
 }
 
 // 메뉴 데이터 처리
@@ -227,7 +232,7 @@ const getMenu = async (): Promise<void> => {
     data: menu.menuItems,
     option: {
       expand: true,
-      checkbox: false,
+      selectionMode: 'single',
       filter: true,
       rootTitle: 'Menu'
     }

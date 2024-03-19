@@ -1,9 +1,9 @@
 <template>
   <v-layout>
     <Tree
-      v-model:selectionKeys="selectedKey"
+      v-model:selectionKeys="selectedKeys"
       v-model:expandedKeys="expandedKeys"
-      selection-mode="single"
+      :selection-mode="selectionMode"
       :value="nodes"
       :filter="filterUse"
       style="width: 100%"
@@ -28,13 +28,27 @@ interface TreeDataItem {
   lv: string
   label: string
   upperId?: string
+  useYn?: string
 }
 
 interface TreeOption {
   rootTitle?: string
   filter?: boolean
   expand?: boolean
-  checkbox?: boolean
+  selectionMode?: SelectionMode
+}
+
+interface TreeNodeSelectionState {
+  checked: boolean
+  partialChecked: boolean
+}
+
+interface NodeItem {
+  key: string
+  label: string
+  style?: { color: string }
+  icon?: string
+  children?: NodeItem[]
 }
 
 const props = defineProps<{
@@ -51,11 +65,15 @@ const nodes = ref<TreeNode[]>([
   }
 ])
 
-const selectedKey = ref<string | null>(null)
+type SelectedKeys = Record<string, TreeNodeSelectionState>
+const selectedKeys = ref<SelectedKeys>({})
 const expandedKeys = ref<{ [key: string]: boolean }>({})
 const treeData = ref<TreeDataItem[]>([])
 const treeOption = ref<TreeOption>({})
 const filterUse = ref<boolean>(false)
+
+type SelectionMode = 'single' | 'multiple' | 'checkbox' | undefined
+const selectionMode = ref<SelectionMode>('single')
 
 const expandAllNodes = () => {
   for (const node of nodes.value) {
@@ -75,6 +93,8 @@ const expandNode = (node: TreeNode) => {
 
 const setNode = () => {
   let label: string = 'ROOT'
+  selectedKeys.value = {}
+
   if (
     treeOption.value.rootTitle !== '' &&
     treeOption.value.rootTitle !== undefined
@@ -86,9 +106,14 @@ const setNode = () => {
     filterUse.value = treeOption.value.filter
   }
 
+  if (treeOption.value.selectionMode !== undefined) {
+    selectionMode.value = treeOption.value.selectionMode
+  }
+
   const rootNode: TreeNode = {
     key: '0',
     label,
+    style: { color: '#476cef' },
     children: []
   }
 
@@ -101,7 +126,11 @@ const setNode = () => {
     const lv1Item = lv1Items[i]
     const lv1Id = lv1Item.id
 
-    const lv1Node = {
+    if (selectionMode.value === 'checkbox' && lv1Item.useYn === 'Y') {
+      selectedKeys.value[lv1Id] = { checked: true, partialChecked: false }
+    }
+
+    const lv1Node: NodeItem = {
       key: lv1Item.id,
       label: lv1Item.label,
       children: []
@@ -109,14 +138,21 @@ const setNode = () => {
 
     for (let j = 0; j < lv2Items.length; j++) {
       const lv2Item = lv2Items[j]
+      const lv2Id = lv2Item.id
+
+      if (selectionMode.value === 'checkbox' && lv2Item.useYn === 'Y') {
+        selectedKeys.value[lv2Id] = { checked: true, partialChecked: false }
+      }
 
       if (lv2Item.upperId === lv1Id) {
-        const lv2Node = {
-          key: lv2Item.id,
-          label: lv2Item.label,
-          icon: 'pi pi-fw pi-file'
+        const lv2Node: NodeItem = {
+          key: lv2Id,
+          label: lv2Item.label
         }
 
+        if (!lv1Node.children) {
+          lv1Node.children = []
+        }
         lv1Node.children.push(lv2Node)
       }
     }
@@ -145,7 +181,7 @@ const getSelectedData = (val: any) => {
 }
 
 watch(
-  () => selectedKey.value,
+  () => selectedKeys.value,
   (newValue) => {
     getSelectedData(newValue)
   }

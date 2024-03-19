@@ -1,10 +1,10 @@
 {
   "data": [
-    { "id": "1","grpCdId" : "1" ,"codeNm": "예", "codeVal": "Y", "useYn": "Y", "ord":  "1", "useYnLabel": "사용"},
-    { "id": "2","grpCdId" : "1" ,"codeNm": "아니오", "codeVal": "N", "useYn": "Y", "ord":  "2", "useYnLabel": "사용"},
-    { "id": "3","grpCdId" : "2" ,"codeNm": "10개", "codeVal": "10", "useYn": "Y", "ord":  "1", "useYnLabel": "사용"},
-    { "id": "4","grpCdId" : "2" ,"codeNm": "50개", "codeVal": "50", "useYn": "Y", "ord":  "2", "useYnLabel": "사용"},
-    { "id": "5","grpCdId" : "2" ,"codeNm": "100개", "codeVal": "100", "useYn": "Y", "ord":  "3", "useYnLabel": "사용"},
-    { "id": "6","grpCdId" : "2" ,"codeNm": "1000개", "codeVal": "1000", "useYn": "Y", "ord":  "4", "useYnLabel": "사용"}
+    { "codeId": "1","grpCdId" : "1" ,"codeNm": "예", "codeVal": "Y", "useYn": "Y", "ord":  "1", "useYnLabel": "사용"},
+    { "codeId": "2","grpCdId" : "1" ,"codeNm": "아니오", "codeVal": "N", "useYn": "Y", "ord":  "2", "useYnLabel": "사용"},
+    { "codeId": "3","grpCdId" : "2" ,"codeNm": "10개", "codeVal": "10", "useYn": "Y", "ord":  "1", "useYnLabel": "사용"},
+    { "codeId": "4","grpCdId" : "2" ,"codeNm": "50개", "codeVal": "50", "useYn": "Y", "ord":  "2", "useYnLabel": "사용"},
+    { "codeId": "5","grpCdId" : "2" ,"codeNm": "100개", "codeVal": "100", "useYn": "Y", "ord":  "3", "useYnLabel": "사용"},
+    { "codeId": "6","grpCdId" : "2" ,"codeNm": "1000개", "codeVal": "1000", "useYn": "Y", "ord":  "4", "useYnLabel": "사용"}
   ]
 }

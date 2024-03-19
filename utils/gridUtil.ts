@@ -1,21 +1,27 @@
 import _ from 'lodash'
 import { mainStore } from '~/stores/main'
+import { GridValidOption } from '~/components/class/Grid'
 
-export function gridValidation(data: any, filters: []): boolean {
+interface Filter {
+  field: string
+  label: string
+  type: string
+}
+
+export function gridValidation(data: any, filters: GridValidOption[]): boolean {
   const main = mainStore()
-
   let chk: boolean = true
 
   for (let i: number = 0; i < filters.length; i++) {
     let message: string = ''
 
-    const filter = filters[i]
-    const field = filter.field
-    const label = filter.label
-    const type = filter.type
+    const filter: Filter = filters[i]
+    const field: string = filter.field
+    const label: string = filter.label
+    const type: string = filter.type
 
     const countObj = _.countBy(data, field)
-    const status = checkStatus(countObj)
+    const status: string = checkStatus(countObj)
 
     if ((type === 'NULL' || type === 'NULL|DUP') && status === 'NULL') {
       chk = false
@@ -40,11 +46,11 @@ export function gridValidation(data: any, filters: []): boolean {
 }
 
 const checkStatus = (value: any): string => {
-  const keys = Object.keys(value)
-  let status = 'OK'
+  const keys: string[] = Object.keys(value)
+  let status: string = 'OK'
 
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
+  for (let i: number = 0; i < keys.length; i++) {
+    const key: string = keys[i]
     const val = value[key]
 
     if (key === '' && val > 0) {

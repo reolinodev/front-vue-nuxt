@@ -3,7 +3,7 @@ import groupCodes from '@/assets/json/groupCodes.json'
 
 interface GroupCode {
   no: number
-  id: string
+  codeGrpId: string
   codeGrpNm: string
   codeGrpVal: string
   useYn: string
@@ -11,7 +11,7 @@ interface GroupCode {
 }
 
 export const groupCodeStore = defineStore('groupCode', {
-  state: () => ({
+  state: (): { groupCodes: GroupCode[] } => ({
     groupCodes: []
   }),
   actions: {
@@ -22,7 +22,7 @@ export const groupCodeStore = defineStore('groupCode', {
     setGroupCodes(
       data: [
         {
-          id: string
+          codeGrpId: string
           codeGrpNm: string
           codeGrpVal: string
           useYn: string
@@ -33,7 +33,7 @@ export const groupCodeStore = defineStore('groupCode', {
       for (let i: number = 0; i < data.length; i++) {
         const groupCode: GroupCode = {
           no: i + 1,
-          id: data[i].id,
+          codeGrpId: data[i].codeGrpId,
           codeGrpNm: data[i].codeGrpNm,
           codeGrpVal: data[i].codeGrpVal,
           useYn: data[i].useYn,

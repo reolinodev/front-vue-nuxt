@@ -2,14 +2,14 @@ import { defineStore } from 'pinia'
 import menuData from '@/assets/json/menu.json'
 
 interface MenuLv1Item {
-  id: string
+  menuId: string
   menuNm: string
   icon: string
   url: string
 }
 
 interface MenuLv2Item {
-  id: string
+  menuId: string
   menuNm: string
   prnMenuId: string
   icon: string
@@ -39,14 +39,14 @@ export const navStore = defineStore('nav', {
       defaultLv2Icon: string
 
       menuLv1Items: {
-        id: string
+        menuId: string
         menuNm: string
         icon: string
         url: string
       }[]
 
       menuLv2Items: {
-        id: string
+        menuId: string
         menuNm: string
         prnMenuId: string
         icon: string
@@ -58,7 +58,7 @@ export const navStore = defineStore('nav', {
 
       menuData.menuLv1Items.forEach((menuDataMenuLv1Item) => {
         const menuLv1Item: MenuLv1Item = {
-          id: menuDataMenuLv1Item.id,
+          menuId: menuDataMenuLv1Item.menuId,
           menuNm: menuDataMenuLv1Item.menuNm,
           url: menuDataMenuLv1Item.url,
           icon:
@@ -71,7 +71,7 @@ export const navStore = defineStore('nav', {
 
       menuData.menuLv2Items.forEach((menuDataMenuLv2Item) => {
         const menuLv2Item: MenuLv2Item = {
-          id: menuDataMenuLv2Item.id,
+          menuId: menuDataMenuLv2Item.menuId,
           menuNm: menuDataMenuLv2Item.menuNm,
           prnMenuId: menuDataMenuLv2Item.prnMenuId,
           url: menuDataMenuLv2Item.url,

@@ -3,7 +3,7 @@
     <v-layout>
       <v-navigation-drawer v-model="drawer" :rail="rail" @click="closeRail">
         <v-list>
-          <v-list-item prepend-icon="mdi-home" nav>
+          <v-list-item prepend-icon="mdi-home-city" nav>
             <div
               class="nav-home-title"
               @click="menuRouter(mainMenuUrl, mainMenuNm)"
@@ -24,10 +24,13 @@
 
           <v-list
             v-for="menuLv1Item in menuLv1Items"
-            :key="menuLv1Item.id"
+            :key="menuLv1Item.menuId"
             v-model:opened="open"
           >
-            <v-list-group v-if="menuLv1Item.url !== ''" :value="menuLv1Item.id">
+            <v-list-group
+              v-if="menuLv1Item.url !== ''"
+              :value="menuLv1Item.menuId"
+            >
               <v-list-item :prepend-icon="menuLv1Item.icon">
                 <v-list-item-title
                   @click="menuRouter(menuLv1Item.url, menuLv1Item.menuNm)"
@@ -36,11 +39,11 @@
               </v-list-item>
             </v-list-group>
 
-            <v-list-group v-else :value="menuLv1Item.id">
+            <v-list-group v-else :value="menuLv1Item.menuId">
               <template #activator="{ props }">
                 <v-list-item
                   v-bind="props"
-                  :value="menuLv1Item.id"
+                  :value="menuLv1Item.menuId"
                   :prepend-icon="menuLv1Item.icon"
                   :title="menuLv1Item.menuNm"
                 />
@@ -48,10 +51,10 @@
 
               <v-list-item
                 v-for="menuLv2Item in menuLv2Items.filter(
-                  (c) => c.prnMenuId === menuLv1Item.id
+                  (c) => c.prnMenuId === menuLv1Item.menuId
                 )"
-                :key="menuLv2Item.id"
-                :value="menuLv2Item.id"
+                :key="menuLv2Item.menuId"
+                :value="menuLv2Item.menuId"
                 :prepend-icon="menuLv2Item.icon"
                 :title="menuLv2Item.menuNm"
                 @click="menuRouter(menuLv2Item.url, menuLv2Item.menuNm)"
@@ -71,14 +74,14 @@ import { navStore } from '@/stores/nav'
 import { commonStore } from '@/stores/common'
 
 interface MenuLv1Item {
-  id: string
+  menuId: string
   menuNm: string
   icon: string
   url: string
 }
 
 interface MenuLv2Item {
-  id: string
+  menuId: string
   menuNm: string
   prnMenuId: string
   icon: string
@@ -145,5 +148,6 @@ onMounted(() => {
 <style scoped>
 .nav-home-title {
   height: 25px;
+  color: #c8a7a7;
 }
 </style>

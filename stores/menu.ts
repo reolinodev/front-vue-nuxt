@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import menus from '@/assets/json/menu.json'
 
-export interface Tree {
+export interface MenuTree {
   id: string
   label: string
   icon: string
@@ -24,7 +24,7 @@ export const menuStore = defineStore('menu', {
     setMenus(
       menuItems: [
         {
-          id: string
+          menuId: string
           menuNm: string
           icon: string
           url: string
@@ -37,8 +37,8 @@ export const menuStore = defineStore('menu', {
       ]
     ) {
       for (let i = 0; i < menuItems.length; i++) {
-        const menuItem: Tree = {
-          id: menuItems[i].id,
+        const menuItem: MenuTree = {
+          id: menuItems[i].menuId,
           label: menuItems[i].menuNm,
           icon: menuItems[i].icon,
           url: menuItems[i].url,

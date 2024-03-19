@@ -41,13 +41,15 @@
 
 <script setup lang="ts">
 import { ref, onBeforeMount, onMounted, watch } from 'vue'
+import type { PropType } from 'vue'
 import { AgGridVue } from 'ag-grid-vue3'
 import { mainStore } from '@/stores/main'
+import { ColumnDefs, GridRef } from '~/components/class/Grid'
 
 const props = defineProps({
-  columnDefs: [],
-  rowData: [],
-  gridRef: []
+  columnDefs: Array as PropType<ColumnDefs[]>,
+  rowData: Array as PropType<any[]>,
+  gridRef: Object as PropType<GridRef>
 })
 
 const emits = defineEmits(['cellClickData'])
@@ -57,8 +59,10 @@ const main = mainStore()
 const gridApi = ref<any>(null)
 const gridOptions = ref<any>(null)
 
-const columnDefsArray = ref<any>(props.columnDefs)
-const rowDataArray = ref<any>(props.rowData)
+const columnDefsArray = ref<ColumnDefs[]>(
+  props.columnDefs ? props.columnDefs : []
+)
+const rowDataArray = ref<any[]>(props.rowData ? props.rowData : [])
 
 const selectedData = ref<any[]>([])
 const excelExportUse = ref<boolean>(false)
@@ -89,11 +93,7 @@ onBeforeMount(() => {
 })
 
 onMounted(() => {
-  if (
-    props.gridRef !== null &&
-    props.gridRef !== undefined &&
-    Object.keys(props.gridRef).length !== 0
-  ) {
+  if (props.gridRef !== undefined && Object.keys(props.gridRef).length !== 0) {
     setGridRef(props.gridRef)
   }
 })
@@ -225,14 +225,14 @@ watch(
 watch(
   () => props.rowData,
   (newValue) => {
-    rowDataArray.value = newValue
+    rowDataArray.value = newValue || []
   }
 )
 
 watch(
   () => props.columnDefs,
   (newValue) => {
-    columnDefsArray.value = newValue
+    columnDefsArray.value = newValue || []
   }
 )
 

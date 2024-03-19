@@ -102,40 +102,51 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import type { Ref } from 'vue'
+import { mainStore } from '@/stores/main'
 import { groupCodeStore } from '@/stores/groupCode'
 import { codeStore } from '@/stores/code'
-import { mainStore } from '@/stores/main'
 import GridListComp from '~/components/GridListComp.vue'
-import {ColumnDefs, GridRef, GridValidOption} from '~/components/class/Grid'
+import { ColumnDefs, GridRef, GridValidOption } from '~/components/class/Grid'
 import { gridValidation } from '~/utils/gridUtil'
 
+
+interface GridComponentRef  {
+  addRow: (newItems:any) => void;
+  delRow: () => void;
+  saveRow : () => any;
+}
+
+
 const main = mainStore()
-
-const groupCodeMode = ref('view')
-const codeMode = ref('view')
-
-//그룹 코드 그리드
 const groupCode = groupCodeStore() //그룹코드 스토어
-const groupCodeData = ref<any[]>([]) // 그룹코드 데이터
-const groupCodeColumnDefs = ref([])  // 그롭코드 그리드 컬럼속성
-const groupCodeGridRef = ref({}) // 그룹코드 그리드 속성
-const groupCodeRef = ref(null) // 그릅코드 참조
+const code = codeStore() //코드 스토어
+
+const groupCodeRef: Ref<GridComponentRef | null> = ref(null);
+const codeRef: Ref<GridComponentRef | null> = ref(null);
+
+const groupCodeMode =  ref<string>('view')
+const codeMode =  ref<string>('view')
+
 const selectedGroupCode = ref<string>('') //선택된 그룹코드값
 const selectedGroupCodeNm = ref<string>('') //선택된 그룹코드명
 
+//그룹 코드 그리드
+const groupCodeData = ref<any[]>([]) // 그룹코드 데이터
+const groupCodeColumnDefs = ref<ColumnDefs[]>([])  // 그롭코드 그리드 컬럼속성
+const groupCodeGridRef = ref<GridRef>() // 그룹코드 그리드 속성
+
 //코드 그리드
-const code = codeStore() //코드 스토어
 const codeData = ref<any[]>([]) //코드 데이터
-const codeColumnDefs = ref([]) //코드 그리드 컬럼속성
-const codeGridRef = ref({}) //코드 그리드 속성
-const codeRef = ref(null) //코드 참조
+const codeColumnDefs = ref<ColumnDefs[]>([]) //코드 그리드 컬럼속성
+const codeGridRef = ref<GridRef>() //코드 그리드 속성
 
 
 //그릅코드 클릭 이벤트
 const groupCodeCellClick = (cellValue: any) => {
-  selectedGroupCode.value = cellValue[0].id
+  selectedGroupCode.value = cellValue[0].codeGrpId
   selectedGroupCodeNm.value = cellValue[0].codeGrpNm
-  getCode(cellValue[0].id);
+  getCode(cellValue[0].codeGrpId);
 }
 
 //그룹 코드 조회
@@ -174,7 +185,7 @@ const setGroupCodeGridSetting = (val: string) => {
   if (val === 'edit') {
 
     groupCodeColumnDefs.value = <any>[
-      new ColumnDefs('ID', 'id', 'text', { flex: 1, hide: true }),
+      new ColumnDefs('ID', 'codeGrpId', 'text', { flex: 1, hide: true }),
       new ColumnDefs('Code Name', 'codeGrpNm', 'text', {
         flex: 1,
         cellStyle: {
@@ -189,18 +200,18 @@ const setGroupCodeGridSetting = (val: string) => {
 
     groupCodeGridRef.value =
         new GridRef(
-          false,
-          true,
-          false,
-          false,
-          true,
-          { height :700}
+            false,
+            true,
+            false,
+            false,
+            true,
+            { height :700}
         )
   } else {
 
     groupCodeColumnDefs.value = <any>[
       new ColumnDefs('No', 'no', 'number', { width: '100' }),
-      new ColumnDefs('ID', 'id', 'text', { flex: 1, hide: true }),
+      new ColumnDefs('ID', 'codeGrpId', 'text', { flex: 1, hide: true }),
       new ColumnDefs('Code Name', 'codeGrpNm', 'text', {
         flex: 1,
         cellStyle: {
@@ -213,14 +224,14 @@ const setGroupCodeGridSetting = (val: string) => {
     ]
 
     groupCodeGridRef.value =
-      new GridRef(
-        true,
-        true,
-        false,
-        true,
-        true,
-        { clickField :['codeGrpNm'], height :700}
-      )
+        new GridRef(
+            true,
+            true,
+            false,
+            true,
+            true,
+            { clickField :['codeGrpNm'], height :700}
+        )
   }
 }
 
@@ -229,7 +240,7 @@ const setCodeGridSetting = (val: string) => {
   if (val === 'edit') {
 
     codeColumnDefs.value = <any>[
-      new ColumnDefs('ID', 'id', 'text', { flex: 1, hide: true }),
+      new ColumnDefs('ID', 'codeId', 'text', { flex: 1, hide: true }),
       new ColumnDefs('Code Name', 'codeNm', 'text', {
         flex: 1,
         editable: true
@@ -244,18 +255,18 @@ const setCodeGridSetting = (val: string) => {
 
     codeGridRef.value =
         new GridRef(
-          false,
-          true,
-          false,
-          false,
-          true,
-          { height :700}
+            false,
+            true,
+            false,
+            false,
+            true,
+            { height :700}
         )
   } else {
 
     codeColumnDefs.value = <any>[
       new ColumnDefs('No', 'no', 'number', { width: '100' }),
-      new ColumnDefs('ID', 'id', 'text', { flex: 1, hide: true }),
+      new ColumnDefs('ID', 'codeId', 'text', { flex: 1, hide: true }),
       new ColumnDefs('Code Name', 'codeNm', 'text', {
         flex: 1,
       }),
@@ -268,12 +279,12 @@ const setCodeGridSetting = (val: string) => {
 
     codeGridRef.value =
         new GridRef(
-          false,
-          true,
-          false,
-          true,
-          true,
-          { height :700}
+            false,
+            true,
+            false,
+            true,
+            true,
+            { height :700}
         )
   }
 }
@@ -288,11 +299,11 @@ const addGroupCode = () => {
       useYn: 'Y'
     }
   ]
-  groupCodeRef.value.addRow(newItems);
+  groupCodeRef.value?.addRow(newItems);
 }
 
 const delGroupCode = async (): Promise<void> => {
-   groupCodeRef.value.delRow();
+  groupCodeRef.value?.delRow();
 }
 
 const confirmSaveGroupCode = () => {
@@ -305,7 +316,7 @@ const confirmSaveGroupCode = () => {
 }
 
 const saveGroupCode = async (): Promise<void> => {
-  const groupCodes = groupCodeRef.value.saveRow()
+  const groupCodes = groupCodeRef.value?.saveRow()
   console.log('save', groupCodes)
 
   if (groupCodes.length === 0) {
@@ -339,7 +350,6 @@ const validationGroupCode = (value: any) => {
   return gridValidation(value, filters)
 }
 
-
 const addCode = () => {
   const newItems = [
     {
@@ -351,11 +361,11 @@ const addCode = () => {
       ord: ''
     }
   ]
-  codeRef.value.addRow(newItems);
+  codeRef.value?.addRow(newItems);
 }
 
 const delCode = async (): Promise<void> => {
-  codeRef.value.delRow();
+  codeRef.value?.delRow();
 }
 
 
@@ -370,7 +380,7 @@ const confirmGroupCode = () => {
 
 const saveCode = async (): Promise<void> => {
 
-  const codes = codeRef.value.saveRow()
+  const codes = codeRef.value?.saveRow()
   console.log('save', codes)
 
   if (codes.length === 0) {
@@ -406,18 +416,18 @@ const validationCode = (value: any) => {
 }
 
 watch(
-  () => groupCodeMode.value,
-  (newValue) => {
-    if (newValue === 'edit') {
-      setGroupCodeGridSetting('edit')
-      codeData.value = [];
-      selectedGroupCode.value = ''
-      codeMode.value = 'view'
-    } else {
-      getGroupCode()
-      setGroupCodeGridSetting('view')
+    () => groupCodeMode.value,
+    (newValue) => {
+      if (newValue === 'edit') {
+        setGroupCodeGridSetting('edit')
+        codeData.value = [];
+        selectedGroupCode.value = ''
+        codeMode.value = 'view'
+      } else {
+        getGroupCode()
+        setGroupCodeGridSetting('view')
+      }
     }
-  }
 )
 
 watch(

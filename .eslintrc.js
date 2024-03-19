@@ -48,6 +48,7 @@ module.exports = {
     'max-classes-per-file': 'off',
     'no-restricted-syntax': 'off',
     'prefer-destructuring': 'off',
+    'no-use-before-define': 'off',
     // Prettier 코드 스타일 설정
     'prettier/prettier': [
       'error',

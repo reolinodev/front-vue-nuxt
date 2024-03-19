@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 interface Code {
   no: number
-  id: string
+  codeId: string
   grpCdId: string
   codeNm: string
   codeVal: string
@@ -14,20 +14,23 @@ interface Code {
 }
 
 export const codeStore = defineStore('code', {
-  state: () => ({
+  state: (): { codes: Code[] } => ({
     codes: []
   }),
   actions: {
     getCodes(grpCdId: string): void {
       this.codes = []
 
-      const filteredCodes = _.filter(codes.data, { grpCdId })
+      const filteredCodes = _.filter(codes.data, function (code: Code) {
+        return code.grpCdId === grpCdId
+      })
+
       this.setCodes(filteredCodes)
     },
     setCodes(
       data: [
         {
-          id: string
+          codeId: string
           grpCdId: string
           codeNm: string
           codeVal: string
@@ -40,7 +43,7 @@ export const codeStore = defineStore('code', {
       for (let i: number = 0; i < data.length; i++) {
         const code: Code = {
           no: i + 1,
-          id: data[i].id,
+          codeId: data[i].codeId,
           grpCdId: data[i].grpCdId,
           codeNm: data[i].codeNm,
           codeVal: data[i].codeVal,
