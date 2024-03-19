@@ -20,7 +20,7 @@
             </template>
           </v-list-item>
 
-          <v-divider />
+          <v-divider class="border-opacity-50" color="success" />
 
           <v-list
             v-for="menuLv1Item in menuLv1Items"
@@ -68,81 +68,80 @@
   </v-card>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref, watch } from 'vue'
 import { navStore } from '@/stores/nav'
 import { commonStore } from '@/stores/common'
 
-export default defineComponent({
-  name: 'NavComp',
-  setup: function () {
-    const nav = navStore()
-    const common = commonStore()
+interface MenuLv1Item {
+  menuId: string
+  menuNm: string
+  icon: string
+  url: string
+}
 
-    const router = useRouter()
+interface MenuLv2Item {
+  menuId: string
+  menuNm: string
+  prnMenuId: string
+  icon: string
+  url: string
+}
 
-    const drawer = ref(true)
-    const rail = ref(true)
-    const open = ref([''])
+const nav = navStore()
+const common = commonStore()
 
-    const menuLv1Items = ref([])
-    const menuLv2Items = ref([])
-    const mainMenuUrl = ref('')
-    const mainMenuNm = ref('')
+const router = useRouter()
 
-    const setMenuData = () => {
-      menuLv1Items.value = nav.menuLv1Items
-      menuLv2Items.value = nav.menuLv2Items
-      mainMenuUrl.value = nav.mainMenuUrl
-      mainMenuNm.value = nav.mainMenuNm
-    }
+const drawer = ref(true)
+const rail = ref(true)
+const open = ref([''])
 
-    const menuRouter = (url: string, menuNm: string) => {
-      setTimeout(() => {
-        open.value = []
-        rail.value = true
-      }, 1000)
+const menuLv1Items = ref<MenuLv1Item[]>([])
+const menuLv2Items = ref<MenuLv2Item[]>([])
+const mainMenuUrl = ref('')
+const mainMenuNm = ref('')
 
-      common.currentUrl = url
-      common.currentMenuNm = menuNm
-      router.push(url)
-    }
+const setMenuData = () => {
+  menuLv1Items.value = nav.menuLv1Items
+  menuLv2Items.value = nav.menuLv2Items
+  mainMenuUrl.value = nav.mainMenuUrl
+  mainMenuNm.value = nav.mainMenuNm
+}
 
-    watch(
-      () => nav.menuLv1Items,
-      () => {
-        setMenuData()
-      }
-    )
+const menuRouter = (url: string, menuNm: string) => {
+  setTimeout(() => {
+    open.value = []
+    rail.value = true
+  }, 1000)
 
-    watch(
-      () => rail.value,
-      (newValue) => {
-        if (newValue) {
-          open.value = []
-        }
-      }
-    )
+  common.currentUrl = url
+  common.currentMenuNm = menuNm
+  router.push(url)
+}
 
-    const closeRail = () => {
-      rail.value = false
-    }
+watch(
+  () => nav.menuLv1Items,
+  () => {
+    setMenuData()
+  }
+)
 
-    onMounted(() => {
-      setMenuData()
-    })
-    return {
-      drawer,
-      rail,
-      open,
-      menuLv1Items,
-      menuLv2Items,
-      mainMenuUrl,
-      mainMenuNm,
-      menuRouter,
-      closeRail
+watch(
+  () => rail.value,
+  (newValue) => {
+    if (newValue) {
+      open.value = []
     }
   }
+)
+
+const closeRail = () => {
+  rail.value = false
+}
+
+onMounted(() => {
+  setMenuData()
 })
 </script>
 

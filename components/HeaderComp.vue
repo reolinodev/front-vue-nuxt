@@ -30,7 +30,7 @@
 
         <v-tooltip v-model="exportshow" location="bottom">
           <template #activator="{ props }">
-            <v-btn icon v-bind="props" size="x-large" @click="logout">
+            <v-btn icon v-bind="props" size="x-large" @click="logoutConfirm">
               <v-icon> mdi-export </v-icon>
             </v-btn>
           </template>
@@ -41,57 +41,55 @@
   </v-toolbar>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue'
 import { commonStore } from '@/stores/common'
+import { mainStore } from '@/stores/main'
 import { headerStore } from '@/stores/header'
 import { clearSessionStorage } from '@/utils/storage'
 
-export default defineComponent({
-  name: 'HeaderComp',
+const common = commonStore()
+const main = mainStore()
+const header = headerStore()
+const router = useRouter()
 
-  setup: function () {
-    const common = commonStore()
-    const header = headerStore()
-    const router = useRouter()
+const menuNm = ref<string>('')
+const alertCount = ref<number>(0)
 
-    const menuNm = ref('')
-    const alertCount = ref(0)
+const infoShow = ref<boolean>(false)
+const exportshow = ref<boolean>(false)
 
-    const infoShow = ref(false)
-    const exportshow = ref(false)
-
-    const logout = () => {
-      common.isLogin = false
-      common.isLoding = false
-      common.currentMenuNm = ''
-      common.currentUrl = ''
-      clearSessionStorage()
-      router.push('/login')
-    }
-
-    onMounted(() => {
-      header.getAlertCount()
-      alertCount.value = header.alertCount
-      menuNm.value = common.currentMenuNm
-    })
-
-    watch(
-      () => common.currentMenuNm,
-      (newValue) => {
-        menuNm.value = newValue
-      }
-    )
-
-    return {
-      menuNm,
-      alertCount,
-      infoShow,
-      exportshow,
-      logout
-    }
+// 로그아웃 확인
+const logoutConfirm = () => {
+  main.confirmAlertOption = {
+    text: '로그아웃 하시겠습니까?',
+    fnc: logout
   }
+  main.isConfirmAlert = true
+}
+
+// 로그아웃 처리
+const logout = () => {
+  common.isLogin = false
+  main.isLoading = false
+  common.currentMenuNm = ''
+  common.currentUrl = ''
+  clearSessionStorage()
+  router.push('/login')
+}
+
+onMounted(() => {
+  header.getAlertCount()
+  alertCount.value = header.alertCount
+  menuNm.value = common.currentMenuNm
 })
+
+watch(
+  () => common.currentMenuNm,
+  (newValue) => {
+    menuNm.value = newValue
+  }
+)
 </script>
 
 <style scoped></style>

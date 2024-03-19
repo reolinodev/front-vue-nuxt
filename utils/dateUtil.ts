@@ -20,7 +20,7 @@ export function getCurrentDateFormat(type: string | null): string {
   } else if (type === 'ss') {
     dateRetunVal = `${now.second()}`
   } else if (type === null || type === undefined) {
-    dateRetunVal = `${now.format('YYYY.MM.DD HH:mm:ss')}`
+    dateRetunVal = `${now.format('YYYY-MM-DD HH:mm:ss')}`
   } else {
     dateRetunVal = `${now.format(type)}`
   }
@@ -34,13 +34,13 @@ export function getDateFormat(txtVal: string, type: string): string {
   if (type !== null && type !== undefined) {
     dateRetunVal = `${date.format(type)}`
   } else if (txtVal.length === 8) {
-    dateRetunVal = `${date.format('YYYY.MM.DD')}`
+    dateRetunVal = `${date.format('YYYY-MM-DD')}`
   } else if (txtVal.length === 10) {
-    dateRetunVal = `${date.format('YYYY.MM.DD HH')}`
+    dateRetunVal = `${date.format('YYYY-MM-DD HH')}`
   } else if (txtVal.length === 12) {
-    dateRetunVal = `${date.format('YYYY.MM.DD HH:mm')}`
+    dateRetunVal = `${date.format('YYYY-MM-DD HH:mm')}`
   } else if (txtVal.length === 14) {
-    dateRetunVal = `${date.format('YYYY.MM.DD HH:mm:ss')}`
+    dateRetunVal = `${date.format('YYYY-MM-DD HH:mm:ss')}`
   } else {
     dateRetunVal = ''
   }
@@ -51,8 +51,8 @@ export function getDateFormat(txtVal: string, type: string): string {
 export function getDateCalculateFormat(
   dateValue: string,
   method: string,
-  period: string,
   days: number,
+  period: string,
   formatType: string | null
 ): string {
   let dateRetunVal: string = ''
@@ -75,13 +75,15 @@ export function getDateCalculateFormat(
   return dateRetunVal
 }
 
-export function getDiffDaytoDay(
+export function getDiffTime(
   dateValue1: string,
-  dateValue2: string
+  dateValue2: string,
+  period: string
 ): string {
   let dateRetunVal: string = ''
   let date1 = dayjs()
   let date2 = dayjs()
+  let periodType: string = 'day'
 
   if (dateValue1 !== 'current') {
     date1 = dayjs(dateValue1)
@@ -91,7 +93,11 @@ export function getDiffDaytoDay(
     date2 = dayjs(dateValue2)
   }
 
-  dateRetunVal = `${date2.diff(date1)}`
+  if (period !== null && period !== undefined) {
+    periodType = period
+  }
+
+  dateRetunVal = `${date2.diff(date1, periodType)}`
 
   return dateRetunVal
 }

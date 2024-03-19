@@ -1,3 +1,6 @@
+<template>
+  <v-layout />
+</template>
 <script setup lang="ts">
 import { commonStore } from '~/stores/common'
 import { navStore } from '~/stores/nav'

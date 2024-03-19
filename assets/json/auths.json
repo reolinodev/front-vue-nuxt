@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "authId": "00001", "authNm": "관리자", "authVal": "admin", "useYn": "Y", "useYnLabel": "사용", "ord": "1"},
+    { "authId": "00002", "authNm": "사용자", "authVal": "user", "useYn": "Y", "useYnLabel": "사용", "ord": "2"}
+  ]
+}

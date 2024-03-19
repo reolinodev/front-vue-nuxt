@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "codeGrpId": "1", "codeGrpNm": "사용여부", "codeGrpVal": "UseYn", "useYn": "Y", "useYnLabel": "사용"},
+    { "codeGrpId": "2", "codeGrpNm": "페이지당 항목수", "codeGrpVal": "PagePer", "useYn": "Y", "useYnLabel": "사용"}
+  ]
+}
