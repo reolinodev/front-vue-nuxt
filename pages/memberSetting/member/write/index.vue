@@ -29,18 +29,25 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import GridListComp from '~/components/GridListComp.vue'
+import type { Ref } from 'vue'
 import { mainStore } from '~/stores/main'
-import { ColumnDefs, GridRef, GridValidOption } from '~/components/class/Grid'
 import { useRouter } from 'vue-router'
+import GridListComp from '~/components/GridListComp.vue'
+import {
+  ColumnDefs,
+  GridComponentRef,
+  GridRef,
+  GridValidOption
+} from '~/components/class/Grid'
 import { gridValidation } from '~/utils/gridUtil'
+import { Member } from '~/stores/member'
 
 const router = useRouter()
 const main = mainStore()
 
-const memberRef = ref({})
+const memberRef: Ref<GridComponentRef | null> = ref(null)
 const memberData = ref<any[]>([])
-const memberColumnDefs = ref([
+const memberColumnDefs = ref<ColumnDefs[]>([
   new ColumnDefs('Login Id *', 'loginId', 'text', {
     flex: 1,
     editable: true
@@ -52,24 +59,25 @@ const memberColumnDefs = ref([
   }),
   new ColumnDefs('Email *', 'email', 'text', { flex: 1, editable: true })
 ])
-const memberGridRef = ref(
+const memberGridRef = ref<GridRef>(
   new GridRef(false, false, false, false, false, { height: 700 })
 )
 
 const addMember = () => {
-  const newItems = [
+  const newItems: Member[] = [
     {
       loginId: '',
       userNm: '',
       mobileNo: '',
-      email: ''
+      email: '',
+      useYn: 'Y'
     }
   ]
-  memberRef.value.addRow(newItems)
+  memberRef.value?.addRow(newItems)
 }
 
 const delMember = () => {
-  memberRef.value.delRow()
+  memberRef.value?.delRow()
 }
 
 const confirmSaveMember = () => {
@@ -81,7 +89,7 @@ const confirmSaveMember = () => {
 }
 
 const saveMember = async (): Promise<void> => {
-  const member = memberRef.value.saveRow()
+  const member = memberRef.value?.saveRow()
   console.log('save', member)
 
   if (member.length === 0) {

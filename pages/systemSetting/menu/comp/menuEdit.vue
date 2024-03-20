@@ -58,19 +58,16 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
 import { mainStore } from '@/stores/main'
-import InputSelectBoxComp, {
+import InputSelectBoxComp from '~/components/InputSelectBoxComp.vue'
+import type {
   SelectBoxData,
   SelectBoxItem
 } from '~/components/InputSelectBoxComp.vue'
 import MenuIconPop from '~/pages/systemSetting/menu/comp/menuIconPop.vue'
-import { MenuItem } from '~/stores/menu'
+import type { Menu, SelectMenu } from '~/stores/menu'
 
 const props = defineProps<{
-  selectedMenuItems: {
-    menuItems: MenuItem[]
-    parentMenuItems: MenuItem[]
-    mode: string | null
-  }
+  selectedMenuItems: SelectMenu
 }>()
 
 const emits = defineEmits(['callBackSave'])
@@ -82,6 +79,7 @@ const activeIcon = ref<string>('mdi-folder-open')
 const errors = ref<any>({})
 const menuIconPopup = ref<boolean>(false)
 
+const menuId = ref<string>('')
 const menuNm = ref<string>('')
 const menuLv = ref<string>('')
 const icon = ref<string>('')
@@ -122,24 +120,25 @@ const useYnItems = ref<SelectBoxItem>({
 })
 
 const setData = (value: any): void => {
-  const { menuItems, parentMenuItems, mode } = value
+  const { menuItem, parentMenuItems, mode } = value
 
-  prnMenuId.value = menuItems.upperId
-  menuNm.value = menuItems.label
-  menuLv.value = menuItems.lv
-  icon.value = menuItems.icon
-  useYn.value = menuItems.useYn
-  url.value = menuItems.url
-  ord.value = menuItems.ord
+  menuId.value = menuItem.menuId
+  prnMenuId.value = menuItem.prnMenuId
+  menuNm.value = menuItem.menuNm
+  menuLv.value = menuItem.menuLv
+  icon.value = menuItem.icon
+  useYn.value = menuItem.useYn
+  url.value = menuItem.url
+  ord.value = menuItem.ord
 
-  if (menuItems.icon === '' && menuItems.lv === '1') {
+  if (menuItem.icon === '' && menuItem.menuLv === '1') {
     activeIcon.value = 'mdi-folder-outline'
-  } else if (menuItems.icon === '' && menuItems.lv === '2') {
+  } else if (menuItem.icon === '' && menuItem.menuLv === '2') {
     activeIcon.value = 'mdi-folder-open'
-  } else if (menuItems.icon === '') {
+  } else if (menuItem.icon === '') {
     activeIcon.value = 'mdi-folder-open'
   } else {
-    activeIcon.value = menuItems.icon
+    activeIcon.value = menuItem.icon
   }
 
   if (mode === 'add') {
@@ -153,7 +152,7 @@ const setData = (value: any): void => {
   }
 
   // prettier-ignore
-  const data = parentMenuItems?.map((item:MenuItem) => ({ label: item.label, value: item.id })) ?? []
+  const data = parentMenuItems?.map((item:Menu) => ({ label: item.menuNm, value: item.menuId })) ?? []
 
   parentItems.value = {
     data,
@@ -193,6 +192,7 @@ const saveConfirm = () => {
 const save = () => {
   if (validation()) {
     const data = {
+      menuId: menuId.value,
       menuNm: menuNm.value,
       menuLv: menuLv.value,
       prnMenuId: prnMenuId.value,

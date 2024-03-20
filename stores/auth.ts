@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import auths from '@/assets/json/auths.json'
 
-interface Auth {
+export interface Auth {
   no?: number
   authId: string
   authNm: string
   authVal: string
   useYn: string
-  useYnLabel: string
+  useYnLabel?: string
   ord: string
 }
 

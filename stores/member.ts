@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia'
 import members from '@/assets/json/members.json'
 
-interface Member {
-  no: number
-  id: number
+export interface Member {
+  no?: number
+  id?: string
   loginId: string
   userNm: string
   mobileNo: string
   email: string
-  useYn: string
-  useYnLabel: string
+  useYn?: string
+  useYnLabel?: string
 }
 
 export const memberStore = defineStore('member', {
@@ -21,19 +21,7 @@ export const memberStore = defineStore('member', {
       this.members = []
       this.setMembers(members.data)
     },
-    setMembers(
-      data: [
-        {
-          id: number
-          loginId: string
-          userNm: string
-          mobileNo: string
-          email: string
-          useYn: string
-          useYnLabel: string
-        }
-      ]
-    ) {
+    setMembers(data: Member[]) {
       for (let i: number = 0; i < data.length; i++) {
         const member: Member = {
           no: i + 1,

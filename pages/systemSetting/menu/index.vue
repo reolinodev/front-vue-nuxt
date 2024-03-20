@@ -3,100 +3,96 @@
     <v-card-item>
       <v-row class="ma-auto">
         <v-col cols="5">
-          <div style="min-height: 900px">
-            <v-row class="ma-auto">
-              <v-col cols="12" class="d-flex justify-space-between pa-0">
-                <span class="card-item-basic_span">
-                  <v-btn
-                    class="ma-1 v-icon--size-x-small"
-                    icon="mdi-view-grid-outline"
-                  />
+          <v-row class="ma-auto">
+            <v-col cols="12" class="d-flex justify-space-between pa-0">
+              <span class="card-item-basic_span">
+                <v-btn
+                  class="ma-1 v-icon--size-x-small"
+                  icon="mdi-view-grid-outline"
+                />
 
-                  Menu
-                </span>
-                <v-col cols="6" class="d-flex justify-end ga-2">
-                  <div class="d-flex justify-end ga-2">
-                    <v-btn color="success" @click="addMenu()"> ADD </v-btn>
-                    <v-btn color="error" @click="delConfirm()"> DEL </v-btn>
-                  </div>
-                </v-col>
+                Menu
+              </span>
+              <v-col cols="6" class="d-flex justify-end ga-2">
+                <div class="d-flex justify-end ga-2">
+                  <v-btn color="success" @click="addMenu()"> ADD </v-btn>
+                  <v-btn color="error" @click="delConfirm()"> DEL </v-btn>
+                </div>
               </v-col>
-            </v-row>
+            </v-col>
+          </v-row>
 
-            <v-divider class="border-opacity-75 pa-2" color="#ffffff" />
+          <v-divider class="border-opacity-75 pa-2" color="#ffffff" />
 
-            <tree-comp
-              :tree-items="treeItems"
-              @selected-tree-data="callBackTreeData"
-            />
-          </div>
+          <tree-comp
+            :tree-items="treeItems"
+            @selected-tree-data="callBackTreeData"
+          />
         </v-col>
         <v-col cols="7">
-          <div style="min-height: 900px">
-            <v-row class="ma-auto">
-              <v-col cols="12" class="d-flex justify-space-between pa-0">
-                <span class="card-item-basic_span">
-                  <v-btn
-                    v-if="mode === 'edit'"
-                    class="ma-1 v-icon--size-x-small"
-                    icon="mdi-square-edit-outline"
-                  />
+          <v-row class="ma-auto">
+            <v-col cols="12" class="d-flex justify-space-between pa-0">
+              <span class="card-item-basic_span">
+                <v-btn
+                  v-if="mode === 'edit'"
+                  class="ma-1 v-icon--size-x-small"
+                  icon="mdi-square-edit-outline"
+                />
 
-                  <v-btn
-                    v-else-if="mode === 'add'"
-                    class="ma-1 v-icon--size-x-small"
-                    icon="mdi-plus-box"
-                  />
-                  <v-btn
-                    v-else
-                    class="ma-1 v-icon--size-x-small"
-                    icon="mdi-view-grid-outline"
-                  />
+                <v-btn
+                  v-else-if="mode === 'add'"
+                  class="ma-1 v-icon--size-x-small"
+                  icon="mdi-plus-box"
+                />
+                <v-btn
+                  v-else
+                  class="ma-1 v-icon--size-x-small"
+                  icon="mdi-view-grid-outline"
+                />
 
-                  {{ subCompTitle }}
-                  <span
-                    v-if="selectedMenuNm !== ''"
-                    class="font-weight-bold pa-3"
-                  >
-                    [ {{ selectedMenuNm }} ]
-                  </span>
+                {{ subCompTitle }}
+                <span
+                  v-if="selectedMenuNm !== ''"
+                  class="font-weight-bold pa-3"
+                >
+                  [ {{ selectedMenuNm }} ]
                 </span>
+              </span>
 
-                <v-col cols="6" class="d-flex justify-end ga-2">
-                  <v-btn
-                    v-if="mode == 'view'"
-                    color="warning"
-                    @click="changeMode('edit')"
-                  >
-                    Edit
+              <v-col cols="6" class="d-flex justify-end ga-2">
+                <v-btn
+                  v-if="mode == 'view'"
+                  color="warning"
+                  @click="changeMode('edit')"
+                >
+                  Edit
+                </v-btn>
+                <div v-if="mode === 'edit'" class="d-flex justify-end ga-2">
+                  <v-btn color="primary" @click="saveMenu()"> SAVE </v-btn>
+                  <v-btn color="warning" @click="changeMode('view')">
+                    VIEW
                   </v-btn>
-                  <div v-if="mode === 'edit'" class="d-flex justify-end ga-2">
-                    <v-btn color="primary" @click="saveMenu()"> SAVE </v-btn>
-                    <v-btn color="warning" @click="changeMode('view')">
-                      VIEW
-                    </v-btn>
-                  </div>
-                  <div v-if="mode === 'add'" class="d-flex justify-end ga-2">
-                    <v-btn color="primary" @click="saveMenu()"> SAVE </v-btn>
-                  </div>
-                </v-col>
+                </div>
+                <div v-if="mode === 'add'" class="d-flex justify-end ga-2">
+                  <v-btn color="primary" @click="saveMenu()"> SAVE </v-btn>
+                </div>
               </v-col>
-            </v-row>
+            </v-col>
+          </v-row>
 
-            <v-divider class="border-opacity-75 pa-2" color="#ffffff" />
+          <v-divider class="border-opacity-75 pa-2" color="#ffffff" />
 
-            <menu-view
-              v-if="mode === 'view'"
-              :selected-menu-items="selectedMenuItems"
-            />
-            <menu-edit
-              v-if="mode === 'edit' || mode === 'add'"
-              ref="menuEditRef"
-              :selected-menu-items="selectedMenuItems"
-              :mode="mode"
-              @call-back-save="save"
-            />
-          </div>
+          <menu-view
+            v-if="mode === 'view'"
+            :selected-menu-items="selectedMenuItems"
+          />
+          <menu-edit
+            v-if="mode === 'edit' || mode === 'add'"
+            ref="menuEditRef"
+            :selected-menu-items="selectedMenuItems"
+            :mode="mode"
+            @call-back-save="save"
+          />
         </v-col>
       </v-row>
     </v-card-item>
@@ -108,10 +104,13 @@ import { onMounted, ref, watch } from 'vue'
 import type { Ref } from 'vue'
 import { mainStore } from '@/stores/main'
 import { menuStore } from '@/stores/menu'
+import type { SelectMenu } from '@/stores/menu'
+
 import _ from 'lodash'
-import TreeComp from '~/components/TreeComp.vue'
-import MenuEdit from '~/pages/systemSetting/menu/comp/menuEdit.vue'
-import MenuView from '~/pages/systemSetting/menu/comp/menuView.vue'
+import TreeComp from '@/components/TreeComp.vue'
+import MenuEdit from '@/pages/systemSetting/menu/comp/menuEdit.vue'
+import MenuView from '@/pages/systemSetting/menu/comp/menuView.vue'
+import type { TreeData, TreeItem } from '~/components/TreeComp.vue'
 
 interface menuEditComponentRef {
   saveConfirm: () => void
@@ -125,11 +124,26 @@ const menuEditRef: Ref<menuEditComponentRef | null> = ref(null)
 const mode = ref<string>('view')
 const subCompTitle = ref<string>('Menu Info')
 
-const selectedMenuItems = ref<any>([])
+const selectedMenuItems = ref<SelectMenu>({
+  menuItem: {
+    menuId: '',
+    menuNm: '',
+    icon: '',
+    url: '',
+    prnMenuId: '',
+    useYn: 'Y',
+    menuLv: '',
+    ord: ''
+  },
+  parentMenuItems: [],
+  mode: ''
+})
 const selectedMenuNm = ref<string>('')
 
-const treeItems = ref<any>([])
-
+const treeItems = ref<TreeItem>({
+  data: [],
+  option: {}
+})
 // 모드 변경 : view, add, edit
 const changeMode = (value: string) => {
   if (selectedMenuNm.value === '' && value !== 'add') {
@@ -156,17 +170,17 @@ const addMenu = () => {
   selectedMenuNm.value = ''
 
   selectedMenuItems.value = {
-    menuItems: {
-      id: '',
-      lv: '',
-      label: '',
-      useYn: 'Y',
-      upperId: '',
+    menuItem: {
+      menuId: '',
+      menuNm: '',
       icon: '',
       url: '',
+      prnMenuId: '',
+      useYn: 'Y',
+      menuLv: '',
       ord: ''
     },
-    parentMenuItems: _.filter(menu.menuItems, { lv: '1' }),
+    parentMenuItems: _.filter(menu.menuItems, { menuLv: '1' }),
     mode: mode.value
   }
 }
@@ -225,11 +239,29 @@ const save = (val: any) => {
 }
 
 // 등록된 전체 메뉴를 조회한다.
-const getMenu = async (): Promise<void> => {
+const getMenu = (): void => {
   menu.getMenus()
+  setTreeItems()
+}
+
+const setTreeItems = (): void => {
+  const menuItems = menu.menuItems
+
+  const data: TreeData[] = []
+
+  for (let i: number = 0; i < menuItems.length; i++) {
+    const treeData: TreeData = {
+      id: menuItems[i].menuId,
+      lv: menuItems[i].menuLv,
+      label: menuItems[i].menuNm,
+      upperId: menuItems[i].prnMenuId,
+      useYn: menuItems[i].useYn
+    }
+    data.push(treeData)
+  }
 
   treeItems.value = {
-    data: menu.menuItems,
+    data,
     option: {
       expand: true,
       selectionMode: 'single',
@@ -245,16 +277,15 @@ const callBackTreeData = (value: any) => {
 
   if (value.length !== 0) {
     const menuData = value[0][0]
+    const menuItems = _.filter(menu.menuItems, { menuId: menuData.id })
 
-    if (menuData !== undefined) {
-      selectedMenuItems.value = {
-        menuItems: menuData,
-        parentMenuItems: _.filter(menu.menuItems, { lv: '1' }),
-        mode: mode.value
-      }
-
-      selectedMenuNm.value = menuData.label
+    selectedMenuItems.value = {
+      menuItem: menuItems[0],
+      parentMenuItems: _.filter(menu.menuItems, { menuLv: '1' }),
+      mode: mode.value
     }
+
+    selectedMenuNm.value = menuData.label
   }
 }
 

@@ -20,10 +20,11 @@ interface TreeNode {
   key: string
   label: string
   style?: { [key: string]: string }
+  icon?: string
   children?: TreeNode[]
 }
 
-interface TreeDataItem {
+export interface TreeData {
   id: string
   lv: string
   label: string
@@ -38,21 +39,18 @@ interface TreeOption {
   selectionMode?: SelectionMode
 }
 
+export interface TreeItem {
+  data: TreeData[]
+  option: TreeOption
+}
+
 interface TreeNodeSelectionState {
   checked: boolean
   partialChecked: boolean
 }
 
-interface NodeItem {
-  key: string
-  label: string
-  style?: { color: string }
-  icon?: string
-  children?: NodeItem[]
-}
-
 const props = defineProps<{
-  treeItems: { data: TreeDataItem[]; option: TreeOption }
+  treeItems: TreeItem
 }>()
 
 const emits = defineEmits(['selectedTreeData'])
@@ -60,15 +58,14 @@ const emits = defineEmits(['selectedTreeData'])
 const nodes = ref<TreeNode[]>([
   {
     key: '0',
-    label: 'No Data',
-    style: { color: '#476cef' }
+    label: 'No Data'
   }
 ])
 
 type SelectedKeys = Record<string, TreeNodeSelectionState>
 const selectedKeys = ref<SelectedKeys>({})
 const expandedKeys = ref<{ [key: string]: boolean }>({})
-const treeData = ref<TreeDataItem[]>([])
+const treeData = ref<TreeData[]>([])
 const treeOption = ref<TreeOption>({})
 const filterUse = ref<boolean>(false)
 
@@ -113,7 +110,6 @@ const setNode = () => {
   const rootNode: TreeNode = {
     key: '0',
     label,
-    style: { color: '#476cef' },
     children: []
   }
 
@@ -130,9 +126,10 @@ const setNode = () => {
       selectedKeys.value[lv1Id] = { checked: true, partialChecked: false }
     }
 
-    const lv1Node: NodeItem = {
+    const lv1Node: TreeNode = {
       key: lv1Item.id,
       label: lv1Item.label,
+      style: { color: '#0dacbb' },
       children: []
     }
 
@@ -145,9 +142,10 @@ const setNode = () => {
       }
 
       if (lv2Item.upperId === lv1Id) {
-        const lv2Node: NodeItem = {
+        const lv2Node: TreeNode = {
           key: lv2Id,
-          label: lv2Item.label
+          label: lv2Item.label,
+          icon: 'pi pi-fw pi-file'
         }
 
         if (!lv1Node.children) {

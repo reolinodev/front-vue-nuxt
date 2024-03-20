@@ -2,14 +2,14 @@ import { defineStore } from 'pinia'
 import codes from '@/assets/json/codes.json'
 import _ from 'lodash'
 
-interface Code {
+export interface Code {
   no?: number
   codeId: string
   grpCdId: string
   codeNm: string
   codeVal: string
   useYn: string
-  useYnLabel: string
+  useYnLabel?: string
   ord: string
 }
 

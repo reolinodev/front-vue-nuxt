@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import groupCodes from '@/assets/json/groupCodes.json'
 
-interface GroupCode {
+export interface GroupCode {
   no?: number
   codeGrpId: string
   codeGrpNm: string
   codeGrpVal: string
   useYn: string
-  useYnLabel: string
+  useYnLabel?: string
 }
 
 export const groupCodeStore = defineStore('groupCode', {

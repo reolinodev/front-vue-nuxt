@@ -47,16 +47,8 @@
 import { onMounted, ref, watch } from 'vue'
 import InputSelectBoxComp from '@/components/InputSelectBoxComp.vue'
 import { mainStore } from '@/stores/main'
-
-interface Member {
-  id: string
-  loginId: string
-  userNm: string
-  mobileNo: string
-  email: string
-  useYn: string
-  useYnLabel: string
-}
+import { Member } from '~/stores/member'
+import { SelectBoxData, SelectBoxItem } from '~/components/InputSelectBoxComp.vue'
 
 const emits = defineEmits(['callBackMemberEditPopup', 'callBackMemberEditSave'])
 const props = defineProps<{
@@ -74,14 +66,14 @@ const userNm = ref<string>('')
 const email = ref<string>('')
 const mobileNo = ref<string>('')
 const useYn = ref<string>('')
-const errors = ref({})
+const errors = ref<any>({})
 
-const useYnData = ref([
+const useYnData: SelectBoxData[] = [
   { label: '사용', value: 'Y' },
   { label: '미사용', value: 'N' }
-])
+]
 
-const useYnItems = ref({
+const useYnItems = ref<SelectBoxItem>({
   data: useYnData,
   option: {
     label: 'Use *'
@@ -89,12 +81,16 @@ const useYnItems = ref({
 })
 
 const setMemberEditData = (value:Member) => {
-  id.value = value.id
+  if (value.id != null) {
+    id.value = value.id
+  }
   loginId.value = value.loginId
   userNm.value = value.userNm
   email.value = value.email
   mobileNo.value = value.mobileNo
-  useYn.value = value.useYn
+  if (value.useYn != null) {
+    useYn.value = value.useYn
+  }
 
 }
 
@@ -148,7 +144,7 @@ const save = () => {
 }
 
 const validation = (): boolean => {
-  const error = {}
+  const error:any = {}
   let chk = true
 
   if (userNm.value === '') {
@@ -163,7 +159,7 @@ const validation = (): boolean => {
 
 
   if (mobileNo.value === '') {
-    error.mobileNo = 'Please enter the your mobile nunmber'
+    error.mobileNo = 'Please enter the your mobile number'
     chk = false
   }
 

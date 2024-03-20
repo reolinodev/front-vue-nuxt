@@ -1,7 +1,7 @@
 <template>
   <v-select
     v-model="selectedItem"
-    :items="items"
+    :items="selectBoxData"
     :label="label"
     :readonly="readOnly"
     :disabled="disabled"
@@ -33,12 +33,12 @@ export interface SelectBoxItem {
 }
 
 const props = defineProps<{
-  items: { data: SelectBoxData[]; option: SelectBoxOption }
+  items: SelectBoxItem
   selectedValue: string
   errorMessages?: string
 }>()
 
-const items = ref<SelectBoxData[]>([])
+const selectBoxData = ref<SelectBoxData[]>([])
 const label = ref<string>('')
 const readOnly = ref<boolean>(false)
 const disabled = ref<boolean>(false)
@@ -80,14 +80,14 @@ const setSelectBoxItems = (value: any) => {
     }
 
     label.value = option.label
-    items.value = data
+    selectBoxData.value = data
   }
 }
 
 // 값을 전달 받으면 셀렉트 박스 아이탬에서 해당값이 있는 경우를 찾는다.
 const setSelectBoxValue = (value: string) => {
   if (value !== '') {
-    const selectedObject = _.filter(items.value, { value })
+    const selectedObject = _.filter(selectBoxData.value, { value })
     selectedItem.value = selectedObject[0]
   } else {
     selectedItem.value = defaultItem.value
@@ -98,8 +98,10 @@ const setSelectBoxValue = (value: string) => {
 
 // 선택된 셀렉트 박스의 값이 바뀐다면 부모 컴퍼넌트로 값을 전달해준다
 const setChangeValue = (changeValue: any) => {
-  selectedValue.value = changeValue.value
-  emits('callBackSelectedValue', selectedValue.value)
+  if (changeValue !== undefined) {
+    selectedValue.value = changeValue.value
+    emits('callBackSelectedValue', selectedValue.value)
+  }
 }
 
 watch(

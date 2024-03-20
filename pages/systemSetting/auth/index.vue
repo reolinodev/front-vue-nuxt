@@ -121,18 +121,13 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import type { Ref } from 'vue'
-import { ColumnDefs, GridRef, GridValidOption } from '@/components/class/Grid'
+import {ColumnDefs, GridRef, GridValidOption} from '@/components/class/Grid'
+import type {GridComponentRef} from '@/components/class/Grid'
+
 import { gridValidation } from '@/utils/gridUtil'
 import { mainStore } from '@/stores/main'
 import { authStore } from '@/stores/auth'
 import { authMenuStore } from '@/stores/authMenu'
-
-interface GridComponentRef  {
-  addRow: (newItems:any) => void;
-  delRow: () => void;
-  saveRow : () => any;
-}
-
 
 import GridListComp from '~/components/GridListComp.vue'
 import TreeComp from '~/components/TreeComp.vue'

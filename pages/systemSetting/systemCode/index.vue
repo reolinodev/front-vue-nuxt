@@ -104,19 +104,16 @@
 import { ref, onMounted, watch } from 'vue'
 import type { Ref } from 'vue'
 import { mainStore } from '@/stores/main'
-import { groupCodeStore } from '@/stores/groupCode'
+import type { GroupCode } from '@/stores/groupCode'
+import  { groupCodeStore } from '@/stores/groupCode'
+import type { Code } from '@/stores/code'
 import { codeStore } from '@/stores/code'
+
 import GridListComp from '~/components/GridListComp.vue'
 import { ColumnDefs, GridRef, GridValidOption } from '~/components/class/Grid'
+import type { GridComponentRef } from '~/components/class/Grid'
+
 import { gridValidation } from '~/utils/gridUtil'
-
-
-interface GridComponentRef  {
-  addRow: (newItems:any) => void;
-  delRow: () => void;
-  saveRow : () => any;
-}
-
 
 const main = mainStore()
 const groupCode = groupCodeStore() //그룹코드 스토어
@@ -290,10 +287,9 @@ const setCodeGridSetting = (val: string) => {
 }
 
 const addGroupCode = () => {
-  const newItems = [
+  const newItems : GroupCode[] = [
     {
-      no: 0,
-      id: '',
+      codeGrpId: '',
       codeGrpNm: '',
       codeGrpVal: '',
       useYn: 'Y'
@@ -319,13 +315,7 @@ const saveGroupCode = async (): Promise<void> => {
   const groupCodes = groupCodeRef.value?.saveRow()
   console.log('save', groupCodes)
 
-  if (groupCodes.length === 0) {
-    main.alertOption = {
-      title: 'Warning',
-      text: '저장할 항목이 존재하지 않습니다.'
-    }
-    main.isAlert = true
-  }else if (validationGroupCode(groupCodes)) {
+  if(validationGroupCode(groupCodes)) {
     main.isLoading = true
 
     setTimeout(() => {
@@ -351,12 +341,12 @@ const validationGroupCode = (value: any) => {
 }
 
 const addCode = () => {
-  const newItems = [
+  const newItems:Code[] = [
     {
-      no: 0,
-      id: '',
+      codeId: '',
       codeNm: '',
       codeVal: '',
+      grpCdId: selectedGroupCode.value,
       useYn: 'Y',
       ord: ''
     }
@@ -383,13 +373,7 @@ const saveCode = async (): Promise<void> => {
   const codes = codeRef.value?.saveRow()
   console.log('save', codes)
 
-  if (codes.length === 0) {
-    main.alertOption = {
-      title: 'Warning',
-      text: '저장할 항목이 존재하지 않습니다.'
-    }
-    main.isAlert = true
-  } else if (validationCode(codes)) {
+  if (validationCode(codes)) {
     main.isLoading = true
 
     setTimeout(() => {

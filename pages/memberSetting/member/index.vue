@@ -54,28 +54,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { memberStore } from '@/stores/member'
+import { Member, memberStore } from '@/stores/member'
 import FloatLabel from 'primevue/floatlabel'
 import { ColumnDefs, GridRef } from '~/components/class/Grid'
 import GridListComp from '@/components/GridListComp.vue'
 import MemberEditPop from '@/pages/memberSetting/member/comp/memberEditPop.vue'
 
-interface Member {
-  id: string
-  loginId: string
-  userNm: string
-  mobileNo: string
-  email: string
-  useYn: string
-  useYnLabel: string
-}
-
 const router = useRouter()
 const member = memberStore()
 
-const rowData = ref([])
-const columnDefs = ref([
-  new ColumnDefs('No', 'no', 'number', { width: 120 }),
+const rowData = ref<any>([])
+const columnDefs = ref<ColumnDefs[]>([
+  new ColumnDefs('No', 'no', 'number', { width: '120' }),
   new ColumnDefs('ID', 'id', 'text', { flex: 1, hide: true }),
   new ColumnDefs('Login Id', 'loginId', 'text', {
     flex: 1,
@@ -87,7 +77,7 @@ const columnDefs = ref([
   new ColumnDefs('Name', 'userNm', 'text', { flex: 1 }),
   new ColumnDefs('Mobile No', 'mobileNo', 'text', {
     flex: 1,
-    valueFormatter: (params: string) => {
+    valueFormatter: (params: any) => {
       // prettier-ignore
       return `(${params.value.substring(0, 3)}) ${params.value.substring(3, 7)}-${params.value.substring(7)}`
     }
@@ -97,15 +87,22 @@ const columnDefs = ref([
   new ColumnDefs('Use', 'useYnLabel', 'text', { flex: 1 })
 ])
 
-const gridRef = ref(
+const gridRef = ref<GridRef>(
   new GridRef(true, true, false, true, true, { clickField: ['loginId'] })
 )
 
-const loginId = ref<string | null>('')
-const name = ref<string | null>('')
-
+const loginId = ref<string>('')
+const name = ref<string>('')
 const memberEditPop = ref<boolean>(false)
-const memberEditData = ref<Member>()
+const memberEditData = ref<Member>({
+  id: '',
+  loginId: '',
+  userNm: '',
+  mobileNo: '',
+  email: '',
+  useYn: '',
+  useYnLabel: ''
+})
 
 // 사용자 조회
 const getMember = async (): Promise<void> => {

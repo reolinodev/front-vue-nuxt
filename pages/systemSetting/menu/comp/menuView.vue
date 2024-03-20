@@ -28,14 +28,15 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
-import InputSelectBoxComp, {
+import InputSelectBoxComp from '~/components/InputSelectBoxComp.vue'
+import type {
   SelectBoxData,
   SelectBoxItem
 } from '~/components/InputSelectBoxComp.vue'
-import { MenuItem } from '~/stores/menu'
+import type { Menu, SelectMenu } from '~/stores/menu'
 
 const props = defineProps<{
-  selectedMenuItems: { menuItems: MenuItem[]; parentMenuItems: MenuItem[] }
+  selectedMenuItems: SelectMenu
 }>()
 
 const prnMenuId = ref<string>('')
@@ -83,26 +84,26 @@ const parentItems = ref<SelectBoxItem>({
 // 메뉴의 상세정보와 부모메뉴의 정보를 받아서 셀렉트 박스로 전달한다.
 const setData = (value: any) => {
   if (value.length !== 0) {
-    const { menuItems, parentMenuItems } = value
+    const { menuItem, parentMenuItems } = value
 
-    prnMenuId.value = menuItems.upperId
-    menuNm.value = menuItems.label
-    menuLv.value = menuItems.lv
-    icon.value = menuItems.icon
-    useYn.value = menuItems.useYn
-    url.value = menuItems.url
-    ord.value = menuItems.ord
+    prnMenuId.value = menuItem.prnMenuId
+    menuNm.value = menuItem.menuNm
+    menuLv.value = menuItem.menuLv
+    icon.value = menuItem.icon
+    useYn.value = menuItem.useYn
+    url.value = menuItem.url
+    ord.value = menuItem.ord
 
-    if (menuItems.icon === '' && menuItems.lv === '1') {
+    if (menuItem.icon === '' && menuItem.menuLv === '1') {
       activeIcon.value = 'mdi-folder-outline'
-    } else if (menuItems.icon === '' && menuItems.lv === '2') {
+    } else if (menuItem.icon === '' && menuItem.menuLv === '2') {
       activeIcon.value = 'mdi-folder-open'
     } else {
-      activeIcon.value = menuItems.icon
+      activeIcon.value = menuItem.icon
     }
 
     // prettier-ignore
-    const data = parentMenuItems?.map((item:MenuItem) => ({ label: item.label, value: item.id })) ?? []
+    const data = parentMenuItems?.map((item:Menu) => ({ label: item.menuNm, value: item.menuId })) ?? []
 
     parentItems.value = {
       ...parentItems.value,

@@ -78,3 +78,9 @@ export class GridValidOption {
     this.type = type
   }
 }
+
+export interface GridComponentRef {
+  addRow: (newItems: any) => void
+  delRow: () => void
+  saveRow: () => any
+}
