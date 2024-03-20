@@ -13,7 +13,7 @@ interface Member {
 }
 
 export const memberStore = defineStore('member', {
-  state: () => ({
+  state: (): { members: Member[] } => ({
     members: []
   }),
   actions: {

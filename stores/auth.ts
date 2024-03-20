@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import auths from '@/assets/json/auths.json'
 
 interface Auth {
-  no: number
+  no?: number
   authId: string
   authNm: string
   authVal: string
@@ -12,7 +12,7 @@ interface Auth {
 }
 
 export const authStore = defineStore('auth', {
-  state: () => ({
+  state: (): { auths: Auth[] } => ({
     auths: []
   }),
   actions: {
@@ -20,18 +20,7 @@ export const authStore = defineStore('auth', {
       this.auths = []
       this.setAuths(auths.data)
     },
-    setAuths(
-      data: [
-        {
-          authId: string
-          authNm: string
-          authVal: string
-          useYn: string
-          useYnLabel: string
-          ord: string
-        }
-      ]
-    ) {
+    setAuths(data: Auth[]) {
       for (let i: number = 0; i < data.length; i++) {
         const auth: Auth = {
           no: i + 1,

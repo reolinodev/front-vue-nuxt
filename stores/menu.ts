@@ -1,19 +1,31 @@
 import { defineStore } from 'pinia'
 import menus from '@/assets/json/menu.json'
 
-export interface MenuTree {
+export interface MenuItem {
   id: string
   label: string
+  icon?: string
+  url: string
+  upperId?: string
+  useYn: string
+  lv?: string
+  ord?: string
+}
+
+export interface Menu {
+  menuId: string
+  menuNm: string
   icon: string
   url: string
-  upperId: string
+  prnMenuId: string
   useYn: string
-  lv: string
+  useYnLabel: string
+  menuLv: string
   ord: string
 }
 
 export const menuStore = defineStore('menu', {
-  state: () => ({
+  state: (): { menuItems: MenuItem[] } => ({
     menuItems: []
   }),
   actions: {
@@ -21,31 +33,17 @@ export const menuStore = defineStore('menu', {
       this.menuItems = []
       this.setMenus(menus.menuItems)
     },
-    setMenus(
-      menuItems: [
-        {
-          menuId: string
-          menuNm: string
-          icon: string
-          url: string
-          prnMenuId: string
-          useYn: string
-          useYnLabel: string
-          menuLv: string
-          ord: string
-        }
-      ]
-    ) {
-      for (let i = 0; i < menuItems.length; i++) {
-        const menuItem: MenuTree = {
-          id: menuItems[i].menuId,
-          label: menuItems[i].menuNm,
-          icon: menuItems[i].icon,
-          url: menuItems[i].url,
-          upperId: menuItems[i].prnMenuId,
-          useYn: menuItems[i].useYn,
-          lv: menuItems[i].menuLv,
-          ord: menuItems[i].ord
+    setMenus(data: Menu[]) {
+      for (let i = 0; i < data.length; i++) {
+        const menuItem: MenuItem = {
+          id: data[i].menuId,
+          label: data[i].menuNm,
+          icon: data[i].icon,
+          url: data[i].url,
+          upperId: data[i].prnMenuId,
+          useYn: data[i].useYn,
+          lv: data[i].menuLv,
+          ord: data[i].ord
         }
         this.menuItems.push(menuItem)
       }

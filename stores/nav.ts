@@ -37,21 +37,8 @@ export const navStore = defineStore('nav', {
       mainMenuNm: string
       defaultLv1Icon: string
       defaultLv2Icon: string
-
-      menuLv1Items: {
-        menuId: string
-        menuNm: string
-        icon: string
-        url: string
-      }[]
-
-      menuLv2Items: {
-        menuId: string
-        menuNm: string
-        prnMenuId: string
-        icon: string
-        url: string
-      }[]
+      menuLv1Items: MenuLv1Item[]
+      menuLv2Items: MenuLv2Item[]
     }): void {
       this.mainMenuUrl = menuData.mainMenuUrl
       this.mainMenuNm = menuData.mainMenuNm

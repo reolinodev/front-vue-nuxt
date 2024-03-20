@@ -6,7 +6,7 @@ export const headerStore = defineStore('header', {
   }),
   actions: {
     getAlertCount(): void {
-      this.alertCount = 10
+      this.alertCount = 0
     }
   },
   persist: {

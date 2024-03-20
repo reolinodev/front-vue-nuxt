@@ -15,34 +15,39 @@
 import { ref, watch, onMounted } from 'vue'
 import _ from 'lodash'
 
-interface SelectBoxItem {
+export interface SelectBoxData {
   label: string
   value: string
 }
 
-interface SelectBoxOption {
+export interface SelectBoxOption {
   label: string
   readOnly?: boolean
   disabled?: boolean
   type?: string
 }
 
+export interface SelectBoxItem {
+  data: SelectBoxData[]
+  option: SelectBoxOption
+}
+
 const props = defineProps<{
-  items: { data: SelectBoxItem[]; option: SelectBoxOption }
+  items: { data: SelectBoxData[]; option: SelectBoxOption }
   selectedValue: string
   errorMessages?: string
 }>()
 
-const items = ref<SelectBoxItem[]>([])
+const items = ref<SelectBoxData[]>([])
 const label = ref<string>('')
 const readOnly = ref<boolean>(false)
 const disabled = ref<boolean>(false)
 const errorMessages = ref<string | undefined>('')
 
-const selectedItem = ref<SelectBoxItem>({ label: '', value: '' })
+const selectedItem = ref<SelectBoxData>({ label: '', value: '' })
 const selectedValue = ref<string>('')
 // 타입에 따라 기본값이 달라질수 있어 임의로 defaultItem을 만들어 처리
-const defaultItem = ref<SelectBoxItem>({ label: '', value: '' })
+const defaultItem = ref<SelectBoxData>({ label: '', value: '' })
 
 const emits = defineEmits(['callBackSelectedValue'])
 

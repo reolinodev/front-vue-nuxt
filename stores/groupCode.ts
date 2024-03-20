@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import groupCodes from '@/assets/json/groupCodes.json'
 
 interface GroupCode {
-  no: number
+  no?: number
   codeGrpId: string
   codeGrpNm: string
   codeGrpVal: string
@@ -19,17 +19,7 @@ export const groupCodeStore = defineStore('groupCode', {
       this.groupCodes = []
       this.setGroupCodes(groupCodes.data)
     },
-    setGroupCodes(
-      data: [
-        {
-          codeGrpId: string
-          codeGrpNm: string
-          codeGrpVal: string
-          useYn: string
-          useYnLabel: string
-        }
-      ]
-    ) {
+    setGroupCodes(data: GroupCode[]) {
       for (let i: number = 0; i < data.length; i++) {
         const groupCode: GroupCode = {
           no: i + 1,

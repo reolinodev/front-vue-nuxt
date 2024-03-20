@@ -57,20 +57,13 @@
 </template>
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
-import InputSelectBoxComp from '~/components/InputSelectBoxComp.vue'
 import { mainStore } from '@/stores/main'
+import InputSelectBoxComp, {
+  SelectBoxData,
+  SelectBoxItem
+} from '~/components/InputSelectBoxComp.vue'
 import MenuIconPop from '~/pages/systemSetting/menu/comp/menuIconPop.vue'
-
-interface MenuItem {
-  id: string
-  lv: string
-  label: string
-  useYn: string
-  upperId?: string
-  icon?: string
-  url?: string
-  ord?: string
-}
+import { MenuItem } from '~/stores/menu'
 
 const props = defineProps<{
   selectedMenuItems: {
@@ -86,7 +79,7 @@ const main = mainStore()
 
 const prnMenuId = ref<string>('')
 const activeIcon = ref<string>('mdi-folder-open')
-const errors = ref({})
+const errors = ref<any>({})
 const menuIconPopup = ref<boolean>(false)
 
 const menuNm = ref<string>('')
@@ -96,16 +89,16 @@ const useYn = ref<string>('')
 const url = ref<string>('')
 const ord = ref<string>('')
 
-const menuLvData = ref([
+const menuLvData: SelectBoxData[] = [
   { label: '상위 메뉴', value: '1' },
   { label: '하위 메뉴', value: '2' }
-])
-const useYnData = ref([
+]
+const useYnData: SelectBoxData[] = [
   { label: '사용', value: 'Y' },
   { label: '미사용', value: 'N' }
-])
+]
 
-const menuLvItems = ref({
+const menuLvItems = ref<SelectBoxItem>({
   data: menuLvData,
   option: {
     label: 'Menu Lv *',
@@ -113,7 +106,7 @@ const menuLvItems = ref({
   }
 })
 
-const parentItems = ref({
+const parentItems = ref<SelectBoxItem>({
   data: [],
   option: {
     label: 'Parent Menu',
@@ -121,7 +114,7 @@ const parentItems = ref({
   }
 })
 
-const useYnItems = ref({
+const useYnItems = ref<SelectBoxItem>({
   data: useYnData,
   option: {
     label: 'Use *'
@@ -160,7 +153,7 @@ const setData = (value: any): void => {
   }
 
   // prettier-ignore
-  const data = parentMenuItems?.map(item => ({ label: item.label, value: item.id })) ?? []
+  const data = parentMenuItems?.map((item:MenuItem) => ({ label: item.label, value: item.id })) ?? []
 
   parentItems.value = {
     data,
@@ -221,7 +214,7 @@ const save = () => {
 
 // 유효성 처리 값 입력 폼에 오류 내용을 전달한다.
 const validation = (): boolean => {
-  const error = {}
+  const error: any = {}
   let chk = true
 
   if (menuNm.value === '') {

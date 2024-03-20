@@ -56,7 +56,7 @@ const props = defineProps<{
 const menuIconPopup = ref<boolean>(<boolean>props.menuIconPopup)
 const icon = ref<string>(<string>props.icon)
 const activeIcon = ref<string>('')
-const menuIcons = ref([])
+const menuIcons = ref<string[]>([])
 
 const getMenuIcons = function() {
   menuIcons.value = [

@@ -3,7 +3,7 @@ import codes from '@/assets/json/codes.json'
 import _ from 'lodash'
 
 interface Code {
-  no: number
+  no?: number
   codeId: string
   grpCdId: string
   codeNm: string
@@ -27,19 +27,7 @@ export const codeStore = defineStore('code', {
 
       this.setCodes(filteredCodes)
     },
-    setCodes(
-      data: [
-        {
-          codeId: string
-          grpCdId: string
-          codeNm: string
-          codeVal: string
-          useYn: string
-          useYnLabel: string
-          ord: string
-        }
-      ]
-    ) {
+    setCodes(data: Code[]) {
       for (let i: number = 0; i < data.length; i++) {
         const code: Code = {
           no: i + 1,
