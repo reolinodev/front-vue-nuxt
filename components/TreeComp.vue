@@ -129,7 +129,6 @@ const setNode = () => {
     const lv1Node: TreeNode = {
       key: lv1Item.id,
       label: lv1Item.label,
-      style: { color: '#0dacbb' },
       children: []
     }
 
@@ -144,8 +143,7 @@ const setNode = () => {
       if (lv2Item.upperId === lv1Id) {
         const lv2Node: TreeNode = {
           key: lv2Id,
-          label: lv2Item.label,
-          icon: 'pi pi-fw pi-file'
+          label: lv2Item.label
         }
 
         if (!lv1Node.children) {
