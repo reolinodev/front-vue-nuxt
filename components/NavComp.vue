@@ -3,12 +3,12 @@
     <v-layout>
       <v-navigation-drawer v-model="drawer" :rail="rail" @click="closeRail">
         <v-list>
-          <v-list-item prepend-icon="mdi-home-city" nav>
+          <v-list-item prepend-icon="mdi-home" nav>
             <div
               class="nav-home-title"
               @click="menuRouter(mainMenuUrl, mainMenuNm)"
             >
-              Home
+              HOME
             </div>
 
             <template #append>
@@ -20,24 +20,25 @@
             </template>
           </v-list-item>
 
-          <v-divider class="border-opacity-50" color="success" />
+          <v-divider class="border-opacity-50" color="default" />
 
           <v-list
             v-for="menuLv1Item in menuLv1Items"
             :key="menuLv1Item.menuId"
             v-model:opened="open"
           >
-            <v-list-group
+            <v-list-item
               v-if="menuLv1Item.url !== ''"
-              :value="menuLv1Item.menuId"
+              :prepend-icon="menuLv1Item.icon"
+              nav
             >
-              <v-list-item :prepend-icon="menuLv1Item.icon">
-                <v-list-item-title
-                  @click="menuRouter(menuLv1Item.url, menuLv1Item.menuNm)"
-                  v-text="menuLv1Item.menuNm"
-                />
-              </v-list-item>
-            </v-list-group>
+              <div
+                class="nav-lv1-title"
+                @click="menuRouter(menuLv1Item.url, menuLv1Item.menuNm)"
+              >
+                {{ menuLv1Item.menuNm }}
+              </div>
+            </v-list-item>
 
             <v-list-group v-else :value="menuLv1Item.menuId">
               <template #activator="{ props }">
@@ -72,21 +73,7 @@
 import { ref, watch } from 'vue'
 import { navStore } from '@/stores/nav'
 import { commonStore } from '@/stores/common'
-
-interface MenuLv1Item {
-  menuId: string
-  menuNm: string
-  icon: string
-  url: string
-}
-
-interface MenuLv2Item {
-  menuId: string
-  menuNm: string
-  prnMenuId: string
-  icon: string
-  url: string
-}
+import type { Menu } from '~/stores/menu'
 
 const nav = navStore()
 const common = commonStore()
@@ -97,8 +84,8 @@ const drawer = ref(true)
 const rail = ref(true)
 const open = ref([''])
 
-const menuLv1Items = ref<MenuLv1Item[]>([])
-const menuLv2Items = ref<MenuLv2Item[]>([])
+const menuLv1Items = ref<Menu[]>([])
+const menuLv2Items = ref<Menu[]>([])
 const mainMenuUrl = ref('')
 const mainMenuNm = ref('')
 
@@ -149,5 +136,12 @@ onMounted(() => {
 .nav-home-title {
   height: 25px;
   color: #c8a7a7;
+}
+
+.nav-lv1-title {
+  height: 25px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
 }
 </style>
