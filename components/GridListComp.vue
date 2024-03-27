@@ -40,8 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, watch } from 'vue'
-import type { PropType } from 'vue'
+import { ref, onBeforeMount, onMounted, watch, PropType } from 'vue'
 import { AgGridVue } from 'ag-grid-vue3'
 import { mainStore } from '@/stores/main'
 import { ColumnDefs, GridRef } from '~/components/class/Grid'
@@ -52,7 +51,7 @@ const props = defineProps({
   gridRef: Object as PropType<GridRef>
 })
 
-const emits = defineEmits(['cellClickData'])
+const emits = defineEmits(['cellClickData', 'checkChangeData'])
 
 const main = mainStore()
 
@@ -78,8 +77,9 @@ const filterActive = ref<boolean>(false)
 const onSelectionChanged = () => {
   if (gridApi.value) {
     selectedData.value = gridApi.value.getSelectedRows()
+
     if (!clickEventUse.value) {
-      emits('cellClickData', selectedData.value)
+      emits('checkChangeData', selectedData.value)
     }
   }
 }
@@ -137,6 +137,10 @@ const setGridRef = (gridRef: any) => {
     gridOptions.value.pagination = gridRef.pagingUse
   }
 
+  if (gridRef.clickEventUse !== undefined) {
+    clickEventUse.value = gridRef.clickEventUse
+  }
+
   // 체크박스를 사용할 경우
   if (gridRef.checkBoxUse !== undefined && gridRef.checkBoxUse) {
     gridOptions.value = {
@@ -144,8 +148,9 @@ const setGridRef = (gridRef: any) => {
       suppressRowClickSelection: true,
       isRowSelectable: gridRef.isRowSelectable
     }
-
-    gridOptions.value.rowSelection = 'multiple'
+    if (gridRef.rowSelection !== undefined) {
+      gridOptions.value.rowSelection = gridRef.rowSelection
+    }
   }
 
   // csv 다운로드 기능 사용할지 체크

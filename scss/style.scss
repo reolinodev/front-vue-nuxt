@@ -30,6 +30,10 @@
   margin-top: 50px;
 }
 
+.login-content {
+  flex: 1;
+}
+
 .search-bar {
   display: flex;
   justify-content: flex-end;
@@ -113,6 +117,61 @@
 .search-input {
   border: 1px solid #cccccc;
 }
+
+.resource-container {
+  border: 1px solid #6c6868;
+  padding: 10px;
+}
+.resource-sheet {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  width: 100%;
+  height: 25vh;
+  min-height: 250px;
+}
+
+.cpu-background {
+  background-image: url('/images/cpu.jpg');
+  border: 2px solid #673ab7;
+}
+
+.disk-background {
+  background-image: url('/images/disk.jpg');
+  border: 2px solid #3f51b5;
+}
+
+.gpu-background {
+  background-image: url('/images/gpu.jpg');
+  border: 2px solid #e91e63;
+}
+
+.memory-background {
+  background-image: url('/images/memory.jpg');
+  border: 2px solid #cddc39;
+}
+.resource-sheet div {
+  width: 100%;
+  text-align: center;
+  border: 2px solid #a1a1aa;
+  padding: 10px;
+  margin: 10px;
+  background: #27272a;
+  border-radius: 10px;
+}
+.resource-sheet span {
+  font-size: 3rem;
+}
+
+.resource-title {
+  width: 100%;
+  padding: 15px;
+}
+
+
 
 
 /*** 외부라이브러리 커스터마이징 ***/
@@ -198,7 +257,7 @@
   max-width: 100%;
   border: 1px solid #cccccc;
   border-radius: 5px;
-  padding: 5px;
+  padding-top: 5px;
 }
 
 .p-calendar:not(.p-calendar-disabled).p-focus > .parentMenuItemstext {
@@ -401,9 +460,9 @@
 }
 
 .p-inputtext {
-  padding-left: 10px;
   border-radius: 5px;
   height: 40px;
+  padding: 8px 10px;
 }
 
 
@@ -423,3 +482,13 @@
   right: 0;
   top: 0;
 }
+
+.p-dropdown-items-wrapper {
+  overflow: auto;
+  padding: 10px;
+}
+
+.p-dropdown-items li {
+  padding: 5px;
+}
+

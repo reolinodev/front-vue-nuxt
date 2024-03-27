@@ -1,19 +1,22 @@
 export class ColumnDefs {
   headerName: string
-  field: string
-  type: string
+  field?: string
+  type?: string
+  children?: { headerName?: string; field?: string }[]
   width?: string
   flex?: number
   hide?: boolean
   editable?: boolean
   cellStyle?: { [key: string]: string }
   cellEditor?: string
+  headerCheckboxSelection?: boolean
+  checkboxSelection?: boolean
   cellEditorParams?: { values: any[] }
   valueFormatter?: (params: any) => string
   constructor(
     headerName: string,
-    field: string,
-    type: string,
+    field?: string,
+    type?: string,
     options: {
       width?: string
       flex?: number
@@ -21,19 +24,25 @@ export class ColumnDefs {
       editable?: boolean
       cellStyle?: { [key: string]: string }
       cellEditor?: string
+      headerCheckboxSelection?: boolean
+      checkboxSelection?: boolean
       cellEditorParams?: { values: any[] }
       valueFormatter?: (params: any) => string
-    } = {}
+    } = {},
+    children?: { headerName?: string; field?: string }[]
   ) {
     this.headerName = headerName
     this.field = field
     this.type = type
+    this.children = children
     this.width = options.width
     this.flex = options.flex
     this.hide = options.hide
     this.editable = options.editable
     this.cellStyle = options.cellStyle
     this.cellEditor = options.cellEditor
+    this.headerCheckboxSelection = options.headerCheckboxSelection
+    this.checkboxSelection = options.checkboxSelection
     this.cellEditorParams = options.cellEditorParams
     this.valueFormatter = options.valueFormatter
   }
@@ -46,6 +55,7 @@ export class GridRef {
   excelExportUse: boolean
   filterUse: boolean
   height?: number
+  rowSelection?: string
   clickField?: string[]
   constructor(
     clickEventUse: boolean,
@@ -55,6 +65,7 @@ export class GridRef {
     filterUse: boolean,
     options: {
       height?: number
+      rowSelection?: string
       clickField?: string[]
     } = {}
   ) {
@@ -65,6 +76,7 @@ export class GridRef {
     this.filterUse = filterUse
     this.clickField = options.clickField
     this.height = options.height
+    this.rowSelection = options.rowSelection
   }
 }
 
