@@ -9,7 +9,8 @@
     </v-col>
     <v-col cols="6">
       <input-select-box-comp
-        :items="menuLvItems"
+        :data="menuLvData"
+        :option="menuLvOption"
         :selected-value="menuLv"
         :error-messages="errors.menuLv"
         @call-back-selected-value="callBackMenuLvItems"
@@ -17,7 +18,8 @@
     </v-col>
     <v-col cols="6">
       <input-select-box-comp
-        :items="parentItems"
+        :data="parentData"
+        :option="parentOption"
         :selected-value="prnMenuId"
         :error-messages="errors.prnMenuId"
         @call-back-selected-value="callBackParentItems"
@@ -45,7 +47,11 @@
       <v-text-field v-model="ord" label="Ord" />
     </v-col>
     <v-col cols="6">
-      <input-select-box-comp :items="useYnItems" :selected-value="useYn" />
+      <input-select-box-comp
+        :data="useYnData"
+        :option="useYnOption"
+        :selected-value="useYn"
+      />
     </v-col>
     <menu-icon-pop
       :menu-icon-popup="menuIconPopup"
@@ -58,13 +64,12 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
 import { mainStore } from '@/stores/main'
-import InputSelectBoxComp from '~/components/InputSelectBoxComp.vue'
-import type {
+import InputSelectBoxComp, {
   SelectBoxData,
-  SelectBoxItem
-} from '~/components/InputSelectBoxComp.vue'
+  SelectBoxOption
+} from '@/components/InputSelectBoxComp.vue'
+import { Menu, SelectMenu } from '@/stores/menu'
 import MenuIconPop from '~/pages/systemSetting/menu/comp/menuIconPop.vue'
-import type { Menu, SelectMenu } from '~/stores/menu'
 
 const props = defineProps<{
   selectedMenuItems: SelectMenu
@@ -86,37 +91,37 @@ const icon = ref<string>('')
 const useYn = ref<string>('')
 const url = ref<string>('')
 const ord = ref<string>('')
+const navYn = ref<string>('')
 
-const menuLvData: SelectBoxData[] = [
+const menuLvData = ref<SelectBoxData[]>([
   { label: '상위 메뉴', value: '1' },
   { label: '하위 메뉴', value: '2' }
-]
-const useYnData: SelectBoxData[] = [
+])
+const menuLvOption = ref<SelectBoxOption>({
+  label: 'Menu Lv *',
+  type: 'select'
+})
+
+const useYnData = ref<SelectBoxData[]>([
   { label: '사용', value: 'Y' },
   { label: '미사용', value: 'N' }
-]
-
-const menuLvItems = ref<SelectBoxItem>({
-  data: menuLvData,
-  option: {
-    label: 'Menu Lv *',
-    type: 'select'
-  }
+])
+const useYnOption = ref<SelectBoxOption>({
+  label: 'Use *'
 })
 
-const parentItems = ref<SelectBoxItem>({
-  data: [],
-  option: {
-    label: 'Parent Menu',
-    disabled: true
-  }
+const navYnData = ref<SelectBoxData[]>([
+  { label: '표시', value: 'Y' },
+  { label: '미표시', value: 'N' }
+])
+const navYnOption = ref<SelectBoxOption>({
+  label: 'Nav'
 })
 
-const useYnItems = ref<SelectBoxItem>({
-  data: useYnData,
-  option: {
-    label: 'Use *'
-  }
+const parentData = ref<SelectBoxData[]>([])
+const parentOption = ref<SelectBoxOption>({
+  label: 'Parent Menu',
+  disabled: true
 })
 
 const setData = (value: any): void => {
@@ -130,6 +135,7 @@ const setData = (value: any): void => {
   useYn.value = menuItem.useYn
   url.value = menuItem.url
   ord.value = menuItem.ord
+  navYn.value = menuItem.navYn
 
   if (menuItem.icon === '' && menuItem.menuLv === '1') {
     activeIcon.value = 'mdi-folder-outline'
@@ -142,36 +148,28 @@ const setData = (value: any): void => {
   }
 
   if (mode === 'add') {
-    menuLvItems.value = {
-      data: menuLvData,
-      option: {
-        label: 'Menu Lv',
-        type: 'select'
-      }
+    menuLvOption.value = {
+      label: 'Menu Lv',
+      type: 'select'
     }
   }
 
-  // prettier-ignore
-  const data = parentMenuItems?.map((item:Menu) => ({ label: item.menuNm, value: item.menuId })) ?? []
-
-  parentItems.value = {
-    data,
-    option: {
-      label: 'Parent Menu',
-      disabled: true
-    }
+  parentOption.value = {
+    label: 'Parent Menu',
+    disabled: true
   }
+  parentData.value =
+    parentMenuItems?.map((item: Menu) => ({
+      label: item.menuNm,
+      value: item.menuId
+    })) ?? []
 }
 
 const callBackMenuLvItems = (value: string) => {
   const disabled: boolean = value !== '2'
-
-  parentItems.value = {
-    ...parentItems.value,
-    option: {
-      label: 'Parent Menu',
-      disabled
-    }
+  parentOption.value = {
+    label: 'Parent Menu',
+    disabled
   }
 
   menuLv.value = value
@@ -199,14 +197,15 @@ const save = () => {
       icon: icon.value,
       useYn: useYn.value,
       url: url.value,
-      ord: ord.value
+      ord: ord.value,
+      navYn: navYn.value
     }
 
     emits('callBackSave', data)
   } else {
     main.alertOption = {
       title: 'Warning',
-      text: '입력하신 내용을 확인해주세요.'
+      text: 'Please check the information you entered'
     }
     main.isAlert = true
   }

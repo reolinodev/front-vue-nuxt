@@ -30,6 +30,7 @@ export interface TreeData {
   label: string
   upperId?: string
   useYn?: string
+  navYn?: string
 }
 
 interface TreeOption {
@@ -58,7 +59,8 @@ const emits = defineEmits(['selectedTreeData'])
 const nodes = ref<TreeNode[]>([
   {
     key: '0',
-    label: 'No Data'
+    label: 'No Data',
+    style: { color: '#476cef' }
   }
 ])
 
@@ -110,6 +112,7 @@ const setNode = () => {
   const rootNode: TreeNode = {
     key: '0',
     label,
+    style: { color: '#476cef' },
     children: []
   }
 
@@ -129,6 +132,7 @@ const setNode = () => {
     const lv1Node: TreeNode = {
       key: lv1Item.id,
       label: lv1Item.label,
+      style: { color: '#0dacbb' },
       children: []
     }
 
@@ -143,7 +147,8 @@ const setNode = () => {
       if (lv2Item.upperId === lv1Id) {
         const lv2Node: TreeNode = {
           key: lv2Id,
-          label: lv2Item.label
+          label: lv2Item.label,
+          icon: 'pi pi-fw pi-file'
         }
 
         if (!lv1Node.children) {

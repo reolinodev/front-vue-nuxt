@@ -49,6 +49,8 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'prefer-destructuring': 'off',
     'no-use-before-define': 'off',
+    'no-nested-ternary': 'off',
+
     // Prettier 코드 스타일 설정
     'prettier/prettier': [
       'error',

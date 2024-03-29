@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     transpile: ['vuetify', 'echarts', 'zrender', 'tslib', 'ag-grid-vue3']
   },
   components: true,
-
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
@@ -36,6 +35,13 @@ export default defineNuxtConfig({
     }
   },
   plugins: [{ src: '~/plugins/echarts.ts', mode: 'client' }],
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        verbatimModuleSyntax: false
+      }
+    }
+  },
   tiptap: {
     prefix: 'Tiptap',
     lowlight: {

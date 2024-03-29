@@ -27,22 +27,20 @@ export interface SelectBoxOption {
   type?: string
 }
 
-export interface SelectBoxItem {
+const props = defineProps<{
   data: SelectBoxData[]
   option: SelectBoxOption
-}
-
-const props = defineProps<{
-  items: SelectBoxItem
   selectedValue: string
   errorMessages?: string
 }>()
 
-const selectBoxData = ref<SelectBoxData[]>([])
 const label = ref<string>('')
 const readOnly = ref<boolean>(false)
 const disabled = ref<boolean>(false)
+const type = ref<string>('')
 const errorMessages = ref<string | undefined>('')
+
+const selectBoxData = ref<SelectBoxData[]>([])
 
 const selectedItem = ref<SelectBoxData>({ label: '', value: '' })
 const selectedValue = ref<string>('')
@@ -51,36 +49,41 @@ const defaultItem = ref<SelectBoxData>({ label: '', value: '' })
 
 const emits = defineEmits(['callBackSelectedValue'])
 
-// 셀렉트 박스 세팅
-const setSelectBoxItems = (value: any) => {
-  if (value.length !== 0) {
-    const { data, option } = value
+const setSelectBoxOption = (val: SelectBoxOption) => {
+  label.value = val.label
 
+  if (val.readOnly !== undefined) {
+    readOnly.value = val.readOnly
+  }
+
+  if (val.disabled !== undefined) {
+    disabled.value = val.disabled
+  }
+  if (val.type !== undefined) {
+    type.value = val.type
+  }
+}
+
+// 셀렉트 박스 세팅
+const setSelectBoxItems = (val: SelectBoxData[]) => {
+  if (val.length !== 0) {
     // 타입이 select,all 일 경우 ''값인 라벨을 추가 해준다.
-    if (option.type !== undefined && option.type === 'select') {
-      const filterObject = _.filter(data, { value: '' })
+    if (type.value === 'select') {
+      const filterObject = _.filter(val, { value: '' })
+
       if (filterObject.length === 0) {
         defaultItem.value = { label: '[ SELECT ]', value: '' }
-        data.unshift(defaultItem.value)
+        val.unshift(defaultItem.value)
       }
-    } else if (option.type !== undefined && option.type === 'all') {
-      const filterObject = _.filter(data, { value: '' })
+    } else if (type.value === 'all') {
+      const filterObject = _.filter(val, { value: '' })
       if (filterObject.length === 0) {
         defaultItem.value = { label: '[ ALL ]', value: '' }
-        data.unshift(defaultItem.value)
+        val.unshift(defaultItem.value)
       }
     }
 
-    if (option.readOnly !== undefined) {
-      readOnly.value = option.readOnly
-    }
-
-    if (option.disabled !== undefined) {
-      disabled.value = option.disabled
-    }
-
-    label.value = option.label
-    selectBoxData.value = data
+    selectBoxData.value = val
   }
 }
 
@@ -105,9 +108,16 @@ const setChangeValue = (changeValue: any) => {
 }
 
 watch(
-  () => props.items,
+  () => props.data,
   (newValue) => {
     setSelectBoxItems(newValue)
+  }
+)
+
+watch(
+  () => props.option,
+  (newValue) => {
+    setSelectBoxOption(newValue)
   }
 )
 
@@ -133,7 +143,8 @@ watch(
 )
 
 onMounted(() => {
-  setSelectBoxItems(props.items)
+  setSelectBoxOption(props.option)
+  setSelectBoxItems(props.data)
   setSelectBoxValue(props.selectedValue)
 })
 </script>

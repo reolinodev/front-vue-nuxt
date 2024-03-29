@@ -100,17 +100,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import type { Ref } from 'vue'
+import { onMounted, ref, watch, Ref } from 'vue'
 import { mainStore } from '@/stores/main'
-import { menuStore } from '@/stores/menu'
-import type { SelectMenu } from '@/stores/menu'
-
+import { menuStore, SelectMenu } from '@/stores/menu'
 import _ from 'lodash'
-import TreeComp from '@/components/TreeComp.vue'
+import TreeComp, { TreeData, TreeItem } from '@/components/TreeComp.vue'
 import MenuEdit from '@/pages/systemSetting/menu/comp/menuEdit.vue'
 import MenuView from '@/pages/systemSetting/menu/comp/menuView.vue'
-import type { TreeData, TreeItem } from '~/components/TreeComp.vue'
 
 interface menuEditComponentRef {
   saveConfirm: () => void
@@ -133,7 +129,8 @@ const selectedMenuItems = ref<SelectMenu>({
     prnMenuId: '',
     useYn: 'Y',
     menuLv: '',
-    ord: ''
+    ord: '',
+    navYn: 'Y'
   },
   parentMenuItems: [],
   mode: ''
@@ -178,7 +175,8 @@ const addMenu = () => {
       prnMenuId: '',
       useYn: 'Y',
       menuLv: '',
-      ord: ''
+      ord: '',
+      navYn: 'Y'
     },
     parentMenuItems: _.filter(menu.menuItems, { menuLv: '1' }),
     mode: mode.value
@@ -255,7 +253,8 @@ const setTreeItems = (): void => {
       lv: menuItems[i].menuLv,
       label: menuItems[i].menuNm,
       upperId: menuItems[i].prnMenuId,
-      useYn: menuItems[i].useYn
+      useYn: menuItems[i].useYn,
+      navYn: menuItems[i].navYn
     }
     data.push(treeData)
   }

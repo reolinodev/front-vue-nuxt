@@ -37,7 +37,10 @@
         />
       </v-col>
       <v-col cols="12">
-        <input-select-box-comp :items="useYnItems" :selected-value="useYn" />
+        <input-select-box-comp
+          :data="useYnData"
+          :option="useYnOption"
+          :selected-value="useYn" />
       </v-col>
     </v-row>
   </popup-comp>
@@ -48,9 +51,9 @@ import { onMounted, ref, watch } from 'vue'
 import InputSelectBoxComp from '@/components/InputSelectBoxComp.vue'
 import { mainStore } from '@/stores/main'
 import { Member } from '~/stores/member'
-import { SelectBoxData, SelectBoxItem } from '~/components/InputSelectBoxComp.vue'
+import { SelectBoxData, SelectBoxOption } from '~/components/InputSelectBoxComp.vue'
 
-const emits = defineEmits(['callBackMemberEditPopup', 'callBackMemberEditSave'])
+const emits = defineEmits(['callBackMemberEditPop', 'callBackMemberEditSave'])
 const props = defineProps<{
   memberEditPop: boolean
   memberEditData: Member
@@ -73,11 +76,8 @@ const useYnData: SelectBoxData[] = [
   { label: '미사용', value: 'N' }
 ]
 
-const useYnItems = ref<SelectBoxItem>({
-  data: useYnData,
-  option: {
-    label: 'Use *'
-  }
+const useYnOption = ref<SelectBoxOption>({
+  label: 'Use *',
 })
 
 const setMemberEditData = (value:Member) => {
@@ -95,7 +95,7 @@ const setMemberEditData = (value:Member) => {
 }
 
 const callBackPopup = (val:boolean) => {
-  emits('callBackMemberEditPopup', val)
+  emits('callBackMemberEditPop', val)
 }
 
 const saveConfirm = () => {
@@ -131,13 +131,13 @@ const save = () => {
       main.isAlert = true
 
       emits('callBackMemberEditSave')
-      emits('callBackMemberEditPopup', false)
+      emits('callBackMemberEditPop', false)
     }, 2000)
 
   } else {
     main.alertOption = {
       title: 'Warning',
-      text: '입력하신 내용을 확인해주세요.'
+      text: '입력하신 내용을 확인해 주세요.'
     }
     main.isAlert = true
   }

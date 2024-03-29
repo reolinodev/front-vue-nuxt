@@ -143,7 +143,8 @@
       "prnMenuId": "",
       "useYn" : "Y",
       "menuLv": "1",
-      "ord": "1"
+      "ord": "1",
+      "navYn" : "Y"
     },
     { "menuId": "00002",
       "menuNm": "System Setting",
@@ -152,7 +153,8 @@
       "prnMenuId": "" ,
       "useYn" : "Y",
       "menuLv": "1",
-      "ord": "2"
+      "ord": "2",
+      "navYn" : "Y"
     },
     { "menuId": "00003",
       "menuNm": "Sample Component",
@@ -161,7 +163,8 @@
       "prnMenuId": "" ,
       "useYn" : "Y",
       "menuLv": "1",
-      "ord": "3"
+      "ord": "3",
+      "navYn" : "Y"
     },
     {
       "menuId": "00005",
@@ -171,7 +174,8 @@
       "url": "/memberSetting/member",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "1"
+      "ord": "1",
+      "navYn" : "Y"
     },
     {
       "menuId": "00008",
@@ -181,7 +185,8 @@
       "url": "/systemSetting/menu",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "1"
+      "ord": "1",
+      "navYn" : "Y"
     },
     {
       "menuId": "00007",
@@ -191,7 +196,8 @@
       "url": "/systemSetting/auth",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "2"
+      "ord": "2",
+      "navYn" : "Y"
     },
     {
       "menuId": "00010",
@@ -201,7 +207,8 @@
       "url": "/systemSetting/systemCode",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "3"
+      "ord": "3",
+      "navYn" : "Y"
     },
     {
       "menuId": "00011",
@@ -211,7 +218,8 @@
       "url": "/sampleComponent/vuetify/vuetifyView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "1"
+      "ord": "1",
+      "navYn" : "Y"
     },
     {
       "menuId": "00012",
@@ -221,7 +229,8 @@
       "url": "/sampleComponent/tiptap/tiptapView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "2"
+      "ord": "2",
+      "navYn" : "Y"
     },
     {
       "menuId": "00013",
@@ -231,7 +240,8 @@
       "url": "/sampleComponent/autoAnimate/autoAnimateView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "3"
+      "ord": "3",
+      "navYn" : "Y"
     },
     {
       "menuId": "00014",
@@ -241,7 +251,8 @@
       "url": "/sampleComponent/echarts/echartsView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "4"
+      "ord": "4",
+      "navYn" : "Y"
     },
     {
       "menuId": "00015",
@@ -251,7 +262,8 @@
       "url": "/sampleComponent/datepicker/datepickerView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "5"
+      "ord": "5",
+      "navYn" : "Y"
     },
     {
       "menuId": "00016",
@@ -261,7 +273,8 @@
       "url": "/sampleComponent/agGrid/agGridView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "6"
+      "ord": "6",
+      "navYn" : "Y"
     },
     {
       "menuId": "00017",
@@ -271,7 +284,8 @@
       "url": "/sampleComponent/fullCalendar/fullCalendarView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "7"
+      "ord": "7",
+      "navYn" : "Y"
     },
     {
       "menuId": "00018",
@@ -281,7 +295,8 @@
       "url": "/sampleComponent/primeVue/primeVueView",
       "useYn" : "Y",
       "menuLv": "2",
-      "ord": "8"
+      "ord": "8",
+      "navYn" : "Y"
     }
   ],
 

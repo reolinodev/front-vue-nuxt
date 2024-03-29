@@ -134,25 +134,6 @@
   min-height: 250px;
 }
 
-.cpu-background {
-  background-image: url('/images/cpu.jpg');
-  border: 2px solid #673ab7;
-}
-
-.disk-background {
-  background-image: url('/images/disk.jpg');
-  border: 2px solid #3f51b5;
-}
-
-.gpu-background {
-  background-image: url('/images/gpu.jpg');
-  border: 2px solid #e91e63;
-}
-
-.memory-background {
-  background-image: url('/images/memory.jpg');
-  border: 2px solid #cddc39;
-}
 .resource-sheet div {
   width: 100%;
   text-align: center;
@@ -170,8 +151,6 @@
   width: 100%;
   padding: 15px;
 }
-
-
 
 
 /*** 외부라이브러리 커스터마이징 ***/

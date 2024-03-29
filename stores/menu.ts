@@ -6,11 +6,12 @@ export interface Menu {
   menuNm: string
   icon: string
   url: string
-  prnMenuId: string
-  useYn: string
+  prnMenuId?: string
+  useYn?: string
   useYnLabel?: string
-  menuLv: string
-  ord: string
+  menuLv?: string
+  ord?: string
+  navYn?: string
 }
 
 export interface SelectMenu {

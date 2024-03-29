@@ -101,17 +101,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import type { Ref } from 'vue'
+import { ref, onMounted, watch, Ref } from 'vue'
 import { mainStore } from '@/stores/main'
-import type { GroupCode } from '@/stores/groupCode'
-import  { groupCodeStore } from '@/stores/groupCode'
-import type { Code } from '@/stores/code'
-import { codeStore } from '@/stores/code'
+import  { GroupCode, groupCodeStore } from '@/stores/groupCode'
+import { Code ,codeStore } from '@/stores/code'
 
 import GridListComp from '~/components/GridListComp.vue'
-import { ColumnDefs, GridRef, GridValidOption } from '~/components/class/Grid'
-import type { GridComponentRef } from '~/components/class/Grid'
+import { ColumnDefs, GridRef, GridValidOption, GridComponentRef } from '~/components/class/Grid'
 
 import { gridValidation } from '~/utils/gridUtil'
 

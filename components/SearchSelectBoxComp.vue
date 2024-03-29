@@ -41,7 +41,7 @@ const selectedValue = ref<string>('')
 const label = ref<string>('')
 const placeholder = ref<string>('')
 const width = ref<string | undefined>('200px')
-const disabled = ref<boolean>(true)
+const disabled = ref<boolean>(false)
 
 // 타입에 따라 기본값이 달라질수 있어 임의로 defaultItem을 만들어 처리
 const defaultItem = ref<SearchSelectBoxData>({ name: '', code: '' })
