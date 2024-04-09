@@ -6,7 +6,7 @@
         :options="items"
         option-label="name"
         :placeholder="placeholder"
-        :style="{ width: width }"
+        :style="{ width: width, border: '1px solid #CCCCCC' }"
         :disabled="disabled"
       />
       <label for="name">{{ label }}</label>
@@ -30,8 +30,8 @@ const props = defineProps<{
   selectedValue: string
   label: string
   placeholder: string
+  type: string | undefined
   width?: string | undefined
-  type?: string | undefined
   disabled?: boolean
 }>()
 
@@ -41,6 +41,7 @@ const selectedValue = ref<string>('')
 const label = ref<string>('')
 const placeholder = ref<string>('')
 const width = ref<string | undefined>('200px')
+const type = ref<string | undefined>(props.type)
 const disabled = ref<boolean>(false)
 
 // 타입에 따라 기본값이 달라질수 있어 임의로 defaultItem을 만들어 처리
@@ -51,16 +52,16 @@ const emits = defineEmits(['callBackSelectedValue'])
 // 값을 전달 받으면 셀렉트 박스 아이탬에서 해당값이 있는 경우를 찾는다.
 const setSelectBoxValue = (value: string) => {
   if (value !== '') {
-    const selectedObject = _.filter(items.value, { code: value })
+    const selectedObject: any = _.filter(items.value, { code: value })
     selectedModel.value = selectedObject[0]
   } else {
-    selectedModel.value = defaultItem.value
+    selectedModel.value[0] = defaultItem.value
   }
 
   selectedValue.value = value
 }
 
-// // 선택된 셀렉트 박스의 값이 바뀐다면 부모 컴퍼넌트로 값을 전달해준다
+// 선택된 셀렉트 박스의 값이 바뀐다면 부모 컴퍼넌트로 값을 전달해준다
 const setChangeValue = (changeValue: any) => {
   if (changeValue !== undefined) {
     selectedValue.value = changeValue.code
@@ -71,7 +72,13 @@ const setChangeValue = (changeValue: any) => {
 watch(
   () => props.items,
   (newValue) => {
+    if (type.value === 'ALL') {
+      defaultItem.value = { name: '--- ALL ---', code: '' }
+      newValue.unshift(defaultItem.value)
+    }
+
     items.value = newValue
+    selectedValue.value = ''
   }
 )
 
@@ -88,6 +95,17 @@ watch(
   (newValue) => {
     if (newValue !== undefined) {
       width.value = newValue
+    }
+  }
+)
+
+watch(
+  () => props.type,
+  (newValue) => {
+    if (newValue !== undefined) {
+      type.value = newValue
+    } else {
+      type.value = ''
     }
   }
 )
@@ -130,8 +148,6 @@ onMounted(() => {
   }
 
   disabled.value = props.disabled
-
-  setSelectBoxValue(props.selectedValue)
 })
 </script>
 

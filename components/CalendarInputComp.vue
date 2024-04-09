@@ -19,9 +19,9 @@ const props = defineProps<{
   inputDate: string | null
   showIcon: boolean
   showOnFocus: boolean
-  width: string | undefined
-  height: string | undefined
-  dateFormat: string | undefined
+  width?: string | undefined
+  height?: string | undefined
+  dateFormat?: string | undefined
 }>()
 
 const inputDate = ref<string | null>(null)

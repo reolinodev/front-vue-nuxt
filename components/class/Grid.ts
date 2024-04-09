@@ -11,6 +11,7 @@ export class ColumnDefs {
   cellEditor?: string
   headerCheckboxSelection?: boolean
   checkboxSelection?: boolean
+  cellEditorPopup?: boolean
   cellEditorParams?: { values: any[] }
   valueFormatter?: (params: any) => string
   constructor(
@@ -26,6 +27,7 @@ export class ColumnDefs {
       cellEditor?: string
       headerCheckboxSelection?: boolean
       checkboxSelection?: boolean
+      cellEditorPopup?: boolean
       cellEditorParams?: { values: any[] }
       valueFormatter?: (params: any) => string
     } = {},
@@ -43,6 +45,7 @@ export class ColumnDefs {
     this.cellEditor = options.cellEditor
     this.headerCheckboxSelection = options.headerCheckboxSelection
     this.checkboxSelection = options.checkboxSelection
+    this.cellEditorPopup = options.cellEditorPopup
     this.cellEditorParams = options.cellEditorParams
     this.valueFormatter = options.valueFormatter
   }
